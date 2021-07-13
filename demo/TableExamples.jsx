@@ -21,7 +21,8 @@ export function TableExamples() {
     });
   }
 
-  function buildSortingHeader(label, attribute) {
+  function buildSortingHeader(column) {
+    const { label, attribute } = column;
     return (
       <div className="d-flex justify-content-between">
         {label}
@@ -218,6 +219,77 @@ export function TableExamples() {
                 title: 'Subtract',
                 content: <span>{doc.b - docIndex}?</span>,
               },
+            ]}
+          />
+        </div>
+        <div className="col-6 mb-3">
+          <h1 className="h4">Table with sortable columns</h1>
+
+          <Table
+            initialSortOptions={{ sortBy: 'c', sortOrder: 'DESC' }}
+            columns={[
+              {
+                attribute: 'a',
+                label: 'A',
+                isSortable: true,
+              },
+              {
+                attribute: 'b',
+                label: 'B',
+              },
+              {
+                attribute: 'c',
+                label: 'C',
+                isSortable: true,
+              },
+            ]}
+            docs={[
+              { a: 'B', b: 'G', c: 'Y' },
+              { a: 'C', b: 'I', c: 'Z' },
+              { a: 'A', b: 'H', c: 'X' },
+              { a: 'D', b: 'L', c: 'T' },
+            ]}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-6 mb-3">
+          <h1 className="h4">Table with custom sortable header</h1>
+
+          <Table
+            initialSortOptions={{ sortBy: 'c', sortOrder: 'DESC' }}
+            sortableHeaderIconFormat={(column, { sortBy, sortOrder }) =>
+              sortBy === column?.attribute ? (
+                sortOrder === 'ASC' ? (
+                  <i class="bi bi-emoji-smile"></i>
+                ) : (
+                  <i class="bi bi-emoji-smile-upside-down"></i>
+                )
+              ) : (
+                <i class="bi bi-circle"></i>
+              )
+            }
+            columns={[
+              {
+                attribute: 'a',
+                label: 'A',
+                isSortable: true,
+              },
+              {
+                attribute: 'b',
+                label: 'B',
+              },
+              {
+                attribute: 'c',
+                label: 'C',
+                isSortable: true,
+              },
+            ]}
+            docs={[
+              { a: 'B', b: 'G', c: 'Y' },
+              { a: 'C', b: 'I', c: 'Z' },
+              { a: 'A', b: 'H', c: 'X' },
+              { a: 'D', b: 'L', c: 'T' },
             ]}
           />
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { isArray, isFunction } from 'js-var-type';
 
@@ -22,7 +22,11 @@ export function Table({
   actions,
   actionLabel,
   columnHeaderFormat,
+  initialSortOptions,
+  sortableHeaderIconFormat,
 }) {
+  const [sortOptions, setSortOptions] = useState(initialSortOptions ?? {});
+
   const normalizedColumns = normalizeColumns(columns);
 
   const tableClasses = formatClasses([
@@ -40,8 +44,11 @@ export function Table({
     <div className="table-responsive">
       <table className={tableClasses}>
         {caption && <caption>{caption}</caption>}
-        <TableHead {...{ actionLabel, columnHeaderFormat, hasActions }} columns={normalizedColumns} />
-        <TableBody {...{ docs, rowClass, actions, onRowClick }} columns={normalizedColumns} />
+        <TableHead
+          {...{ actionLabel, columnHeaderFormat, hasActions, sortableHeaderIconFormat, sortOptions, setSortOptions }}
+          columns={normalizedColumns}
+        />
+        <TableBody {...{ docs, rowClass, actions, onRowClick, sortOptions }} columns={normalizedColumns} />
       </table>
     </div>
   );
@@ -55,7 +62,6 @@ Table.defaultProps = {
   dark: false,
   actionLabel: 'Actions',
   rowClass: () => '',
-  columnHeaderFormat: (label) => label,
 };
 
 Table.propTypes = {
@@ -72,4 +78,9 @@ Table.propTypes = {
   rowClass: PropTypes.func,
   small: PropTypes.bool,
   striped: PropTypes.bool,
+  sortableHeaderIconFormat: PropTypes.func,
+  initialSortOptions: PropTypes.shape({
+    sortBy: PropTypes.string,
+    sortOrder: PropTypes.oneOf(['ASC', 'DESC']),
+  }),
 };

@@ -1,22 +1,31 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { isFunction } from 'js-var-type';
 
 import { safeClick } from '../utils/event-handlers';
 import { getValueByPath } from '../utils/getters-setters';
+import { sortData } from '../utils/sort';
 
 import { getColumnClass } from './table-helpers';
 import { TableActions } from './TableActions';
 
-export function TableBody({ columns, docs, rowRole, rowClass, actions, onRowClick }) {
+export function TableBody({ columns, docs, rowRole, rowClass, actions, onRowClick, sortOptions }) {
   const trRole = rowRole ?? isFunction(onRowClick) ? 'button' : 'row';
   const trOnClick = isFunction(onRowClick) ? onRowClick : () => {};
 
+  const sortedDocs = useMemo(() => {
+    if (sortOptions?.sortBy && sortOptions?.sortOrder) {
+      return sortData(docs, sortOptions);
+    }
+
+    return docs;
+  }, [docs, sortOptions]);
+
   return (
     <tbody>
-      {docs.map((doc, docIndex) => (
+      {sortedDocs?.map((doc, docIndex) => (
         <tr key={docIndex} className={rowClass(doc)} role={trRole} onClick={safeClick(trOnClick, doc, docIndex)}>
-          {columns.map((column, columnIndex) => (
+          {columns?.map((column, columnIndex) => (
             <td key={columnIndex} className={getColumnClass(column)}>
               {getColumnValue(doc, column, docIndex)}
             </td>
@@ -36,6 +45,10 @@ TableBody.propTypes = {
   rowRole: PropTypes.string,
   rowClass: PropTypes.func,
   onRowClick: PropTypes.func,
+  sortOptions: PropTypes.shape({
+    sortBy: PropTypes.string,
+    sortOrder: PropTypes.oneOf(['ASC', 'DESC']),
+  }),
 };
 
 function getColumnValue(doc, column, docIndex) {
