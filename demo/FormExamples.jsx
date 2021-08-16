@@ -25,10 +25,11 @@ export function FormExamples() {
         radioField2: 'b',
         numberField: null,
         dateField: new Date().toISOString(),
-        dropdown: {
+        dropdownField1: {
           subtitle: 'subtitle two',
           title: 'Title two',
         },
+        dropdownField2: '03',
       }}
       onChange={console.info}
       onSubmit={(formData) => {
@@ -355,8 +356,8 @@ export function FormExamples() {
       ))}
 
       <FormGroupDropdown
-        name="dropdown"
-        label="Dropdown"
+        name="dropdownField1"
+        label="Dropdown using object as value"
         options={[
           {
             value: {
@@ -401,6 +402,26 @@ export function FormExamples() {
         template={(label) => <div>{label}</div>}
         itemClassName="border-bottom"
         childClassName="text-muted"
+      />
+
+      <FormGroupDropdown
+        name="dropdownField2"
+        label="Dropdown using string as value"
+        options={[
+          {
+            value: '01',
+            label: <p>Value one</p>,
+          },
+          {
+            value: '02',
+            label: <p>Value two</p>,
+          },
+          {
+            value: '03',
+            label: <p>Value three</p>,
+          },
+        ]}
+        placeholder="Select one value"
       />
     </Form>
   );

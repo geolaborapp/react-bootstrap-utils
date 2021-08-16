@@ -1,11 +1,11 @@
 import React, { useRef, useCallback, useEffect, useMemo } from 'react';
+import { isEqual } from 'lodash-es';
 import PropTypes from 'prop-types';
 import { isFunction } from 'js-var-type';
 
 import { Dropdown } from '../mixed/Dropdown';
 import { useOpenState } from '../utils/useOpenState';
 import { formatClasses } from '../utils/attributes';
-import { objectsAreEquivalent } from '../utils/object-helpers';
 
 import { normalizeOptions } from './helpers/form-helpers';
 import { useFormControl } from './helpers/useFormControl';
@@ -28,7 +28,7 @@ export const FormDropdown = ({
 
   const value = getValue();
   const items = normalizeOptions(options, getFormData());
-  const selectedItem = useMemo(() => items.find((item) => objectsAreEquivalent(item.value, value)), [items, value]);
+  const selectedItem = useMemo(() => items.find((item) => isEqual(item.value, value)), [items, value]);
 
   const { isOpen: _isOpen, open, close } = useOpenState();
   const isOpen = _isOpen();
