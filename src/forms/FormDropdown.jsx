@@ -5,7 +5,6 @@ import { isFunction } from 'js-var-type';
 import { Dropdown } from '../mixed/Dropdown';
 import { useOpenState } from '../utils/useOpenState';
 import { formatClasses } from '../utils/attributes';
-
 import { objectsAreEquivalent } from '../utils/object-helpers';
 
 import { normalizeOptions } from './helpers/form-helpers';
