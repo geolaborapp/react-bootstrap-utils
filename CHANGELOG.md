@@ -2,6 +2,60 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.8](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.7...v0.26.8) (2021-08-13)
+
+
+### Features
+
+* include prop to hide closed modals content ([4099fdc](https://github.com/geolaborapp/react-bootstrap-utils/commit/4099fdcd86e9e1caafa539a7659d7edc82200dd7))
+* include prop to hide closed modals content ([82a00d6](https://github.com/geolaborapp/react-bootstrap-utils/commit/82a00d638671990edff1bcca602950364943cb00))
+
+### [0.26.7](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.6...v0.26.7) (2021-07-28)
+
+
+### Bug Fixes
+
+* set the selected value as initial search in autocomplete ([07c4369](https://github.com/geolaborapp/react-bootstrap-utils/commit/07c4369ec0585b426500824e65bb0599f9befee1))
+* set the selected value as initial search in autocomplete ([bd3be74](https://github.com/geolaborapp/react-bootstrap-utils/commit/bd3be741cba33fc0ad3583beaff63a57bed388ee))
+
+### [0.26.6](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.5...v0.26.6) (2021-07-21)
+
+
+### Features
+
+* adiciona componente SortableTable ([320feab](https://github.com/geolaborapp/react-bootstrap-utils/commit/320feab1af4e9a9339a6ac36e48551de17026ebe))
+
+
+### Bug Fixes
+
+* flexibiliza papel das linhas de uma tabela ([dd39fa7](https://github.com/geolaborapp/react-bootstrap-utils/commit/dd39fa7988f62fd43870ea78c34c4e3cd504aae2))
+
+### [0.26.5](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.3...v0.26.5) (2021-07-09)
+
+
+### Features
+
+* allow input masks functions on forminput2 ([afaa1ce](https://github.com/geolaborapp/react-bootstrap-utils/commit/afaa1cea773ea9abedd8ffaa4e827b0e14b22ea0))
+* allow input masks functions on forminput2 ([049b214](https://github.com/geolaborapp/react-bootstrap-utils/commit/049b21484b7b00dec2f91f9c775b6a18ef9ea264))
+
+
+### Bug Fixes
+
+* check if an element is descendant before remove ([a1eb85d](https://github.com/geolaborapp/react-bootstrap-utils/commit/a1eb85d56cbd0142673e2a35394821a5a4a19874))
+
+### [0.26.4](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.3...v0.26.4) (2021-07-09)
+
+
+### Features
+
+* allow input masks functions on forminput2 ([afaa1ce](https://github.com/geolaborapp/react-bootstrap-utils/commit/afaa1cea773ea9abedd8ffaa4e827b0e14b22ea0))
+* allow input masks functions on forminput2 ([049b214](https://github.com/geolaborapp/react-bootstrap-utils/commit/049b21484b7b00dec2f91f9c775b6a18ef9ea264))
+
+
+### Bug Fixes
+
+* check if an element is descendant before remove ([a1eb85d](https://github.com/geolaborapp/react-bootstrap-utils/commit/a1eb85d56cbd0142673e2a35394821a5a4a19874))
+
 ### [0.26.3](https://github.com/assisrafael/react-bootstrap-utils/compare/v0.26.2...v0.26.3) (2021-04-21)
 
 
