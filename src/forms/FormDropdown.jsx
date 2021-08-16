@@ -14,7 +14,7 @@ import { FormGroup } from './FormGroup';
 
 export const FormDropdown = ({
   afterChange,
-  childClassName, // necessário?
+  childClassName,
   dropdownClassName,
   itemClassName,
   name,
@@ -25,7 +25,7 @@ export const FormDropdown = ({
 }) => {
   const dropdownRef = useRef(null);
 
-  const { getFormData, getValue, handleOnChangeFactory, setValue: _setValue } = useFormControl(name);
+  const { getFormData, getValue, setValue: _setValue } = useFormControl(name);
 
   const value = getValue();
   const items = normalizeOptions(options, getFormData());
@@ -38,7 +38,6 @@ export const FormDropdown = ({
     (v) => {
       _setValue(v);
 
-      // usar handleOnChangeFactory
       if (isFunction(afterChange)) {
         afterChange(v);
       }
@@ -87,7 +86,7 @@ export const FormDropdown = ({
         className={dropdownClassName}
         itemsBoxClassName="p-0 w-100"
       >
-        <div className="input-group mb-3">
+        <div className="input-group">
           <div className={formatClasses(['form-control h-auto', childClassName])} onClick={toggleDropdown}>
             {selectedItem ? (
               <>
@@ -145,3 +144,19 @@ export function FormGroupDropdown(props) {
     </FormGroup>
   );
 }
+
+FormGroupDropdown.propTypes = {
+  afterChange: PropTypes.func,
+  childClassName: PropTypes.string,
+  dropdownClassName: PropTypes.string,
+  help: PropTypes.node,
+  itemClassName: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  options: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
+  ]),
+  placeholder: PropTypes.string,
+  template: PropTypes.func,
+  toggleIcon: PropTypes.func,
+};

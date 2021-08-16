@@ -9,6 +9,7 @@ import {
   FormGroupRadio,
   FormGroupTextarea,
   FormGroupAutocomplete,
+  FormGroupDropdown,
   // eslint-disable-next-line import/no-unresolved
 } from '../dist/main';
 
@@ -24,6 +25,10 @@ export function FormExamples() {
         radioField2: 'b',
         numberField: null,
         dateField: new Date().toISOString(),
+        dropdown: {
+          title: 'Title two',
+          subtitle: 'subtitle two',
+        },
       }}
       onChange={console.info}
       onSubmit={(formData) => {
@@ -348,6 +353,55 @@ export function FormExamples() {
           </div>
         </div>
       ))}
+
+      <FormGroupDropdown
+        name="dropdown"
+        label="Dropdown"
+        options={[
+          {
+            value: {
+              title: 'Title one',
+              subtitle: 'subtitle one',
+            },
+            label: (
+              <div>
+                <h5>Title: title one</h5>
+                <p>Subtitle: subtitle one</p>
+              </div>
+            ),
+          },
+          {
+            value: {
+              title: 'Title two',
+              subtitle: 'subtitle two',
+            },
+            label: (
+              <div>
+                <h5>Title: title two</h5>
+                <p>Subtitle: subtitle two</p>
+              </div>
+            ),
+          },
+          {
+            value: {
+              title: 'Title three',
+              subtitle: 'subtitle three',
+            },
+            label: (
+              <div>
+                <h5>Title: title three</h5>
+                <p>Subtitle: subtitle three</p>
+              </div>
+            ),
+          },
+        ]}
+        help="dropdown help"
+        placeholder="Select one value"
+        afterChange={() => console.log('afterChange dropdown')}
+        template={(label) => <div>{label}</div>}
+        itemClassName="border-bottom"
+        childClassName="text-muted"
+      />
     </Form>
   );
 }
