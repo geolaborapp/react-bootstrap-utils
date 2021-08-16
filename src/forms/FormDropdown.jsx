@@ -10,17 +10,18 @@ import { objectsAreEquivalent } from '../utils/object-helpers';
 
 import { normalizeOptions } from './helpers/form-helpers';
 import { useFormControl } from './helpers/useFormControl';
+import { FormGroup } from './FormGroup';
 
 export const FormDropdown = ({
   afterChange,
-  // className,
-  // childClassName,
+  childClassName, // necessário?
+  dropdownClassName,
   itemClassName,
   name,
   options,
   placeholder,
   template,
-  dropdownClassName, //permitir customização da classe do Dropdown
+  toggleIcon,
 }) => {
   const dropdownRef = useRef(null);
 
@@ -55,10 +56,6 @@ export const FormDropdown = ({
 
   const toggleDropdown = useCallback(() => (isOpen ? close() : open()), [close, isOpen, open]);
 
-  const clear = useCallback(() => {
-    setValue(null);
-  }, [setValue]);
-
   useEffect(() => {
     const pageClickEvent = (e) => {
       if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
@@ -83,35 +80,36 @@ export const FormDropdown = ({
     <div ref={dropdownRef}>
       <Dropdown
         isOpen={isOpen}
-        items={items}
+        items={[{ value: null, label: placeholder }, ...items]}
         onSelect={onSelectItem}
         template={template}
         itemClassName={itemClassName}
         className={dropdownClassName}
+        itemsBoxClassName="p-0 w-100"
       >
-        <div
-          className={formatClasses([
-            'form-control',
-            'd-flex',
-            'align-items-center',
-            'justify-content-between',
-            'h-auto',
-          ])}
-          onClick={toggleDropdown}
-        >
-          {selectedItem ? (
-            <>
-              <div>{template(selectedItem.label)}</div>
-              {isOpen && (
-                <div onClick={clear}>
-                  {/* Permitir customização do dev */}
-                  <i className="bi bi-x"></i>
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="text-muted">{placeholder}</div>
-          )}
+        <div className="input-group mb-3">
+          <div className={formatClasses(['form-control h-auto', childClassName])} onClick={toggleDropdown}>
+            {selectedItem ? (
+              <>
+                <div>{template(selectedItem.label)}</div>
+              </>
+            ) : (
+              <div className="text-muted">{placeholder}</div>
+            )}
+          </div>
+          <div className="input-group-append">
+            <a
+              href="#"
+              className="input-group-text"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleDropdown();
+              }}
+            >
+              {toggleIcon(isOpen)}
+            </a>
+          </div>
         </div>
       </Dropdown>
     </div>
@@ -120,10 +118,16 @@ export const FormDropdown = ({
 
 FormDropdown.defaultProps = {
   template: (x) => x,
+  toggleIcon: function toggleIcon(isOpen) {
+    return <i className={`bi ${isOpen ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>;
+  },
 };
 
 FormDropdown.propTypes = {
   afterChange: PropTypes.func,
+  childClassName: PropTypes.string,
+  dropdownClassName: PropTypes.string,
+  itemClassName: PropTypes.string,
   name: PropTypes.string.isRequired,
   options: PropTypes.oneOfType([
     PropTypes.func,
@@ -131,6 +135,13 @@ FormDropdown.propTypes = {
   ]),
   placeholder: PropTypes.string,
   template: PropTypes.func,
-  itemClassName: PropTypes.string,
-  dropdownClassName: PropTypes.string,
+  toggleIcon: PropTypes.func,
 };
+
+export function FormGroupDropdown(props) {
+  return (
+    <FormGroup {...props}>
+      <FormDropdown {...props} />
+    </FormGroup>
+  );
+}
