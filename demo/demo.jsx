@@ -15,7 +15,6 @@ import { ToastsExamples } from './ToastsExamples';
 import { DropdownExamples } from './DropdownExamples';
 import { TreeViewExamples } from './TreeViewExamples';
 import { Form2Examples } from './Form2Examples';
-import { FormExamplesTeste } from './FormExamplesTeste';
 
 ReactDOM.render(
   <div className="mt-3">
@@ -32,10 +31,6 @@ ReactDOM.render(
           {
             title: 'Dropdown',
             content: <DropdownExamples />,
-          },
-          {
-            title: 'FormsTeste',
-            content: <FormExamplesTeste />,
           },
           {
             title: 'Forms',

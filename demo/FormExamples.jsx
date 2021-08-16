@@ -365,8 +365,8 @@ export function FormExamples() {
             },
             label: (
               <div>
-                <h5>Title: title one</h5>
-                <p>Subtitle: subtitle one</p>
+                <h5>Title one</h5>
+                <p>Subtitle one</p>
               </div>
             ),
           },
@@ -377,8 +377,8 @@ export function FormExamples() {
             },
             label: (
               <div>
-                <h5>Title: title two</h5>
-                <p>Subtitle: subtitle two</p>
+                <h5>Title two</h5>
+                <p>Subtitle two</p>
               </div>
             ),
           },
@@ -389,8 +389,8 @@ export function FormExamples() {
             },
             label: (
               <div>
-                <h5>Title: title three</h5>
-                <p>Subtitle: subtitle three</p>
+                <h5>Title three</h5>
+                <p>Subtitle three</p>
               </div>
             ),
           },
