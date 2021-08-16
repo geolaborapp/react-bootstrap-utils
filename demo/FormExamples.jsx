@@ -26,8 +26,8 @@ export function FormExamples() {
         numberField: null,
         dateField: new Date().toISOString(),
         dropdown: {
-          title: 'Title two',
           subtitle: 'subtitle two',
+          title: 'Title two',
         },
       }}
       onChange={console.info}
