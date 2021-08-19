@@ -55,6 +55,7 @@ export const FormDropdown = ({
   const toggleDropdown = useCallback(() => (isOpen ? close() : open()), [close, isOpen, open]);
 
   useEffect(() => {
+   /* The logic in this effect allows the user to close the dropdown menu when they click outside of the component. */
     const pageClickEvent = (e) => {
       if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
         if (isOpen) {
