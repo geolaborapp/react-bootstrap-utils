@@ -15,7 +15,7 @@ export function Dropdown({
   template,
   className,
   itemClassName,
-  itemsBoxClassName,
+  menuClassName,
 }) {
   return (
     <div
@@ -26,7 +26,7 @@ export function Dropdown({
 
       {items.length > 0 && (
         <div
-          className={formatClasses(['dropdown-menu', itemsBoxClassName, isOpen && 'show'])}
+          className={formatClasses(['dropdown-menu', menuClassName, isOpen && 'show'])}
           // aria-labelledby="dropdownMenuButton"
           style={{ maxHeight: '200px', overflowY: 'auto' }}
         >
@@ -62,5 +62,5 @@ Dropdown.propTypes = {
   template: PropTypes.func,
   className: PropTypes.string,
   itemClassName: PropTypes.string,
-  itemsBoxClassName: PropTypes.string,
+  menuClassName: PropTypes.string,
 };

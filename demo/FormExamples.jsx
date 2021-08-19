@@ -431,6 +431,8 @@ export function FormExamples() {
           },
         ]}
         placeholder="Select one value"
+        includeEmptyItem={false}
+        menuClassName="p-4 w-100"
       />
     </Form>
   );

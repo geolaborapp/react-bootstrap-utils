@@ -15,7 +15,9 @@ export const FormDropdown = ({
   afterChange,
   childClassName,
   dropdownClassName,
+  includeEmptyItem,
   itemClassName,
+  menuClassName,
   name,
   options,
   placeholder,
@@ -78,36 +80,19 @@ export const FormDropdown = ({
     <div ref={dropdownRef}>
       <Dropdown
         isOpen={isOpen}
-        items={[{ value: null, label: placeholder }, ...items]}
+        items={includeEmptyItem ? [{ value: null, label: <div className="m-3"></div> }, ...items] : items}
         onSelect={onSelectItem}
         template={template}
         itemClassName={itemClassName}
         className={dropdownClassName}
-        itemsBoxClassName="p-0 w-100"
+        menuClassName={menuClassName}
       >
-        <div className="input-group">
-          <div className={formatClasses(['form-control h-auto', childClassName])} onClick={toggleDropdown}>
-            {selectedItem ? (
-              <>
-                <div>{template(selectedItem.label)}</div>
-              </>
-            ) : (
-              <div className="text-muted">{placeholder}</div>
-            )}
-          </div>
-          <div className="input-group-append">
-            <a
-              href="#"
-              className="input-group-text"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                toggleDropdown();
-              }}
-            >
-              {toggleIcon(isOpen)}
-            </a>
-          </div>
+        <div
+          className={formatClasses(['input-group justify-content-between form-control h-auto', childClassName])}
+          onClick={toggleDropdown}
+        >
+          {selectedItem ? template(selectedItem.label) : <div className="text-muted">{placeholder}</div>}
+          {toggleIcon(isOpen)}
         </div>
       </Dropdown>
     </div>
@@ -115,9 +100,15 @@ export const FormDropdown = ({
 };
 
 FormDropdown.defaultProps = {
+  includeEmptyItem: true,
+  menuClassName: 'p-0 w-100',
   template: (x) => x,
   toggleIcon: function toggleIcon(isOpen) {
-    return <i className={`bi ${isOpen ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>;
+    return (
+      <div className="d-flex align-items-center px-2">
+        <i className={`bi ${isOpen ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
+      </div>
+    );
   },
 };
 
@@ -125,7 +116,9 @@ FormDropdown.propTypes = {
   afterChange: PropTypes.func,
   childClassName: PropTypes.string,
   dropdownClassName: PropTypes.string,
+  includeEmptyItem: PropTypes.bool,
   itemClassName: PropTypes.string,
+  menuClassName: PropTypes.string,
   name: PropTypes.string.isRequired,
   options: PropTypes.oneOfType([
     PropTypes.func,
@@ -149,7 +142,9 @@ FormGroupDropdown.propTypes = {
   childClassName: PropTypes.string,
   dropdownClassName: PropTypes.string,
   help: PropTypes.node,
+  includeEmptyItem: PropTypes.bool,
   itemClassName: PropTypes.string,
+  menuClassName: PropTypes.string,
   name: PropTypes.string.isRequired,
   options: PropTypes.oneOfType([
     PropTypes.func,
