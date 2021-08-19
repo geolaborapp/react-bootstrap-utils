@@ -26,7 +26,6 @@ export function FormExamples() {
         numberField: null,
         dateField: new Date().toISOString(),
         dropdownField1: {
-          subtitle: 'subtitle two',
           title: 'Title two',
         },
         dropdownField2: '03',
@@ -411,6 +410,7 @@ export function FormExamples() {
         template={(label) => <div>{label}</div>}
         itemClassName="border-bottom"
         childClassName="text-muted"
+        trackBy="title"
       />
 
       <FormGroupDropdown
