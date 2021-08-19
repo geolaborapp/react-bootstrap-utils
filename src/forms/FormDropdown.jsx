@@ -1,5 +1,4 @@
 import React, { useRef, useCallback, useEffect, useMemo } from 'react';
-import { isEqual } from 'lodash-es';
 import PropTypes from 'prop-types';
 import { isFunction } from 'js-var-type';
 
@@ -7,7 +6,7 @@ import { Dropdown } from '../mixed/Dropdown';
 import { useOpenState } from '../utils/useOpenState';
 import { formatClasses } from '../utils/attributes';
 
-import { normalizeOptions } from './helpers/form-helpers';
+import { getSelectedOption, normalizeOptions } from './helpers/form-helpers';
 import { useFormControl } from './helpers/useFormControl';
 import { FormGroup } from './FormGroup';
 
@@ -23,6 +22,7 @@ export const FormDropdown = ({
   placeholder,
   template,
   toggleIcon,
+  trackBy,
 }) => {
   const dropdownRef = useRef(null);
 
@@ -30,7 +30,7 @@ export const FormDropdown = ({
 
   const value = getValue();
   const items = normalizeOptions(options, getFormData());
-  const selectedItem = useMemo(() => items.find((item) => isEqual(item.value, value)), [items, value]);
+  const selectedItem = useMemo(() => getSelectedOption(value, items, trackBy), [items, trackBy, value]);
 
   const { isOpen: _isOpen, open, close } = useOpenState();
   const isOpen = _isOpen();
@@ -127,6 +127,7 @@ FormDropdown.propTypes = {
   placeholder: PropTypes.string,
   template: PropTypes.func,
   toggleIcon: PropTypes.func,
+  trackBy: PropTypes.string,
 };
 
 export function FormGroupDropdown(props) {
@@ -153,4 +154,5 @@ FormGroupDropdown.propTypes = {
   placeholder: PropTypes.string,
   template: PropTypes.func,
   toggleIcon: PropTypes.func,
+  trackBy: PropTypes.string,
 };
