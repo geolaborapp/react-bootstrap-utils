@@ -370,7 +370,7 @@ export function FormExamples() {
           {
             value: {
               firstValue: 'Title one',
-              secondvalue: 1,
+              secondValue: 1,
             },
             label: {
               title: 'Title one',
@@ -380,7 +380,7 @@ export function FormExamples() {
           {
             value: {
               firstValue: 'Title two',
-              secondvalue: 2,
+              secondValue: 2,
             },
             label: {
               title: 'Title two',
@@ -390,7 +390,7 @@ export function FormExamples() {
           {
             value: {
               firstValue: 'Title three',
-              secondvalue: 3,
+              secondValue: 3,
             },
             label: {
               title: 'Title three',
@@ -413,7 +413,7 @@ export function FormExamples() {
         }}
         itemClassName="border-bottom"
         childClassName="text-muted"
-        trackBy="secondvalue"
+        trackBy="secondValue"
       />
 
       <FormGroupDropdown

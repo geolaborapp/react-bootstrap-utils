@@ -92,7 +92,7 @@ export const FormDropdown = ({
           className={formatClasses(['input-group justify-content-between form-control h-auto', childClassName])}
           onClick={toggleDropdown}
         >
-          {selectedItem ? template(selectedItem.label) : <div className="text-muted">{placeholder}</div>}
+          {selectedItem ? template(selectedItem.label, selectedItem.value) : <div className="text-muted">{placeholder}</div>}
           {toggleIcon(isOpen)}
         </div>
       </Dropdown>
