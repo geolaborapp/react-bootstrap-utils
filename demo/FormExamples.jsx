@@ -401,12 +401,16 @@ export function FormExamples() {
         help="dropdown help"
         placeholder="Select one value"
         afterChange={() => console.log('afterChange dropdown')}
-        template={(label) => (
-          <div>
-            <strong>{label.title ?? '-'}</strong>
-            <p className="m-0">{label.subtitle ?? '-'}</p>
-          </div>
-        )}
+        template={(label, value) => {
+          return value ? (
+            <div>
+              <strong>{label.title ?? '-'}</strong>
+              <p className="m-0">{label.subtitle ?? '-'}</p>
+            </div>
+          ) : (
+            label
+          );
+        }}
         itemClassName="border-bottom"
         childClassName="text-muted"
         trackBy="secondvalue"

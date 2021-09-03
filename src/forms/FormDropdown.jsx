@@ -81,9 +81,7 @@ export const FormDropdown = ({
     <div ref={dropdownRef}>
       <Dropdown
         isOpen={isOpen}
-        items={
-          includeEmptyItem ? [{ value: null, label: <div className="m-3"></div>, useTemplate: false }, ...items] : items
-        }
+        items={includeEmptyItem ? [{ value: null, label: <div className="m-3"></div> }, ...items] : items}
         onSelect={onSelectItem}
         template={template}
         itemClassName={itemClassName}
