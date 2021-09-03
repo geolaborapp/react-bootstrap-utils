@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { isNullLike } from 'js-var-type';
+
 import { safeClick } from '../utils/event-handlers';
 import { formatClasses } from '../utils/attributes';
 
@@ -30,14 +32,14 @@ export function Dropdown({
           // aria-labelledby="dropdownMenuButton"
           style={{ maxHeight: '200px', overflowY: 'auto' }}
         >
-          {items.map(({ label, value, isDisabled }, index) => (
+          {items.map(({ label, value, isDisabled, useTemplate }, index) => (
             <a
               key={index}
               href="#"
               className={formatClasses(['dropdown-item', isDisabled && 'disabled', itemClassName])}
               onClick={safeClick(onSelect, { value, index, label })}
             >
-              {template(label)}
+              {!isNullLike(useTemplate) && !useTemplate ? label : template(label)}
             </a>
           ))}
         </div>

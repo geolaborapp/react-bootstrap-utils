@@ -57,7 +57,7 @@ export const FormDropdown = ({
   const toggleDropdown = useCallback(() => (isOpen ? close() : open()), [close, isOpen, open]);
 
   useEffect(() => {
-   /* The logic in this effect allows the user to close the dropdown menu when they click outside of the component. */
+    /* The logic in this effect allows the user to close the dropdown menu when they click outside of the component. */
     const pageClickEvent = (e) => {
       if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
         if (isOpen) {
@@ -81,7 +81,9 @@ export const FormDropdown = ({
     <div ref={dropdownRef}>
       <Dropdown
         isOpen={isOpen}
-        items={includeEmptyItem ? [{ value: null, label: <div className="m-3"></div> }, ...items] : items}
+        items={
+          includeEmptyItem ? [{ value: null, label: <div className="m-3"></div>, useTemplate: false }, ...items] : items
+        }
         onSelect={onSelectItem}
         template={template}
         itemClassName={itemClassName}
