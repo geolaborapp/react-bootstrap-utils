@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { isFunction } from 'js-var-type';
 
-import { stopPropagation } from '../utils/event-handlers';
+import { stopPropagation as stopPropagationEvent } from '../utils/event-handlers';
 import { formatClasses } from '../utils/attributes';
 
 const ESCAPE_KEYCODE = 27;
@@ -18,6 +18,7 @@ export function Modal({
   scrollable,
   size,
   staticBackdrop,
+  stopPropagation,
   title,
   useTimesClose,
   dialogBodyProps,
@@ -62,8 +63,11 @@ export function Modal({
       role="dialog"
       ref={modalRef}
       onClick={(e) => {
-        e.stopPropagation();
-        if (!staticBackdrop) {
+        if (stopPropagation) {
+          e.stopPropagation();
+        }
+
+        if (!e.forceStopPropagation && !staticBackdrop) {
           closeAndHide();
         }
       }}
@@ -76,7 +80,13 @@ export function Modal({
           size && `modal-${size}`,
         ])}
         role="document"
-        onClick={stopPropagation}
+        onClick={(e) => {
+          e.forceStopPropagation = true;
+
+          if (stopPropagation) {
+            stopPropagationEvent(e);
+          }
+        }}
       >
         <div className="modal-content">
           {title && (
@@ -105,6 +115,7 @@ Modal.defaultProps = {
   scrollable: false,
   size: '',
   staticBackdrop: false,
+  stopPropagation: true,
   useTimesClose: true,
 };
 
@@ -120,6 +131,7 @@ Modal.propTypes = {
   scrollable: PropTypes.bool,
   size: PropTypes.oneOf(['sm', 'lg', 'xl', '']),
   staticBackdrop: PropTypes.bool,
+  stopPropagation: PropTypes.bool,
   title: PropTypes.node,
   useTimesClose: PropTypes.bool,
 };

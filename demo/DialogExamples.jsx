@@ -7,6 +7,7 @@ import {
   ConfirmationDialog,
   Dialog,
   Form,
+  FormGroupDropdown,
   FormGroupInput,
   useAlertDialog,
   useConfirmationDialog,
@@ -147,6 +148,8 @@ export function DialogExamples() {
         <h1 className="h4 mt-3">Form dialog</h1>
         <Dialog
           title="Edit item"
+          stopPropagation={false}
+          staticBackdrop={false}
           body={({ close }) => (
             <Form
               initialValues={{}}
@@ -170,6 +173,27 @@ export function DialogExamples() {
               }}
             >
               <FormGroupInput name="test" label="Test" required />
+              <FormGroupDropdown
+                name="dropdownField2"
+                label="Dropdown in a dialog using string as value"
+                options={[
+                  {
+                    value: '01',
+                    label: <p>Value one</p>,
+                  },
+                  {
+                    value: '02',
+                    label: <p>Value two</p>,
+                  },
+                  {
+                    value: '03',
+                    label: <p>Value three</p>,
+                  },
+                ]}
+                placeholder="Select one value"
+                includeEmptyItem={false}
+                menuClassName="p-4 w-100"
+              />
             </Form>
           )}
         >
