@@ -169,6 +169,20 @@ export function FormAutocomplete({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    /* Handles case when a useFormControl.setValue is used. Without this logic,
+     * selectedItem would not be updaded. */
+    if (selectedItem?.value !== value) {
+      const item = getSelectedItem(_selectedItem, value, allowUnlistedValue);
+
+      setSelectedItem(item);
+
+      if (item?.label) {
+        setSearchValue(item?.label);
+      }
+    }
+  }, [_selectedItem, allowUnlistedValue, selectedItem?.value, value]);
+
   return (
     <>
       <input
