@@ -113,7 +113,7 @@ export function FormAutocomplete({
       setValue('');
       setSelectedItem(null);
       updateSearchInputValidation();
-    } else if (selectedItem?.value !== searchValue && !isEmptyLike(searchValue) && allowUnlistedValue) {
+    } else if (selectedItem?.label !== searchValue && !isEmptyLike(searchValue) && allowUnlistedValue) {
       onSelectItem({ value: searchValue, label: searchValue });
     }
 
