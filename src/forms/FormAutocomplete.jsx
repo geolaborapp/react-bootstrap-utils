@@ -178,7 +178,7 @@ export function FormAutocomplete({
 
   useEffect(() => {
     /* Handles case when a useFormControl.setValue is used. Without this logic,
-     * selectedItem would not be updaded. */
+     * selectedItem would not be updated. */
     if (!valuesAreEqual(selectedItem?.value, value, trackBy)) {
       const item = getSelectedItem(value, items, allowUnlistedValue, trackBy);
 
