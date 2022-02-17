@@ -177,7 +177,6 @@ export function FormExamples() {
             onSearch={console.log}
             placeholder="Type some letters"
             openOnFocus={true}
-            required={() => true}
             afterChange={console.log.bind(console, 'afterChange autocomplete')}
           />
         </div>
