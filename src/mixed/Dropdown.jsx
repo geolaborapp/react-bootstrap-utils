@@ -28,7 +28,7 @@ export function Dropdown({
         <div
           className={formatClasses(['dropdown-menu', menuClassName, isOpen && 'show'])}
           // aria-labelledby="dropdownMenuButton"
-          style={{ maxHeight: '200px', overflowY: 'auto' }}
+          style={{ maxHeight: '180px', overflowY: 'auto' }}
         >
           {items.map(({ label, value, isDisabled }, index) => (
             <a
