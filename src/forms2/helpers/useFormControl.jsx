@@ -14,15 +14,12 @@ export function useFormControl2(name, type) {
     (newValue) => {
       const newValueFn = isFunction(newValue) ? newValue : () => newValue;
 
-      _setValue((prevValue) => {
-        const nextValue = newValueFn(prevValue);
+      const nextValue = newValueFn(value);
 
-        formHelper.notify(name, nextValue);
-
-        return isDefined(nextValue) ? nextValue : '';
-      });
+      _setValue(isDefined(nextValue) ? nextValue : '');
+      formHelper.notify(name, nextValue);
     },
-    [formHelper, name]
+    [formHelper, name, value]
   );
 
   const handleOnChange = useCallback(
