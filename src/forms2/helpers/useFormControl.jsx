@@ -16,6 +16,9 @@ export function useFormControl2(name, type) {
 
       const nextValue = newValueFn(value);
 
+      // utilizar o setState como função trouxe problemas na ficha de ensaio
+      // não foi possível identificar o motivo, porém o callback não era acionado e o valor não era atualizado
+      // e nem era enviada a notificação de alteração para o form-helper
       _setValue(isDefined(nextValue) ? nextValue : '');
       formHelper.notify(name, nextValue);
     },
