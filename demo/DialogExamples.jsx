@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React from 'react';
+import React, { useState } from 'react';
 
 // eslint-disable-next-line import/no-unresolved
 import {
@@ -14,6 +14,7 @@ import {
 } from '../dist/main';
 
 export function DialogExamples() {
+  const [hideModal, toggleHideModal] = useState(false);
   const { showDialog, DialogPortal } = useDialog({
     title: 'useDialog',
     body: ({ foo, bar }) => (
@@ -105,30 +106,39 @@ export function DialogExamples() {
       </div>
       <div className="col-6">
         <h1 className="h4 mt-3">Close dialog from body/footer</h1>
-        <Dialog
-          title="Custom footer dialog"
-          body={({ close }) => (
-            <>
-              <strong>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam amet rerum ducimus maiores deleniti
-                ullam necessitatibus, minus dolore maxime repellat provident perspiciatis veritatis eum sunt? Nam quo
-                vel quia qui.
-              </strong>
+        {!hideModal && (
+          <Dialog
+            title="Custom footer dialog"
+            body={({ close }) => (
+              <>
+                <strong>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam amet rerum ducimus maiores deleniti
+                  ullam necessitatibus, minus dolore maxime repellat provident perspiciatis veritatis eum sunt? Nam quo
+                  vel quia qui.
+                </strong>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    toggleHideModal(true);
+                    close();
+                  }}
+                >
+                  Close from body
+                </button>
+              </>
+            )}
+            footer={({ close }) => (
               <button type="button" className="btn btn-primary" onClick={close}>
-                Close from body
+                Close from footer
               </button>
-            </>
-          )}
-          footer={({ close }) => (
-            <button type="button" className="btn btn-primary" onClick={close}>
-              Close from footer
-            </button>
-          )}
-          staticBackdrop={true}
-          useTimesClose={false}
-        >
-          <a href="">&amp;</a>
-        </Dialog>
+            )}
+            staticBackdrop={true}
+            useTimesClose={false}
+          >
+            <a href="">&amp;</a>
+          </Dialog>
+        )}
       </div>
       <div className="col-6">
         <h1 className="h4 mt-3">Confirmation dialog</h1>
