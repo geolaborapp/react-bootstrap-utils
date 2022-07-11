@@ -15,6 +15,8 @@ import {
 
 export function DialogExamples() {
   const [hideModal, toggleHideModal] = useState(false);
+  const [mockData, setMockData] = useState('empty');
+  console.log('mockData >>> ', mockData);
   const { showDialog, DialogPortal } = useDialog({
     title: 'useDialog',
     body: ({ foo, bar }) => (
@@ -171,8 +173,12 @@ export function DialogExamples() {
           body={({ close }) => (
             <Form
               initialValues={{}}
-              onSubmit={(data) => {
+              onSubmit={async (data) => {
                 console.info('submit', data);
+
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                setMockData(data);
+
                 close();
               }}
               onCancel={() => {
@@ -256,6 +262,7 @@ export function DialogExamples() {
           onClick={() => {
             showAutoCloseDialog();
             setTimeout(() => {
+              setMockData('AutoCloseDialog');
               close();
             }, 5000);
           }}
