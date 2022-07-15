@@ -226,14 +226,6 @@ export function FormAutocomplete({
         </div>
       )}
 
-      <input
-        type="text"
-        className={formatClasses(['form-control', 'd-none'])}
-        {...{ name, required, id }}
-        onChange={() => {}}
-        value={getValue()}
-        ref={registerRef}
-      />
 
       <Dropdown
         className="form-autocomplete-dropdown"
@@ -245,7 +237,17 @@ export function FormAutocomplete({
         onTouchStart={() => setIgnoreBlur(true)}
         onMouseEnter={() => setIgnoreBlur(true)}
         onMouseLeave={() => setIgnoreBlur(false)}
-      />
+      >
+        <input
+          type="text"
+          className={formatClasses(['form-control', 'position-absolute', 'fixed-bottom', 'opacity-0'])}
+          style={{ zIndex: '-9999' }}
+          {...{ name, required, id }}
+          onChange={() => {}}
+          value={getValue()}
+          ref={registerRef}
+        />
+      </Dropdown>
     </>
   );
 }
