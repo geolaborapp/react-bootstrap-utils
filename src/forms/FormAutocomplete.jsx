@@ -70,6 +70,8 @@ export function FormAutocomplete({
 
   const [selectedItem, setSelectedItem] = useState(getSelectedItem(value, items, allowUnlistedValue, trackBy));
   const { isOpen, open, close } = useOpenState();
+  const [controlFeedback, setControlFeedback] = useState('');
+
   const [ignoreBlur, setIgnoreBlur] = useState(false);
   const [isFocused, setFocus] = useState(false);
   const searchInputRef = useRef(null);
@@ -77,8 +79,7 @@ export function FormAutocomplete({
   const registerRef = useCallback(register, [register]);
   const disabled = booleanOrFunction(_disabled, getFormData());
   const required = booleanOrFunction(_required, getFormData());
-
-  const controlFeedback = getFormSubmitedAttempted() ? (isValid() ? 'is-valid' : 'is-invalid') : '';
+  const formSubmitedAttempted = useMemo(() => getFormSubmitedAttempted(), [getFormSubmitedAttempted]);
 
   const updateSearchInputValidation = useCallback(() => {
     searchInputRef.current.setCustomValidity(controlFeedback === 'is-invalid' ? 'invalid' : '');
@@ -182,6 +183,10 @@ export function FormAutocomplete({
   }, []);
 
   useEffect(() => {
+    setControlFeedback(formSubmitedAttempted ? (isValid() ? 'is-valid' : 'is-invalid') : '');
+  }, [controlFeedback, formSubmitedAttempted, getFormSubmitedAttempted, isValid]);
+
+  useEffect(() => {
     /* Handles case when a useFormControl.setValue is used. Without this logic,
      * selectedItem would not be updated. */
     if (!valuesAreEqual(selectedItem?.value, value, trackBy)) {
@@ -225,7 +230,6 @@ export function FormAutocomplete({
           {selectedItem ? (template ? template(selectedItem.label) : selectedItem.label) : placeholder}
         </div>
       )}
-
 
       <Dropdown
         className="form-autocomplete-dropdown"
