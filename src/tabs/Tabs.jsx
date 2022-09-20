@@ -81,6 +81,7 @@ Tabs.propTypes = {
     PropTypes.shape({
       title: PropTypes.node,
       content: PropTypes.node,
+      hideIf: PropTypes.func,
     })
   ).isRequired,
   vertical: PropTypes.bool,
