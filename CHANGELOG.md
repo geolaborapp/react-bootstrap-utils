@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.32](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.31...v0.26.32) (2022-12-14)
+
+
+### Features
+
+* allow custom columns width in Table ([#36](https://github.com/geolaborapp/react-bootstrap-utils/issues/36)) ([e7c417e](https://github.com/geolaborapp/react-bootstrap-utils/commit/e7c417e30598eb2fc952b3af7cf091686692446b))
+
+### [0.26.31](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.30...v0.26.31) (2022-09-29)
+
+
+### Bug Fixes
+
+* corrige prop onSelect do StatefulTabs ([#35](https://github.com/geolaborapp/react-bootstrap-utils/issues/35)) ([8fde4a6](https://github.com/geolaborapp/react-bootstrap-utils/commit/8fde4a6df42d2f2616e5ed229421c19deb4908d8))
+
+### [0.26.30](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.29...v0.26.30) (2022-09-20)
+
+
+### Features
+
+* inclui funcionalidade de esconder aba ([#34](https://github.com/geolaborapp/react-bootstrap-utils/issues/34)) ([e54f6fa](https://github.com/geolaborapp/react-bootstrap-utils/commit/e54f6fa6dc346f5a57a84b9ccab7a84252a4976f))
+
+### [0.26.29](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.28...v0.26.29) (2022-08-24)
+
+
+### Bug Fixes
+
+* required form autocomplete using custom validation ([#33](https://github.com/geolaborapp/react-bootstrap-utils/issues/33)) ([3d84c67](https://github.com/geolaborapp/react-bootstrap-utils/commit/3d84c67c357e5b8bb3e3a7a4b371a415f0a7eaee))
+* required form autocomplete using native form validation ([#30](https://github.com/geolaborapp/react-bootstrap-utils/issues/30)) ([1ece0f0](https://github.com/geolaborapp/react-bootstrap-utils/commit/1ece0f0e3ab00695c3e67d48278bdb2ad4a8464a))
+
 ### [0.26.28](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.27...v0.26.28) (2022-08-12)
 
 
