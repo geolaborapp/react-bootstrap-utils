@@ -6,7 +6,6 @@ import { formatClasses } from '../utils/attributes';
 
 export function Dropdown({
   children,
-  itemKeyName,
   items,
   onSelect,
   isDisabled,
@@ -34,7 +33,7 @@ export function Dropdown({
         >
           {items.map(({ label, value, isDisabled }, index) => (
             <a
-              key={`${itemKeyName}${index}`}
+              key={`l[${label}]v[${value}]i[${index}]`}
               href="#"
               className={formatClasses(['dropdown-item', isDisabled && 'disabled', itemClassName])}
               onClick={safeClick(onSelect, { value, index, label })}
@@ -57,7 +56,6 @@ Dropdown.propTypes = {
   children: PropTypes.node,
   isDisabled: PropTypes.bool,
   isOpen: PropTypes.bool,
-  itemKeyName: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.object),
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
