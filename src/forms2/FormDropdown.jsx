@@ -140,6 +140,7 @@ FormDropdown2.defaultProps = {
 FormDropdown2.propTypes = {
   afterChange: PropTypes.func,
   childClassName: PropTypes.string,
+  disabled: PropTypes.bool,
   dropdownClassName: PropTypes.string,
   includeEmptyItem: PropTypes.bool,
   itemClassName: PropTypes.string,
@@ -153,7 +154,6 @@ FormDropdown2.propTypes = {
   template: PropTypes.func,
   toggleIcon: PropTypes.func,
   trackBy: PropTypes.string,
-  disabled: PropTypes.bool,
 };
 
 export function FormGroupDropdown2(props) {
@@ -167,6 +167,7 @@ export function FormGroupDropdown2(props) {
 FormGroupDropdown2.propTypes = {
   afterChange: PropTypes.func,
   childClassName: PropTypes.string,
+  disabled: PropTypes.bool,
   dropdownClassName: PropTypes.string,
   help: PropTypes.node,
   includeEmptyItem: PropTypes.bool,
