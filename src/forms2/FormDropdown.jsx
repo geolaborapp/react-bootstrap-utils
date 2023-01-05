@@ -108,7 +108,7 @@ export const FormDropdown2 = ({
           className={formatClasses([
             'input-group justify-content-between form-control h-auto',
             childClassName,
-            disabled && 'disabled',
+            disabled && 'text-muted bg-light',
           ])}
           onClick={toggleDropdown}
         >
