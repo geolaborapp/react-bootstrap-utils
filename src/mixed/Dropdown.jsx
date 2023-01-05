@@ -6,8 +6,10 @@ import { formatClasses } from '../utils/attributes';
 
 export function Dropdown({
   children,
+  itemKeyName,
   items,
   onSelect,
+  isDisabled,
   isOpen,
   onTouchStart,
   onMouseEnter,
@@ -19,7 +21,7 @@ export function Dropdown({
 }) {
   return (
     <div
-      className={formatClasses(['dropdown', className, isOpen && 'show'])}
+      className={formatClasses(['dropdown', className, isOpen && 'show', isDisabled && 'disabled'])}
       {...{ onTouchStart, onMouseEnter, onMouseLeave }}
     >
       {children}
@@ -32,7 +34,7 @@ export function Dropdown({
         >
           {items.map(({ label, value, isDisabled }, index) => (
             <a
-              key={index}
+              key={`${itemKeyName}${index}`}
               href="#"
               className={formatClasses(['dropdown-item', isDisabled && 'disabled', itemClassName])}
               onClick={safeClick(onSelect, { value, index, label })}
@@ -53,7 +55,9 @@ Dropdown.defaultProps = {
 
 Dropdown.propTypes = {
   children: PropTypes.node,
+  isDisabled: PropTypes.bool,
   isOpen: PropTypes.bool,
+  itemKeyName: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.object),
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
