@@ -97,6 +97,7 @@ export const FormDropdown2 = ({
       <Dropdown
         isOpen={isOpen}
         isDisabled={disabled}
+        itemKeyName={name}
         items={includeEmptyItem ? [{ value: null, label: <div className="m-3"></div> }, ...items] : items}
         onSelect={onSelectItem}
         template={template}
