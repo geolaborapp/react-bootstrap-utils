@@ -84,7 +84,7 @@ export function DialogExamples() {
             </div>
           }
           keyboard={false}
-          onClose={console.log('onClose')}
+          onClose={() => console.log('onClose')}
         >
           <a href="" className="btn btn-primary">
             Dialog with function onClose
