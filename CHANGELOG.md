@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.36](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.35...v0.26.36) (2023-01-30)
+
+
+### Features
+
+* Adiciona uma nova prop 'onClose' ao componente Dialog, que recebe uma função a ser executada ao fechar o modal. ([#40](https://github.com/geolaborapp/react-bootstrap-utils/issues/40)) ([9204861](https://github.com/geolaborapp/react-bootstrap-utils/commit/92048614d190547eae03238335812a368533000a))
+
 ### [0.26.35](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.32...v0.26.35) (2023-01-05)
 
 
