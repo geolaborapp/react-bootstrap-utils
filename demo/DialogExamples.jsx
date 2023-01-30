@@ -74,6 +74,24 @@ export function DialogExamples() {
         </Dialog>
       </div>
       <div className="col-6">
+        <h1 className="h4">Dialog with function onClose</h1>
+        <Dialog
+          title="Dialog with function onClose"
+          body={
+            <div>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam sequi vero sapiente delectus error
+              sunt, a eveniet nobis est ex magni nesciunt magnam. Eaque eius hic eligendi dolorum ut quas?
+            </div>
+          }
+          keyboard={false}
+          onClose={() => console.log('onClose')}
+        >
+          <a href="" className="btn btn-primary">
+            Dialog with function onClose
+          </a>
+        </Dialog>
+      </div>
+      <div className="col-6">
         <h1 className="h4 mt-3">Scrolling long content Dialog</h1>
         <Dialog
           title="Long content dialog"
