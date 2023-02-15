@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 
 import { FormContext } from './useFormHelper';
 
-export function useFormEffect(name, observerFn) {
+export function useFormEffect(name, observerFn, deps = []) {
   const formHelper = useContext(FormContext);
 
   useEffect(() => {
@@ -10,5 +10,5 @@ export function useFormEffect(name, observerFn) {
 
     return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [...deps]);
 }
