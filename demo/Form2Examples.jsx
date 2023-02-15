@@ -175,6 +175,10 @@ export function Form2Examples() {
           <label htmlFor="">Observer</label>
           <FormObserver />
         </div>
+        <div className="form-group">
+          <label htmlFor="">Observer 2</label>
+          <FormObserver2 />
+        </div>
 
         <FormGroupInputMask2
           name="decimalMask"
@@ -393,4 +397,46 @@ function currencyMask(v) {
   maskedValue = maskedValue.replace(/(?=(\d{3})+(\D))\B/g, ',');
 
   return { maskedValue, rawValue };
+}
+
+function FormObserver2() {
+  const [toggleName, setToggleName] = useState(false);
+
+  return (
+    <div>
+      <div className=" mb-2">
+        <FormGroupSwitch2
+          id="formObserver2"
+          label="Element observed switch"
+          name="formObserver2"
+          trueLabel="observed-input-1"
+          falseLabel="observed-input-2"
+          afterChange={(v) => setToggleName(v)}
+        />
+      </div>
+      <FormObserved2ObservedComponent name={toggleName ? 'observed-input-1' : 'observed-input-2'} />
+    </div>
+  );
+}
+
+function FormObserved2ObservedComponent({ name }) {
+  const [value, setValue] = useState();
+
+  useFormEffect(
+    name,
+    (value) => {
+      setValue(value);
+    },
+    [name]
+  );
+
+  return (
+    <div>
+      <div className="row mb-2">
+        <div className="col-6">{`Input observed "${name}"`}</div>
+        <div className="col-6">{`Value "${value}"`}</div>
+      </div>
+      <FormGroupSwitch2 id={name} label="Observed input switch" name={name} />
+    </div>
+  );
 }
