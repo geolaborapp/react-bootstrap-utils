@@ -14,6 +14,7 @@ export function FormSwitch2({
   falseLabel,
   disabled: _disabled,
   afterChange,
+  ...props
 }) {
   const { getValue, handleOnChangeFactory, getFormData, registerInputRef } = useFormControl2(name, 'boolean');
 
@@ -30,6 +31,7 @@ export function FormSwitch2({
         onChange={handleOnChangeFactory(afterChange)}
         checked={value}
         ref={registerInputRef}
+        {...props}
       />
       <label className="custom-control-label" htmlFor={id}>
         {(trueLabel || falseLabel) && (value ? trueLabel : falseLabel)}
