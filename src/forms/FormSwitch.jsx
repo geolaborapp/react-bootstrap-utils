@@ -5,7 +5,16 @@ import { useFormControl } from './helpers/useFormControl';
 import { booleanOrFunction } from './helpers/form-helpers';
 import { FormGroup } from './FormGroup';
 
-export function FormSwitch({ id, name, required: _required, trueLabel, falseLabel, disabled: _disabled, afterChange }) {
+export function FormSwitch({
+  id,
+  name,
+  required: _required,
+  trueLabel,
+  falseLabel,
+  disabled: _disabled,
+  afterChange,
+  ...props
+}) {
   const { getValue, handleOnChangeFactory, register, getFormData } = useFormControl(name, 'boolean');
   const registerRef = useCallback(register, [register]);
   const value = getValue();
@@ -21,6 +30,7 @@ export function FormSwitch({ id, name, required: _required, trueLabel, falseLabe
         onChange={handleOnChangeFactory(afterChange)}
         checked={value}
         ref={registerRef}
+        {...props}
       />
       <label className="custom-control-label" htmlFor={id}>
         {(trueLabel || falseLabel) && (value ? trueLabel : falseLabel)}
