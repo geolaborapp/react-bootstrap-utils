@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.37](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.36...v0.26.37) (2023-02-16)
+
+
+### Bug Fixes
+
+* corrige passagem de props com formSwitch ([#42](https://github.com/geolaborapp/react-bootstrap-utils/issues/42)) ([9c3ac73](https://github.com/geolaborapp/react-bootstrap-utils/commit/9c3ac73c2ed6306e1861528a693f90731e47ee9b))
+
 ### [0.26.36](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.35...v0.26.36) (2023-01-30)
 
 
