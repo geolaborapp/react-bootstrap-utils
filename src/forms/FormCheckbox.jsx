@@ -5,7 +5,15 @@ import { useFormControl } from './helpers/useFormControl';
 import { booleanOrFunction } from './helpers/form-helpers';
 import { FormGroup } from './FormGroup';
 
-export function FormCheckbox({ id, name, required: _required, valueLabel, disabled: _disabled, afterChange }) {
+export function FormCheckbox({
+  id,
+  name,
+  required: _required,
+  valueLabel,
+  disabled: _disabled,
+  afterChange,
+  ...props
+}) {
   const { getValue, handleOnChangeFactory, register, getFormData } = useFormControl(name, 'boolean');
   const registerRef = useCallback(register, [register]);
   const disabled = booleanOrFunction(_disabled, getFormData());
@@ -20,6 +28,7 @@ export function FormCheckbox({ id, name, required: _required, valueLabel, disabl
         onChange={handleOnChangeFactory(afterChange)}
         checked={getValue()}
         ref={registerRef}
+        {...props}
       />
       <label className="custom-control-label" htmlFor={id}>
         {valueLabel}
