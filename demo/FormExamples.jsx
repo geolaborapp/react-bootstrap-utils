@@ -321,6 +321,7 @@ export function FormExamples() {
             label="Checkbox field"
             valueLabel="Checkbox description"
             help="Checkbox help"
+            onClick={() => console.log('TESTE')}
             afterChange={console.log.bind(console, 'afterChange checkbox')}
           />
         </div>
@@ -493,6 +494,7 @@ const FormSwitchExample = () => {
       falseLabel="OFF"
       help="Switch Autocomplete Object Options Value"
       afterChange={afterChange}
+      onClick={() => console.log('TESTE')}
     />
   );
 };
