@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.38](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.37...v0.26.38) (2023-02-16)
+
+
+### Bug Fixes
+
+* corrige props do fomcheckbox ([#43](https://github.com/geolaborapp/react-bootstrap-utils/issues/43)) ([779e398](https://github.com/geolaborapp/react-bootstrap-utils/commit/779e39895efb4a785b1752f6933e15859a446742))
+
 ### [0.26.37](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.36...v0.26.37) (2023-02-16)
 
 
