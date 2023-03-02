@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.39](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.38...v0.26.39) (2023-03-02)
+
+
+### Features
+
+* melhora useFormEffect ([#41](https://github.com/geolaborapp/react-bootstrap-utils/issues/41)) ([76fe87a](https://github.com/geolaborapp/react-bootstrap-utils/commit/76fe87a58103dc6c17d8a9b65f52028861c67e85))
+
 ### [0.26.38](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.37...v0.26.38) (2023-02-16)
 
 
