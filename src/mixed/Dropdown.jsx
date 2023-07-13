@@ -17,6 +17,7 @@ export function Dropdown({
   className,
   itemClassName,
   menuClassName,
+  listContainerRef,
 }) {
   return (
     <div
@@ -30,6 +31,7 @@ export function Dropdown({
           className={formatClasses(['dropdown-menu', menuClassName, isOpen && 'show'])}
           // aria-labelledby="dropdownMenuButton"
           style={{ maxHeight: '200px', overflowY: 'auto' }}
+          ref={listContainerRef}
         >
           {items.map(({ label, value, isDisabled }, index) => (
             <a
@@ -64,5 +66,6 @@ Dropdown.propTypes = {
   template: PropTypes.func,
   className: PropTypes.string,
   itemClassName: PropTypes.string,
+  listContainerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]),
   menuClassName: PropTypes.string,
 };

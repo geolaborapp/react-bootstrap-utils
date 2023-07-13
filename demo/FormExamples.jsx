@@ -229,6 +229,20 @@ export function FormExamples() {
             }}
           />
         </div>
+        <div className="col">
+          <FormGroupAutocomplete
+            name="autocompleteField5"
+            label="Autocomplete that logs when searched value is cleared"
+            options={['1234', '2345', '3456']}
+            placeholder="Type some numbers"
+            afterChange={(newValue, oldValue) => {
+              console.log(oldValue, ' changed to  :>> ', newValue);
+            }}
+            onClearSearch={() => {
+              console.log('search has been cleared');
+            }}
+          />
+        </div>
       </div>
 
       <div className="row">

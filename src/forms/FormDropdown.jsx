@@ -17,6 +17,7 @@ export const FormDropdown = ({
   dropdownClassName,
   includeEmptyItem,
   itemClassName,
+  listContainerRef,
   menuClassName,
   name,
   options,
@@ -103,6 +104,7 @@ export const FormDropdown = ({
         itemClassName={itemClassName}
         className={dropdownClassName}
         menuClassName={menuClassName}
+        listContainerRef={listContainerRef}
       >
         <div
           className={formatClasses([
@@ -144,6 +146,7 @@ FormDropdown.propTypes = {
   dropdownClassName: PropTypes.string,
   includeEmptyItem: PropTypes.bool,
   itemClassName: PropTypes.string,
+  listContainerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]),
   menuClassName: PropTypes.string,
   name: PropTypes.string.isRequired,
   options: PropTypes.oneOfType([
@@ -172,6 +175,7 @@ FormGroupDropdown.propTypes = {
   help: PropTypes.node,
   includeEmptyItem: PropTypes.bool,
   itemClassName: PropTypes.string,
+  listContainerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]),
   menuClassName: PropTypes.string,
   name: PropTypes.string.isRequired,
   options: PropTypes.oneOfType([

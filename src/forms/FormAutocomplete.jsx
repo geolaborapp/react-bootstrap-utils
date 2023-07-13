@@ -36,8 +36,10 @@ export function FormAutocomplete({
   disabled: _disabled,
   filter,
   id,
+  listContainerRef,
   name,
   onSearch,
+  onClearSearch,
   openOnFocus,
   options,
   placeholder,
@@ -91,8 +93,10 @@ export function FormAutocomplete({
     if (isEmptyLike(value) && !isFocused) {
       setSearchValue('');
       setSelectedItem(null);
+
+      return onClearSearch();
     }
-  }, [isFocused, value]);
+  }, [isFocused, value, onClearSearch]);
 
   const onSearchInputType = useCallback(
     (_, nextSearchValue) => {
@@ -243,6 +247,7 @@ export function FormAutocomplete({
         onTouchStart={() => setIgnoreBlur(true)}
         onMouseEnter={() => setIgnoreBlur(true)}
         onMouseLeave={() => setIgnoreBlur(false)}
+        listContainerRef={listContainerRef}
       >
         <input
           type="text"
@@ -261,6 +266,7 @@ export function FormAutocomplete({
 FormAutocomplete.defaultProps = {
   openOnFocus: false,
   onSearch: () => {},
+  onClearSearch: () => {},
   filter: (_searchValue) => (item) => {
     const itemValue = JSON.stringify(item.label).toLowerCase();
     const searchValue = _searchValue.toLowerCase();
@@ -276,8 +282,10 @@ FormAutocomplete.propTypes = {
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   filter: PropTypes.func,
   id: PropTypes.string,
+  listContainerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]),
   name: PropTypes.string.isRequired,
   onSearch: PropTypes.func,
+  onClearSearch: PropTypes.func,
   openOnFocus: PropTypes.bool,
   options: PropTypes.oneOfType([
     PropTypes.func,
@@ -306,8 +314,10 @@ FormGroupAutocomplete.propTypes = {
   help: PropTypes.node,
   id: PropTypes.string,
   label: PropTypes.node.isRequired,
+  listContainerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]),
   name: PropTypes.string.isRequired,
   onSearch: PropTypes.func,
+  onClearSearch: PropTypes.func,
   openOnFocus: PropTypes.bool,
   options: PropTypes.oneOfType([
     PropTypes.func,
