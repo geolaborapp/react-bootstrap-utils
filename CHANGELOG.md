@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.40](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.39...v0.26.40) (2023-07-14)
+
+
+### Features
+
+* adiciona props para Dropdown e FormAutocomplete ([#44](https://github.com/geolaborapp/react-bootstrap-utils/issues/44)) ([8c6612d](https://github.com/geolaborapp/react-bootstrap-utils/commit/8c6612d02f5d64d2df2d2d85c5e7ffd98863755f))
+
 ### [0.26.39](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.38...v0.26.39) (2023-03-02)
 
 
