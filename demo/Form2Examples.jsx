@@ -142,6 +142,19 @@ export function Form2Examples() {
           required={() => true}
         />
 
+        <FormGroupAutocomplete2
+          name="autocomplete2Field4"
+          label="Autocomplete Field that logs when searched value is cleared"
+          options={['1', '2', '3']}
+          placeholder="Type some numbers"
+          afterChange={(newValue, oldValue) => {
+            console.log(oldValue, ' changed to  :>> ', newValue);
+          }}
+          onClearSearch={() => {
+            console.log('search has been cleared');
+          }}
+        />
+
         <FormGroupInput2 label="AttrA" name="attrA"></FormGroupInput2>
         <FormGroupInput2 label="AttrB" name="attrB"></FormGroupInput2>
         <FormGroupSelect2 label="AttrC" name="attrC" options={[1, 2, 3]}></FormGroupSelect2>
