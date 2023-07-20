@@ -94,7 +94,7 @@ export function FormAutocomplete({
       setSearchValue('');
       setSelectedItem(null);
 
-      return onClearSearch();
+      onClearSearch();
     }
   }, [isFocused, value, onClearSearch]);
 
