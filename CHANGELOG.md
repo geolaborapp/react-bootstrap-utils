@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.41](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.40...v0.26.41) (2023-07-21)
+
+
+### Bug Fixes
+
+* corrige uso do onClearSearch ([#45](https://github.com/geolaborapp/react-bootstrap-utils/issues/45)) ([30d35bd](https://github.com/geolaborapp/react-bootstrap-utils/commit/30d35bd6473e393988984fd7b37e6e059d566df4))
+
 ### [0.26.40](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.39...v0.26.40) (2023-07-14)
 
 
