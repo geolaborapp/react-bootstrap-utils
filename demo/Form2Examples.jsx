@@ -82,9 +82,9 @@ export function Form2Examples() {
           afterChange={(value) => setBootstrapFormValidation(value)}
         />
         <hr />
-        <div className="form-group">
+        <div className="mb-3">
           <label htmlFor="">Obj</label>
-          <div className="form-row">
+          <div className="row">
             <div className="col">
               <FormInput2 name="Obj.x" />
             </div>
@@ -96,11 +96,11 @@ export function Form2Examples() {
             </div>
           </div>
         </div>
-        <div className="form-group">
+        <div className="mb-3">
           <label htmlFor="">Array</label>
           <FormArray />
         </div>
-        <div className="form-group">
+        <div className="mb-3">
           <label htmlFor="">Array of objects</label>
           <FormArrayOfObjects />
         </div>
@@ -170,7 +170,7 @@ export function Form2Examples() {
 
         <FormGroupCheckbox2 id="checkboxFieldId2" name="checkboxField2" label="Checkbox field 2" disabled />
 
-        <div className="form-group">
+        <div className="mb-3">
           <label htmlFor="">Version</label>
           <FormVersion />
         </div>
@@ -184,11 +184,11 @@ export function Form2Examples() {
           }}
         />
 
-        <div className="form-group">
+        <div className="mb-3">
           <label htmlFor="">Observer</label>
           <FormObserver />
         </div>
-        <div className="form-group">
+        <div className="mb-3">
           <label htmlFor="">Observer 2</label>
           <FormObserver2 />
         </div>
@@ -331,11 +331,10 @@ function FormArray() {
       {(getValue() || []).map((v, index) => (
         <div className="input-group mb-2">
           <FormInput2 key={index} name={`arr[${index}]`} />
-          <div className="input-group-append">
-            <button className="btn btn-danger" onClick={() => remove(index)}>
-              Remove
-            </button>
-          </div>
+
+          <button className="btn btn-danger" onClick={() => remove(index)}>
+            Remove
+          </button>
         </div>
       ))}
 

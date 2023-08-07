@@ -18,7 +18,7 @@ export function TableActions({ doc, docIndex, actions }) {
   return (
     <td className="text-center">
       {normalizedActions.map((action, actionIndex) => (
-        <span key={actionIndex} className={actionIndex > 0 ? 'ml-2' : ''}>
+        <span key={actionIndex} className={actionIndex > 0 ? 'ms-2' : ''}>
           <TableAction doc={doc} docIndex={docIndex} action={action} />
         </span>
       ))}

@@ -20,17 +20,17 @@ export function FormCheckbox({
   const required = booleanOrFunction(_required, getFormData());
 
   return (
-    <div className="custom-control custom-checkbox">
+    <div className="form-check">
       <input
         {...{ required, name, id, disabled }}
         type="checkbox"
-        className="custom-control-input"
+        className="form-check-input"
         onChange={handleOnChangeFactory(afterChange)}
         checked={getValue()}
         ref={registerRef}
         {...props}
       />
-      <label className="custom-control-label" htmlFor={id}>
+      <label className="form-check-label" htmlFor={id}>
         {valueLabel}
       </label>
     </div>

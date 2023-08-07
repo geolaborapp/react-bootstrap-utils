@@ -23,17 +23,17 @@ export function FormRadio2({
   const required = booleanOrFunction(_required, getFormData());
 
   return (
-    <div className={formatClasses([`custom-control`, `custom-radio`, inline && 'custom-control-inline'])}>
+    <div className={formatClasses(['form-check', inline && 'form-check-inline'])}>
       <input
         {...{ required, name, id, disabled }}
         type="radio"
-        className="custom-control-input"
+        className="form-check-input"
         onChange={handleOnChangeFactory(afterChange)}
         checked={value === checkedValue}
         value={checkedValue}
         ref={registerInputRef}
       />
-      <label className="custom-control-label" htmlFor={id}>
+      <label className="form-check-label" htmlFor={id}>
         {valueLabel}
       </label>
     </div>

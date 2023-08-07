@@ -6,28 +6,8 @@ export const TOASTS_VALID_POSITIONS = ['TOP_LEFT', 'TOP_RIGHT', 'BOTTOM_LEFT', '
 
 export const TOASTS_VALID_TYPES = ['info', 'success', 'danger', 'warning'];
 
-export const TOASTS_CLASSNAME_BY_POSITION = [
-  {
-    name: 'TOP_LEFT',
-    className: 'top-left',
-  },
-  {
-    name: 'TOP_RIGHT',
-    className: 'top-right',
-  },
-  {
-    name: 'BOTTOM_LEFT',
-    className: 'bottom-left',
-  },
-  {
-    name: 'BOTTOM_RIGHT',
-    className: 'bottom-right',
-  },
-];
-
 export const TOASTS_DEFAULT_STYLE = {
   position: 'fixed',
-  zIndex: 9999,
   maxWidth: '50%',
 };
 

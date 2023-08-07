@@ -60,7 +60,7 @@ ReactDOM.render(
             title: 'Toasts',
             content: (
               <ToastsContainer>
-                <ToastsExamples />,
+                <ToastsExamples />
               </ToastsContainer>
             ),
           },

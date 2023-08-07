@@ -74,7 +74,7 @@ export function SortableTable({ columnHeaderFormat, docs, defaultSortOption, ...
         <>
           <a
             href="#"
-            className="mr-1"
+            className="me-1"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();

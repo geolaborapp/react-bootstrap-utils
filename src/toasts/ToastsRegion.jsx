@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import { Toast } from './Toast';
 import { TOASTS_DEFAULT_STYLES_BY_POSITION, TOASTS_DEFAULT_STYLE } from './toasts-helpers';
 
-export function ToastsRegion({ name, className, toasts, noStyle }) {
+export function ToastsRegion({ name, toasts, noStyle }) {
   return (
     <div
       key={name}
-      className={className}
       style={
         noStyle
           ? null
@@ -30,7 +29,6 @@ ToastsRegion.defaultProps = {
 };
 
 ToastsRegion.propTypes = {
-  className: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   noStyle: PropTypes.bool,
   toasts: PropTypes.arrayOf(PropTypes.object),

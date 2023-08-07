@@ -7,7 +7,7 @@ import { FormValidationFeedback } from './FormValidationFeedback';
 
 export function FormGroup2({ children, name, feedback, mockInvalidSibling, help, ...props }) {
   return (
-    <div className="form-group">
+    <div className="mb-3">
       <FormLabel2 {...props} />
       {children}
       {feedback && <FormValidationFeedback mockInvalidSibling={mockInvalidSibling} name={name} />}

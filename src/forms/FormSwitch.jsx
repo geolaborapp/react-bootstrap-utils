@@ -22,17 +22,17 @@ export function FormSwitch({
   const required = booleanOrFunction(_required, getFormData());
 
   return (
-    <div className="custom-control custom-switch">
+    <div className="form-check form-switch">
       <input
         {...{ required, name, id, disabled }}
         type="checkbox"
-        className="custom-control-input"
+        className="form-check-input"
         onChange={handleOnChangeFactory(afterChange)}
         checked={value}
         ref={registerRef}
         {...props}
       />
-      <label className="custom-control-label" htmlFor={id}>
+      <label className="form-check-label" htmlFor={id}>
         {(trueLabel || falseLabel) && (value ? trueLabel : falseLabel)}
       </label>
     </div>

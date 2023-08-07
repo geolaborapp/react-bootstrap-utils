@@ -248,11 +248,11 @@ export function DialogExamples() {
           useDialog
         </button>
         <ConfirmationDialogPortal />
-        <button type="button" className="btn btn-warning ml-2" onClick={() => showConfirmationDialog({ foo: 'FOO' })}>
+        <button type="button" className="btn btn-warning ms-2" onClick={() => showConfirmationDialog({ foo: 'FOO' })}>
           useConfirmationDialog
         </button>
         <AlertDialogPortal />
-        <button type="button" className="btn btn-info ml-2" onClick={() => showAlertDialog({ bar: 'BAR' })}>
+        <button type="button" className="btn btn-info ms-2" onClick={() => showAlertDialog({ bar: 'BAR' })}>
           useAlertDialog
         </button>
       </div>

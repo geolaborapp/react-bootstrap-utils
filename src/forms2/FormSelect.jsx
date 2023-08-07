@@ -39,7 +39,7 @@ export function FormSelect2({
   return (
     <select
       {...attrs}
-      className="custom-select"
+      className="form-select"
       onChange={handleOnChangeFactory(afterChange, getOptionsType(normalizedOptions))}
       value={getSelectedValue(value, normalizedOptions, trackBy)}
       ref={registerInputRef}
