@@ -86,9 +86,13 @@ export function Modal({
             <div className="modal-header">
               <h5 className="modal-title">{title}</h5>
               {useTimesClose && (
-                <button type="button" className="close" onClick={closeAndHide} aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={closeAndHide}
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               )}
             </div>
           )}

@@ -52,7 +52,7 @@ export function useToastState({ unique }) {
 
   const close = useCallback(
     (position, toastId) => {
-      const { timeoutId } = timeoutRefs.current[toastId];
+      const { timeoutId } = timeoutRefs.current?.[toastId] ?? {};
 
       if (timeoutId) {
         clearTimeout(timeoutId);

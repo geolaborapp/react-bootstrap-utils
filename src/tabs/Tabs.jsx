@@ -17,34 +17,32 @@ export function Tabs({ vertical, tabs: _tabs, activeTab, onlyRenderActiveTab, bo
   }
 
   return (
-    <div className={formatClasses(['custom-tabs-container', vertical && 'd-flex'])}>
-      <div className="tabs-navigation">
-        <ul
-          className={formatClasses([
-            'nav',
-            vertical ? 'nav-pills flex-column' : 'nav-tabs',
-            justified && 'nav-justified',
-            fill && 'nav-fill',
-          ])}
-          id="myTab"
-          role="tablist"
-        >
-          {tabs.map((tab, tabIndex) => (
-            <TabHeader
-              key={tabIndex}
-              index={tabIndex}
-              isActive={tabIndex === activeTab}
-              title={tab.title}
-              onSelect={onSelect}
-            />
-          ))}
-        </ul>
-      </div>
+    <div className={formatClasses([vertical && 'd-flex'])}>
+      <ul
+        className={formatClasses([
+          'nav',
+          vertical ? 'nav-pills flex-column' : 'nav-tabs',
+          justified && 'nav-justified',
+          fill && 'nav-fill',
+        ])}
+        id="myTab"
+        role="tablist"
+      >
+        {tabs.map((tab, tabIndex) => (
+          <TabHeader
+            key={tabIndex}
+            index={tabIndex}
+            isActive={tabIndex === activeTab}
+            title={tab.title}
+            onSelect={onSelect}
+          />
+        ))}
+      </ul>
 
       <div
         className={formatClasses([
           'tab-content',
-          vertical ? 'flex-fill ml-3' : bordered ? 'border-left border-right border-bottom p-2' : 'py-2',
+          vertical ? 'flex-fill ms-3' : bordered ? 'border-start border-end border-bottom p-2' : 'py-2',
         ])}
         // id="myTabContent"
       >

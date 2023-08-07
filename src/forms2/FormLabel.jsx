@@ -6,7 +6,7 @@ export function FormLabel2({ id, label, required: _required }) {
   const required = isBoolean(_required) && _required;
 
   return (
-    <label htmlFor={id}>
+    <label className="form-label" htmlFor={id}>
       {label}
 
       {required && <span className="text-danger"> *</span>}

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { formatClasses } from '../utils/attributes';
@@ -7,19 +7,23 @@ import { ToastsContext } from './toasts-helpers';
 
 export function Toast({ id, type, message, closeControl, position, noStyle }) {
   const toastsState = useContext(ToastsContext);
+  const shouldShow = useMemo(() => Boolean(toastsState?.get(position)), [position, toastsState]);
 
   return (
-    <div
-      className={formatClasses(['toast-message', 'alert', `alert-${type}`, closeControl && 'alert-dismissible'])}
-      style={noStyle ? null : { width: 'auto', zIndex: 9999 }}
-    >
-      {message}
+    <div className={formatClasses(['toast', shouldShow && 'show'])} style={noStyle ? null : { width: 'auto' }}>
+      <div className={formatClasses(['toast-body', 'alert', 'mb-0', `alert-${type}`, closeControl && 'd-flex'])}>
+        <div>{message}</div>
 
-      {closeControl && (
-        <button type="button" className="close" onClick={() => toastsState.close(position, id)} aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      )}
+        {closeControl && (
+          <button
+            type="button"
+            className="btn-close ms-2 m-auto"
+            onClick={() => toastsState.close(position, id)}
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          />
+        )}
+      </div>
     </div>
   );
 }

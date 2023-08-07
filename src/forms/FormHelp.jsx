@@ -5,7 +5,7 @@ import { formatClasses } from '../utils/attributes';
 
 export function FormHelp({ id, inline, message }) {
   return (
-    <small id={`${id}-help`} className={formatClasses(['text-muted', inline ? 'ml-2' : 'form-text'])}>
+    <small id={`${id}-help`} className={formatClasses(['text-muted', inline ? 'ms-2' : 'form-text'])}>
       {message}
     </small>
   );

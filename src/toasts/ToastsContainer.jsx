@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ToastsContext, TOASTS_CLASSNAME_BY_POSITION } from './toasts-helpers';
+import { ToastsContext, TOASTS_VALID_POSITIONS } from './toasts-helpers';
 import { ToastsRegion } from './ToastsRegion';
 import { useToastState } from './useToastState';
 
@@ -13,8 +13,8 @@ export function ToastsContainer({ children, unique, noStyle }) {
       {children}
 
       <div className="toast-container">
-        {TOASTS_CLASSNAME_BY_POSITION.map(({ name, className }) => (
-          <ToastsRegion key={name} name={name} className={className} toasts={toastsState.get(name)} noStyle={noStyle} />
+        {TOASTS_VALID_POSITIONS.map((position) => (
+          <ToastsRegion key={position} name={position} toasts={toastsState.get(position)} noStyle={noStyle} />
         ))}
       </div>
     </ToastsContext.Provider>

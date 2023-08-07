@@ -212,7 +212,7 @@ export function FormAutocomplete({
         {...{ placeholder, disabled }}
         type="search"
         ref={searchInputRef}
-        className={formatClasses(['form-control form-autocomplete-search', isFocused ? '' : 'd-none', controlFeedback])}
+        className={formatClasses(['form-control', isFocused ? '' : 'd-none', controlFeedback])}
         onChange={inputHandleChange}
         onFocus={onSearchInputFocus}
         onBlur={onSearchInputBlur}
@@ -225,11 +225,7 @@ export function FormAutocomplete({
 
       {!isFocused && (
         <div
-          className={formatClasses([
-            'form-control form-autocomplete-selected',
-            controlFeedback,
-            disabled ? 'bg-light text-muted' : '',
-          ])}
+          className={formatClasses(['form-control', controlFeedback, disabled ? 'bg-light text-muted' : ''])}
           disabled={disabled}
           onClick={enableSearchInput}
         >
@@ -238,7 +234,6 @@ export function FormAutocomplete({
       )}
 
       <Dropdown
-        className="form-autocomplete-dropdown"
         isOpen={isOpen()}
         items={items.filter(filter(searchValue))}
         onSelect={onSelectItem}
@@ -295,7 +290,6 @@ FormAutocomplete.propTypes = {
   required: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   template: PropTypes.func,
   trackBy: PropTypes.string,
-  type: PropTypes.string,
 };
 
 export function FormGroupAutocomplete(props) {
@@ -327,5 +321,4 @@ FormGroupAutocomplete.propTypes = {
   required: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   template: PropTypes.func,
   trackBy: PropTypes.string,
-  type: PropTypes.string,
 };

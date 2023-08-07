@@ -9,7 +9,7 @@ export function FormActions({ submitLabel, cancelLabel, onCancel, isSubmiting, c
 
   return (
     <div className="form-actions">
-      <button type="submit" className="btn btn-primary mr-1" disabled={isSubmiting}>
+      <button type="submit" className="btn btn-primary me-1" disabled={isSubmiting}>
         {isFunction(submitLabel) ? submitLabel(isSubmiting) : submitLabel}
       </button>
       <button type="button" className="btn btn-secondary" onClick={onCancel} disabled={isSubmiting}>
