@@ -27,6 +27,23 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
     [formControl]
   );
 
+  const maskRefHandler = useCallback(
+    (input) => {
+      ref.current = input;
+      if (input) {
+        input.getMaskValue = (value) => {
+          const { maskedValue } = mask?.parse?.(value) ?? {};
+
+          return maskedValue;
+        };
+      }
+
+      formControl.registerInputRef(input);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [mask] //formControl como dependencia causaria um loop infinito de render
+  );
+
   useEffect(() => {
     //formatação do valor inicial do input, deve ser executada apenas uma vez
     const valorInicialFormatado = mask?.format?.(valorInicial) ?? valorInicial;
@@ -44,7 +61,7 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
   return (
     <>
       <input
-        ref={ref}
+        ref={maskRefHandler}
         className="form-control"
         name={`__mask.${name}`}
         defaultValue=""

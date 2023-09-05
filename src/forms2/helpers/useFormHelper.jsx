@@ -117,6 +117,18 @@ export function useFormHelper(initialValues, { debounceWait, transform, onChange
       }
     },
     notify(name, value) {
+      const elements = getElementRefs(name) || [];
+      const [element] = elements.filter((el) => !el?.name?.startsWith('__mask.'));
+      const [maskElement] = elements.filter((el) => el?.name?.startsWith('__mask.'));
+
+      if (isDefined(element?.value)) {
+        element.value = value;
+      }
+
+      if (isDefined(maskElement?.value) && isDefined(maskElement?.getMaskValue)) {
+        maskElement.value = maskElement.getMaskValue(value);
+      }
+
       formHelper.current.notify(name, value, (formData) => {
         if (transform) {
           transform(formData, name, this.updateFormData.bind(this));
@@ -131,7 +143,7 @@ export function useFormHelper(initialValues, { debounceWait, transform, onChange
     registerRef(name, inputRef) {
       registerElementRef(name, inputRef);
 
-      if (validations) {
+      if (validations && !inputRef?.name?.startsWith('__mask.')) {
         validateFormElement({
           name,
           formData: formState,
@@ -149,11 +161,14 @@ export function useFormHelper(initialValues, { debounceWait, transform, onChange
       const formData = _formData || formState;
 
       for (const name of elementNames) {
+        const elementRefs = getElementRefs(name) || [];
+        const elementRefsWithoutMask = elementRefs.filter((element) => !element?.name?.startsWith('__mask.'));
+
         const isElementValid = !validateFormElement({
           name,
           formData,
           validations: validations[name],
-          elementRefs: getElementRefs(name),
+          elementRefs: elementRefsWithoutMask,
         });
 
         if (!isElementValid) {
@@ -174,9 +189,10 @@ export function useFormHelper(initialValues, { debounceWait, transform, onChange
       return submitAttempted;
     },
     getValidationMessage(name) {
-      const elementRefs = getElementRefs(name);
+      const elementRefs = getElementRefs(name) || [];
+      const elementRefsWithoutMask = elementRefs.filter((element) => !element?.name?.startsWith('__mask.'));
 
-      return elementRefs && elementRefs[0] ? elementRefs[0].validationMessage : '';
+      return elementRefsWithoutMask && elementRefsWithoutMask[0] ? elementRefsWithoutMask[0].validationMessage : '';
     },
   };
 }

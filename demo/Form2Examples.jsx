@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Form2,
   FormGroupCheckbox2,
@@ -281,6 +281,14 @@ export function Form2Examples() {
           template={(linha) => <p className="mb-0">{linha}</p>}
           disabled
         />
+
+        <FormGroupInput2
+          label="FormInput with value setted by useFormControl2().setValue()"
+          placeholder="Type something on the input below to update this value"
+          name="disabledFormInputForCustomSetValue"
+          disabled
+        />
+        <InputsWithCustomSetValue />
       </Form2>
     </div>
   );
@@ -378,6 +386,13 @@ function decimalMask(value) {
 }
 
 function dateMask(value) {
+  if (!value) {
+    return {
+      rawValue: null,
+      maskedValue: '',
+    };
+  }
+
   let maskedValue = String(value);
 
   maskedValue = maskedValue.replace(/\D/g, '');
@@ -392,7 +407,13 @@ function dateMask(value) {
 }
 
 function hourMask(v) {
-  let maskedValue = v;
+  if (!v) {
+    return {
+      rawValue: null,
+      maskedValue: '',
+    };
+  }
+  let maskedValue = String(v);
 
   maskedValue = maskedValue.replace(/\D/g, '');
   maskedValue = maskedValue.replace(/(\d{2})(\d)/, '$1:$2');
@@ -401,8 +422,14 @@ function hourMask(v) {
 }
 
 function currencyMask(v) {
+  if (!v) {
+    return {
+      rawValue: null,
+      maskedValue: '',
+    };
+  }
   const rawValue = parseFloat(v);
-  let maskedValue = v;
+  let maskedValue = String(v);
 
   maskedValue = maskedValue.replace(/\D/g, '');
   maskedValue = maskedValue.replace(/(\d)(\d{2})$/, '$1.$2');
@@ -450,5 +477,40 @@ function FormObserved2ObservedComponent({ name }) {
       </div>
       <FormGroupSwitch2 id={name} label="Observed input switch" name={name} />
     </div>
+  );
+}
+
+function InputsWithCustomSetValue() {
+  const formInputFormControl = useFormControl2('disabledFormInputForCustomSetValue');
+  const formInputMaskFormControl = useFormControl2('disabledFormInputMaskForCustomSetValue');
+
+  const mask = useMemo(
+    () => ({ parse: (value) => ({ rawValue: value, maskedValue: value }), format: (value) => value }),
+    []
+  );
+
+  return (
+    <>
+      <input
+        className="form-control mb-2"
+        placeholder="Type something to update the value of the form input above"
+        value={formInputFormControl.getValue()}
+        onChange={(e) => formInputFormControl.setValue(e.target.value)}
+      />
+      <div className="mb-2">
+        <FormGroupInputMask2
+          label="FormInputMask with value setted by useFormControl2().setValue()"
+          name="disabledFormInputMaskForCustomSetValue"
+          mask={mask}
+          inputAttrs={{ disabled: true, placeholder: 'Type something on the input below to update this value' }}
+        />
+        <input
+          className="form-control mb-2"
+          placeholder="Type something to update the value of the form input above"
+          value={formInputMaskFormControl.getValue()}
+          onChange={(e) => formInputMaskFormControl.setValue(e.target.value)}
+        />
+      </div>
+    </>
   );
 }
