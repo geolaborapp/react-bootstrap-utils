@@ -66,7 +66,7 @@ export function DialogExamples() {
             <div>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam sequi vero sapiente delectus error
               sunt, a eveniet nobis est ex magni nesciunt magnam. Eaque eius hic eligendi dolorum ut quas?
-              <button onClick={() => setDialogComponentTitleType((t) => !t)}>teste</button>
+              <button onClick={() => setDialogComponentTitleType((t) => !t)}>click to toggle the title!</button>
             </div>
           }
           keyboard={false}
