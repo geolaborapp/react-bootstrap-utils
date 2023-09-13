@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React from 'react';
+import React, { useState } from 'react';
 
 // eslint-disable-next-line import/no-unresolved
 import {
@@ -14,6 +14,7 @@ import {
 } from '../dist/main';
 
 export function DialogExamples() {
+  const [dialogComponentTitleType, setDialogComponentTitleType] = useState(false);
   const { showDialog, DialogPortal } = useDialog({
     title: 'useDialog',
     body: ({ foo, bar }) => (
@@ -48,6 +49,24 @@ export function DialogExamples() {
             <div>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam sequi vero sapiente delectus error
               sunt, a eveniet nobis est ex magni nesciunt magnam. Eaque eius hic eligendi dolorum ut quas?
+            </div>
+          }
+          keyboard={false}
+        >
+          <a href="" className="btn btn-primary">
+            Simple Dialog
+          </a>
+        </Dialog>
+      </div>
+      <div className="col-6">
+        <h1 className="h4">Simple Dialog with component as title</h1>
+        <Dialog
+          title={<>Simple dialog {dialogComponentTitleType ? 'a' : 'b'}</>}
+          body={
+            <div>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam sequi vero sapiente delectus error
+              sunt, a eveniet nobis est ex magni nesciunt magnam. Eaque eius hic eligendi dolorum ut quas?
+              <button onClick={() => setDialogComponentTitleType((t) => !t)}>click to toggle the title!</button>
             </div>
           }
           keyboard={false}

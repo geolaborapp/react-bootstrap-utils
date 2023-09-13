@@ -8,14 +8,12 @@ export function ModalPortal({ children, title, isOpen }) {
   useEffect(() => {
     const modalPortalsElem = getModalPortalsElem();
 
-    if (!container) {
-      const containerElem = document.createElement('div');
+    const containerElem = document.createElement('div');
 
-      containerElem.dataset.title = title;
+    containerElem.dataset.title = title;
 
-      modalPortalsElem.appendChild(containerElem);
-      setContainer(containerElem);
-    }
+    modalPortalsElem.appendChild(containerElem);
+    setContainer(containerElem);
 
     return () => {
       if (!container) {
@@ -28,7 +26,9 @@ export function ModalPortal({ children, title, isOpen }) {
         modalPortalsElem.removeChild(container);
       }
     };
-  }, [container, title]);
+    //"container" causaria um loop infinito
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title]);
 
   //FIXME: prop to define if modal will be always included into DOM
   if (!container || !isOpen) {
