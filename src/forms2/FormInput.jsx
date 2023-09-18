@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { booleanOrFunction } from './helpers/form-helpers';
@@ -7,7 +7,11 @@ import { useFormControl2 } from './helpers/useFormControl';
 import { FormGroup2 } from './FormGroup';
 
 export function FormInput2({ type, name, required: _required, disabled: _disabled, afterChange, ..._attrs }) {
-  const { getValue, handleOnChangeFactory, getFormData, registerInputRef } = useFormControl2(name, type);
+  const state = useState('');
+
+  const { getValue, handleOnChangeFactory, getFormData, registerInputRef } = useFormControl2(name, type, {
+    state,
+  });
 
   const disabled = booleanOrFunction(_disabled, getFormData());
   const required = booleanOrFunction(_required, getFormData());

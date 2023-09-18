@@ -46,6 +46,8 @@ export function FormAutocomplete2({
   template,
   trackBy,
 }) {
+  const state = useState('');
+
   const {
     getValue,
     setValue: _setValue,
@@ -53,7 +55,7 @@ export function FormAutocomplete2({
     isValid,
     getFormSubmitedAttempted,
     getFormData,
-  } = useFormControl2(name);
+  } = useFormControl2(name, undefined, { state });
   const value = getValue();
 
   const setValue = useCallback(

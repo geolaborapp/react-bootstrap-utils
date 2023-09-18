@@ -1,29 +1,37 @@
 import { isDefined, isFunction } from 'js-var-type';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+
+import { getValueByPath } from '../../utils/getters-setters';
 
 import { decode, getTargetValue, encode } from './form-helpers';
 
 import { FormContext } from './useFormHelper';
 
-export function useFormControl2(name, type) {
+export function useFormControl2(name, type, { state, afterSetValue } = {}) {
   const formHelper = useContext(FormContext);
-  const [value, _setValue] = useState('');
+
+  const [stateValue, setStateValue] = useMemo(() => state ?? [], [state]);
   const [isRegistered, setIsRegistered] = useState(false);
 
-  const setValue = useCallback(
+  const setFormControlValue = useCallback(
     (newValue) => {
       const newValueFn = isFunction(newValue) ? newValue : () => newValue;
-
-      const nextValue = newValueFn(value);
+      const nextValue = newValueFn(stateValue);
 
       // utilizar o setState como função trouxe problemas na ficha de ensaio
       // não foi possível identificar o motivo, porém o callback não era acionado e o valor não era atualizado
       // e nem era enviada a notificação de alteração para o form-helper
-      _setValue(isDefined(nextValue) ? nextValue : '');
-      formHelper.notify(name, nextValue);
+      setStateValue?.(isDefined(nextValue) ? nextValue : '');
+      formHelper?.notify?.(name, nextValue);
+
+      if (isFunction(afterSetValue)) {
+        afterSetValue(nextValue);
+      }
     },
-    [formHelper, name, value]
+    [stateValue, setStateValue, formHelper, name, afterSetValue]
   );
+
+  const setValue = useCallback((newValue) => formHelper?.setFormControlValue?.(name, newValue), [formHelper, name]);
 
   const handleOnChange = useCallback(
     ({ target }, _type) => {
@@ -38,9 +46,12 @@ export function useFormControl2(name, type) {
   );
 
   useEffect(() => {
-    formHelper.register(name, {
-      setValue: _setValue,
-    });
+    if (isFunction(setStateValue) && isFunction(formHelper.register)) {
+      formHelper.register(name, {
+        setValue: setFormControlValue,
+      });
+    }
+
     setIsRegistered(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -55,7 +66,10 @@ export function useFormControl2(name, type) {
 
   return {
     getValue() {
-      return encode(value, type);
+      const formData = formHelper?.getFormData?.() ?? {};
+      const _value = getValueByPath(formData, name);
+
+      return encode(_value, type);
     },
     setValue,
     isRegistered() {
@@ -65,7 +79,7 @@ export function useFormControl2(name, type) {
       const newValue = handleOnChange(e, type);
 
       if (isFunction(afterChange)) {
-        afterChange(newValue, value);
+        afterChange(newValue, stateValue);
       }
     },
     getFormData() {

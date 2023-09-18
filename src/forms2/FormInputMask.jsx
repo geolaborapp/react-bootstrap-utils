@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useMemo, useEffect, Fragment } from 'react';
+import React, { useRef, useCallback, useMemo, useEffect, Fragment, useState } from 'react';
 import { isUndefined } from 'js-var-type';
 import PropTypes from 'prop-types';
 
@@ -9,8 +9,22 @@ import { FormInput2 } from './FormInput';
 import { FormGroup2 } from './FormGroup';
 
 export function FormInputMask2({ mask, name, inputAttrs }) {
-  const formControl = useFormControl2(name);
+  const state = useState('');
   const ref = useRef(null);
+  const { afterChange, ..._inputAttrs } = inputAttrs;
+
+  const setFormattedValue = useCallback((value) => {
+    const valueFormatado = mask?.format?.(value) ?? value;
+
+    if (isUndefined(valueFormatado)) {
+      return;
+    }
+
+    ref.current.value = valueFormatado;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const formControl = useFormControl2(name, undefined, { state, afterSetValue: (v) => setFormattedValue(v) });
   const valorInicial = useMemo(() => getValueByPath(formControl.getFormData(), name), [formControl, name]);
 
   const handleKeyDown = useCallback(
@@ -21,25 +35,18 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
         if (Number(value) === 0 || String(value).length === 1) {
           e.target.value = '';
           formControl.setValue('');
+          afterChange?.('');
         }
       }
     },
-    [formControl]
+    [afterChange, formControl]
   );
 
   useEffect(() => {
     //formatação do valor inicial do input, deve ser executada apenas uma vez
-    const valorInicialFormatado = mask?.format?.(valorInicial) ?? valorInicial;
-
-    if (isUndefined(valorInicialFormatado)) {
-      return;
-    }
-
-    ref.current.value = valorInicialFormatado;
+    setFormattedValue(valorInicial);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const { afterChange, ..._inputAttrs } = inputAttrs;
 
   return (
     <>

@@ -11,9 +11,9 @@ import {
   FormInput2,
   useFormControl2,
   useFormEffect,
-  NumberMask,
   FormGroupAutocomplete2,
   FormGroupDropdown2,
+  FormGroupRadio2,
 } from '../dist/main';
 
 export function Form2Examples() {
@@ -281,6 +281,61 @@ export function Form2Examples() {
           template={(linha) => <p className="mb-0">{linha}</p>}
           disabled
         />
+
+        <h4>SetValue Test</h4>
+        <h5>FormInput</h5>
+        <div className="row mb-2">
+          <FormInputSetValueTeste1 />
+          <FormInputSetValueTeste2 />
+        </div>
+
+        <h5>FormAutocomplete</h5>
+        <div className="row mb-2">
+          <FormAutocompleteSetValueTeste1 />
+          <FormAutocompleteSetValueTeste2 />
+        </div>
+
+        <h5>FormCheckbox</h5>
+        <div className="row mb-2">
+          <FormCheckboxSetValueTeste1 />
+          <FormCheckboxSetValueTeste2 />
+        </div>
+
+        <h5>FormDropdown</h5>
+        <div className="row mb-2">
+          <FormDropdownSetValueTeste1 />
+          <FormDropdownSetValueTeste2 />
+        </div>
+
+        <h5>FormInputMask</h5>
+        <div className="row mb-2">
+          <FormInputMaskSetValueTeste1 />
+          <FormInputMaskSetValueTeste2 />
+        </div>
+
+        <h5>FormRadio</h5>
+        <div className="row mb-2">
+          <FormRadioSetValueTeste1 />
+          <FormRadioSetValueTeste2 />
+        </div>
+
+        <h5>FormSelect</h5>
+        <div className="row mb-2">
+          <FormSelectSetValueTeste1 />
+          <FormSelectSetValueTeste2 />
+        </div>
+
+        <h5>FormSwitch</h5>
+        <div className="row mb-2">
+          <FormSwitchSetValueTeste1 />
+          <FormSwitchSetValueTeste2 />
+        </div>
+
+        <h5>FormTextarea</h5>
+        <div className="row mb-2">
+          <FormTextareaSetValueTeste1 />
+          <FormTextareaSetValueTeste2 />
+        </div>
       </Form2>
     </div>
   );
@@ -449,6 +504,486 @@ function FormObserved2ObservedComponent({ name }) {
         <div className="col-6">{`Value "${value}"`}</div>
       </div>
       <FormGroupSwitch2 id={name} label="Observed input switch" name={name} />
+    </div>
+  );
+}
+
+function FormInputSetValueTeste1({}) {
+  const input2 = useFormControl2('input2');
+  const input3 = useFormControl2('input3');
+
+  const afterChange = useCallback((v) => {
+    input2.setValue(v);
+    input3.setValue(v);
+  }, []);
+
+  return (
+    <>
+      <div className="col">
+        <FormGroupInput2 label="Input 1" name="input1" afterChange={afterChange} />
+      </div>
+      <div className="col">
+        <FormGroupInput2 label="Replicates Input 1 with setValue - same component" name="input2" />
+      </div>
+    </>
+  );
+}
+
+function FormInputSetValueTeste2({}) {
+  return (
+    <div className="col">
+      <FormGroupInput2 label="Replicates Input 1 with setValue - different component" name="input3" />
+    </div>
+  );
+}
+
+function FormAutocompleteSetValueTeste1({}) {
+  const autoComplete2 = useFormControl2('autoComplete2');
+  const autoComplete3 = useFormControl2('autoComplete3');
+
+  const afterChange = useCallback((v) => {
+    autoComplete2.setValue(v);
+    autoComplete3.setValue(v);
+  }, []);
+
+  return (
+    <>
+      <div className="col">
+        <FormGroupAutocomplete2
+          label="AutoComplete 1"
+          name="autoComplete1"
+          afterChange={afterChange}
+          options={['1', '2', '3']}
+          allowUnlistedValue
+          placeholder="..."
+        />
+      </div>
+      <div className="col">
+        <FormGroupAutocomplete2
+          label="Replicates AutoComplete 1 with setValue - same component"
+          name="autoComplete2"
+          allowUnlistedValue
+          options={[]}
+          placeholder="..."
+        />
+      </div>
+    </>
+  );
+}
+
+function FormAutocompleteSetValueTeste2({}) {
+  return (
+    <div className="col">
+      <FormGroupAutocomplete2
+        label="Replicates AutoComplete 1 with setValue - different component"
+        name="autoComplete3"
+        allowUnlistedValue
+        options={[]}
+        placeholder="..."
+      />
+    </div>
+  );
+}
+
+function FormCheckboxSetValueTeste1({}) {
+  const checkbox2 = useFormControl2('checkbox2');
+  const checkbox3 = useFormControl2('checkbox3');
+
+  const afterChange = useCallback((v) => {
+    checkbox2.setValue(v);
+    checkbox3.setValue(v);
+  }, []);
+
+  return (
+    <>
+      <div className="col">
+        <FormGroupCheckbox2 label="Checkbox 1" name="checkbox1" id="checkbox1" afterChange={afterChange} />
+      </div>
+      <div className="col">
+        <FormGroupCheckbox2
+          label="Replicates Checkbox 1 with setValue - same component"
+          name="checkbox2"
+          id="checkbox2"
+        />
+      </div>
+    </>
+  );
+}
+
+function FormCheckboxSetValueTeste2({}) {
+  return (
+    <div className="col">
+      <FormGroupCheckbox2
+        label="Replicates Checkbox 1 with setValue - different component"
+        name="checkbox3"
+        id="checkbox3"
+      />
+    </div>
+  );
+}
+
+function FormDropdownSetValueTeste1({}) {
+  const dropdown2 = useFormControl2('dropdown2');
+  const dropdown3 = useFormControl2('dropdown3');
+
+  const afterChange = useCallback((v) => {
+    dropdown2.setValue(v);
+    dropdown3.setValue(v);
+  }, []);
+
+  return (
+    <>
+      <div className="col">
+        <FormGroupDropdown2
+          label="Dropdown 1"
+          name="dropdown2"
+          afterChange={afterChange}
+          options={[
+            {
+              value: 1,
+              label: 'Label para o valor 1',
+            },
+            {
+              value: 2,
+              label: 'Label para o valor 2',
+            },
+            {
+              value: 3,
+              label: 'Label para o valor 3',
+            },
+          ]}
+        />
+      </div>
+      <div className="col">
+        <FormGroupDropdown2
+          label="Replicates Dropdown 1 with setValue - same component"
+          name="dropdown2"
+          options={[
+            {
+              value: 1,
+              label: 'Label para o valor 1',
+            },
+            {
+              value: 2,
+              label: 'Label para o valor 2',
+            },
+            {
+              value: 3,
+              label: 'Label para o valor 3',
+            },
+          ]}
+          template={(linha) => <span className="text-info">{linha}</span>}
+        />
+      </div>
+    </>
+  );
+}
+
+function FormDropdownSetValueTeste2({}) {
+  return (
+    <div className="col">
+      <FormGroupDropdown2
+        label="Replicates Dropdown 1 with setValue - different component"
+        name="dropdown3"
+        options={[
+          {
+            value: 1,
+            label: 'Label para o valor 1',
+          },
+          {
+            value: 2,
+            label: 'Label para o valor 2',
+          },
+          {
+            value: 3,
+            label: 'Label para o valor 3',
+          },
+        ]}
+      />
+    </div>
+  );
+}
+
+function FormInputMaskSetValueTeste1({}) {
+  const datemask2 = useFormControl2('datemask2');
+  const datemask3 = useFormControl2('datemask3');
+
+  const afterChange = useCallback((v) => {
+    datemask2.setValue(v);
+    datemask3.setValue(v);
+  }, []);
+
+  return (
+    <>
+      <div className="col">
+        <FormGroupInputMask2
+          label="Input Mask 1"
+          name="datemask1"
+          mask={{
+            parse: dateMask,
+            format: (value) => value,
+          }}
+          inputAttrs={{
+            maxLength: '10',
+            afterChange,
+          }}
+        />
+      </div>
+      <div className="col">
+        <FormGroupInputMask2
+          label="Replicates Input Mask 1 with setValue - same component"
+          name="datemask2"
+          mask={{
+            parse: dateMask,
+            format: (value) => value,
+          }}
+          inputAttrs={{
+            maxLength: '10',
+          }}
+        />
+      </div>
+    </>
+  );
+}
+
+function FormInputMaskSetValueTeste2({}) {
+  return (
+    <div className="col">
+      <FormGroupInputMask2
+        label="Replicates Input Mask 1 with setValue - different component"
+        name="datemask3"
+        mask={{
+          parse: dateMask,
+          format: (value) => value,
+        }}
+        inputAttrs={{
+          maxLength: '10',
+        }}
+      />
+    </div>
+  );
+}
+
+function FormRadioSetValueTeste1({}) {
+  const radio2 = useFormControl2('radio2');
+  const radio3 = useFormControl2('radio3');
+
+  const afterChange = useCallback((v) => {
+    radio2.setValue(v);
+    radio3.setValue(v);
+  }, []);
+
+  return (
+    <>
+      <div className="col">
+        <FormGroupRadio2
+          required
+          label="Radio 1"
+          name="radio1"
+          id="radio1"
+          afterChange={afterChange}
+          options={[
+            {
+              value: 'a',
+              label: 'A',
+            },
+            {
+              value: 'b',
+              label: 'B',
+            },
+            {
+              value: 'c',
+              label: 'C',
+            },
+          ]}
+        />
+      </div>
+      <div className="col">
+        <FormGroupRadio2
+          label="Replicates Radio 1 with setValue - same component"
+          name="radio2"
+          id="radio2"
+          options={[
+            {
+              value: 'a',
+              label: 'A',
+            },
+            {
+              value: 'b',
+              label: 'B',
+            },
+            {
+              value: 'c',
+              label: 'C',
+            },
+          ]}
+        />
+      </div>
+    </>
+  );
+}
+
+function FormRadioSetValueTeste2({}) {
+  return (
+    <div className="col">
+      <FormGroupRadio2
+        label="Replicates Radio 1 with setValue - different component"
+        name="radio3"
+        id="radio3"
+        options={[
+          {
+            value: 'a',
+            label: 'A',
+          },
+          {
+            value: 'b',
+            label: 'B',
+          },
+          {
+            value: 'c',
+            label: 'C',
+          },
+        ]}
+      />
+    </div>
+  );
+}
+
+function FormSelectSetValueTeste1({}) {
+  const select2 = useFormControl2('select2');
+  const select3 = useFormControl2('select3');
+
+  const afterChange = useCallback((v) => {
+    select2.setValue(v);
+    select3.setValue(v);
+  }, []);
+
+  return (
+    <>
+      <div className="col">
+        <FormGroupSelect2
+          label="Select 1"
+          name="select1"
+          afterChange={afterChange}
+          options={[
+            {
+              value: 1,
+              label: 'Label para o valor 1',
+            },
+            {
+              value: 2,
+              label: 'Label para o valor 2',
+            },
+            {
+              value: 3,
+              label: 'Label para o valor 3',
+            },
+          ]}
+        />
+      </div>
+      <div className="col">
+        <FormGroupSelect2
+          label="Replicates Select 1 with setValue - same component"
+          name="select2"
+          options={[
+            {
+              value: 1,
+              label: 'Label para o valor 1',
+            },
+            {
+              value: 2,
+              label: 'Label para o valor 2',
+            },
+            {
+              value: 3,
+              label: 'Label para o valor 3',
+            },
+          ]}
+        />
+      </div>
+    </>
+  );
+}
+
+function FormSelectSetValueTeste2({}) {
+  return (
+    <div className="col">
+      <FormGroupSelect2
+        label="Replicates Select 1 with setValue - different component"
+        name="select3"
+        options={[
+          {
+            value: 1,
+            label: 'Label para o valor 1',
+          },
+          {
+            value: 2,
+            label: 'Label para o valor 2',
+          },
+          {
+            value: 3,
+            label: 'Label para o valor 3',
+          },
+        ]}
+      />
+    </div>
+  );
+}
+
+function FormSwitchSetValueTeste1({}) {
+  const switch2 = useFormControl2('switch2');
+  const switch3 = useFormControl2('switch3');
+
+  const afterChange = useCallback((v) => {
+    switch2.setValue(v);
+    switch3.setValue(v);
+  }, []);
+
+  return (
+    <>
+      <div className="col">
+        <FormGroupSwitch2 label="Switch 1" name="switch1" id="switch1" afterChange={afterChange} />
+      </div>
+      <div className="col">
+        <FormGroupSwitch2 label="Replicates Switch 1 with setValue - same component" name="switch2" id="switch2" />
+      </div>
+    </>
+  );
+}
+
+function FormSwitchSetValueTeste2({}) {
+  return (
+    <div className="col">
+      <FormGroupSwitch2 label="Replicates Switch 1 with setValue - different component" name="switch3" id="switch3" />
+    </div>
+  );
+}
+
+function FormTextareaSetValueTeste1({}) {
+  const textarea2 = useFormControl2('textarea2');
+  const textarea3 = useFormControl2('textarea3');
+
+  const afterChange = useCallback((v) => {
+    textarea2.setValue(v);
+    textarea3.setValue(v);
+  }, []);
+
+  return (
+    <>
+      <div className="col">
+        <FormGroupTextarea2 label="Textarea 1" name="textarea1x" afterChange={afterChange} rows="5" />
+      </div>
+      <div className="col">
+        <FormGroupTextarea2 label="Replicates Textarea 1 with setValue - same component" name="textarea2" rows="5" />
+      </div>
+    </>
+  );
+}
+
+function FormTextareaSetValueTeste2({}) {
+  return (
+    <div className="col">
+      <FormGroupTextarea2 label="Replicates Textarea 1 with setValue - different component" name="textarea3" rows="5" />
     </div>
   );
 }
