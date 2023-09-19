@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.45](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.43...v0.26.45) (2023-09-19)
+
+
+### Bug Fixes
+
+* Corrige titulo dinamico em Dialog ([#50](https://github.com/geolaborapp/react-bootstrap-utils/issues/50)) ([79af830](https://github.com/geolaborapp/react-bootstrap-utils/commit/79af830d773be8e5d0e65a4b4ebedb0bc7bacc39))
+
 ### [0.26.44](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.43...v0.26.44) (2023-09-13)
 
 
