@@ -25,7 +25,7 @@ export function FormInput({ type, name, required: _required, disabled: _disabled
     attrs.value = getValue();
   }
 
-  return <input {...attrs} className="form-control" onChange={handleOnChangeFactory(afterChange)} ref={registerRef} />;
+  return <input className="form-control" {...attrs} onChange={handleOnChangeFactory(afterChange)} ref={registerRef} />;
 }
 
 FormInput.defaultProps = {

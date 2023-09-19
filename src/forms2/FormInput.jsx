@@ -28,8 +28,8 @@ export function FormInput2({ type, name, required: _required, disabled: _disable
 
   return (
     <input
-      {...attrs}
       className="form-control"
+      {...attrs}
       onChange={handleOnChangeFactory(afterChange, type)}
       ref={registerInputRef}
     />
