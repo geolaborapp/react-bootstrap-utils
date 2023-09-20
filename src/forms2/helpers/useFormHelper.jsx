@@ -106,6 +106,13 @@ export function useFormHelper(initialValues, { debounceWait, transform, onChange
   const formState = formHelper.current.formData;
 
   return {
+    setFormControlValue(name, value) {
+      const formControl = formHelper?.current?.formControls?.get(name);
+
+      if (formControl) {
+        formControl.setValue(value);
+      }
+    },
     getFormData() {
       return formHelper.current.formData;
     },

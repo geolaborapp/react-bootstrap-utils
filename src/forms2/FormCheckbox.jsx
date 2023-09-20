@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { useFormControl2 } from './helpers/useFormControl';
@@ -14,7 +14,10 @@ export function FormCheckbox2({
   afterChange,
   ...props
 }) {
-  const { getValue, handleOnChangeFactory, registerInputRef, getFormData } = useFormControl2(name, 'boolean');
+  const state = useState('');
+  const { getValue, handleOnChangeFactory, registerInputRef, getFormData } = useFormControl2(name, 'boolean', {
+    state,
+  });
 
   const disabled = booleanOrFunction(_disabled, getFormData());
   const required = booleanOrFunction(_required, getFormData());

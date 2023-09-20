@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { booleanOrFunction } from './helpers/form-helpers';
@@ -16,7 +16,11 @@ export function FormSwitch2({
   afterChange,
   ...props
 }) {
-  const { getValue, handleOnChangeFactory, getFormData, registerInputRef } = useFormControl2(name, 'boolean');
+  const state = useState('');
+
+  const { getValue, handleOnChangeFactory, getFormData, registerInputRef } = useFormControl2(name, 'boolean', {
+    state,
+  });
 
   const value = getValue();
   const disabled = booleanOrFunction(_disabled, getFormData());

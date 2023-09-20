@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect, useMemo } from 'react';
+import React, { useRef, useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isFunction } from 'js-var-type';
 
@@ -27,8 +27,9 @@ export const FormDropdown2 = ({
   trackBy,
 }) => {
   const dropdownRef = useRef(null);
+  const state = useState('');
 
-  const { getFormData, getValue, setValue: _setValue } = useFormControl2(name);
+  const { getFormData, getValue, setValue: _setValue } = useFormControl2(name, undefined, { state });
 
   const value = getValue();
   const items = normalizeOptions(options, getFormData());

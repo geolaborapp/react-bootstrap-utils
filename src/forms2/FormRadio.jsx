@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { formatClasses } from '../utils/attributes';
@@ -16,8 +16,11 @@ export function FormRadio2({
   inline,
   disabled: _disabled,
   afterChange,
+  state,
 }) {
-  const { getValue, handleOnChangeFactory, registerInputRef, getFormData } = useFormControl2(name);
+  const { getValue, handleOnChangeFactory, registerInputRef, getFormData } = useFormControl2(name, undefined, {
+    state,
+  });
   const value = getValue();
   const disabled = booleanOrFunction(_disabled, getFormData());
   const required = booleanOrFunction(_required, getFormData());
@@ -53,14 +56,18 @@ FormRadio2.propTypes = {
   name: PropTypes.string.isRequired,
   required: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   valueLabel: PropTypes.node,
+  state: PropTypes.array.isRequired,
 };
 
 export function FormGroupRadio2({ options, id, ...props }) {
+  const state = useState('');
+
   return (
     <FormGroup2 mockInvalidSibling={true} {...props}>
       <div>
         {options.map((option, index) => (
           <FormRadio2
+            state={state}
             key={index}
             {...props}
             checkedValue={option.value}

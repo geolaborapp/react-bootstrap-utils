@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { booleanOrFunction } from './helpers/form-helpers';
@@ -8,7 +8,9 @@ import { FormGroup2 } from './FormGroup';
 import { useFormControl2 } from './helpers/useFormControl';
 
 export function FormTextarea2({ name, required: _required, disabled: _disabled, afterChange, ..._attrs }) {
-  const { handleOnChangeFactory, getFormData, getValue, registerInputRef } = useFormControl2(name);
+  const state = useState('');
+
+  const { handleOnChangeFactory, getFormData, getValue, registerInputRef } = useFormControl2(name, undefined, { state });
 
   const disabled = booleanOrFunction(_disabled, getFormData());
   const required = booleanOrFunction(_required, getFormData());

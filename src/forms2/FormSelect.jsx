@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -22,7 +22,11 @@ export function FormSelect2({
   afterChange,
   ..._attrs
 }) {
-  const { getFormData, getValue, handleOnChangeFactory, registerInputRef } = useFormControl2(name);
+  const state = useState('');
+
+  const { getFormData, getValue, handleOnChangeFactory, registerInputRef } = useFormControl2(name, undefined, {
+    state,
+  });
   const value = getValue();
 
   const normalizedOptions = normalizeOptions(options, getFormData());
