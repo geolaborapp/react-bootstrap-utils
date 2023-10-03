@@ -43,10 +43,8 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
   );
 
   useEffect(() => {
-    //formatação do valor inicial do input, deve ser executada apenas uma vez
     setFormattedValue(valorInicial);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setFormattedValue, valorInicial]);
 
   return (
     <>

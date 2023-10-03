@@ -14,10 +14,16 @@ import {
   FormGroupAutocomplete2,
   FormGroupDropdown2,
   FormGroupRadio2,
-} from '../dist/main';
+} from '../src/forms2';
 
 export function Form2Examples() {
   const [bootstrapFormValidation, setBootstrapFormValidation] = useState(false);
+  const [transform, setTransform] = useState(null);
+
+  const transform2 = useCallback((formData) => {
+    console.log('transform2', formData);
+  }, []);
+
   return (
     <div className="pb-4">
       <h4>Alternative Form implementation</h4>
@@ -32,28 +38,32 @@ export function Form2Examples() {
         }}
         onSubmit={(data) => console.log('onSubmit', data)}
         onChange={(data) => console.log('onChange', data)}
-        transform={(formData) => {
-          console.log('transform', formData);
+        transform={
+          transform === 2
+            ? transform2
+            : (formData) => {
+                console.log('transform', formData);
 
-          return {
-            __v: formData.__v ? formData.__v + 1 : 1,
-            attrB: `${formData.attrB || ''}A`,
-            Obj: {
-              y: `${formData.Obj.y || ''}X`,
-              w: {
-                z: formData.__v ? formData.__v * 2 : 1,
-              },
-              t: formData.__v % 2 ? null : undefined,
-              u: new Date(),
-            },
-            arr: formData.arr.map((v) => parseFloat(v) + 1),
-            arrObj: formData.arrObj.map((v) => {
-              v.o = parseFloat(v.o) ** 2;
+                return {
+                  __v: formData.__v ? formData.__v + 1 : 1,
+                  attrB: `${formData.attrB || ''}A`,
+                  Obj: {
+                    y: `${formData.Obj.y || ''}X`,
+                    w: {
+                      z: formData.__v ? formData.__v * 2 : 1,
+                    },
+                    t: formData.__v % 2 ? null : undefined,
+                    u: new Date(),
+                  },
+                  arr: formData.arr.map((v) => parseFloat(v) + 1),
+                  arrObj: formData.arrObj.map((v) => {
+                    v.o = parseFloat(v.o) ** 2;
 
-              return v;
-            }),
-          };
-        }}
+                    return v;
+                  }),
+                };
+              }
+        }
         customValidation={bootstrapFormValidation}
         validations={{
           autocomplete2Field2: [
@@ -283,6 +293,15 @@ export function Form2Examples() {
         />
 
         <h4>SetValue Test</h4>
+
+        <button
+          className="btn btn-info"
+          type="button"
+          onClick={() => (transform === 2 ? setTransform(null) : setTransform(2))}
+        >
+          Toggle transform
+        </button>
+
         <h5>FormInput</h5>
         <div className="row mb-2">
           <FormInputSetValueTeste1 />

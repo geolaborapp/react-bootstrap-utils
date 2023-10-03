@@ -56,6 +56,14 @@ export function useFormControl2(name, type, { state, afterSetValue } = {}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (isRegistered && isFunction(setStateValue)) {
+      formHelper.setFormControl(name, {
+        setValue: setFormControlValue,
+      });
+    }
+  }, [formHelper, isRegistered, name, setFormControlValue, setStateValue]);
+
   const registerInputRef = useCallback(
     (ref) => {
       formHelper.registerRef(name, ref);
