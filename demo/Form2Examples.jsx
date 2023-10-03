@@ -14,7 +14,7 @@ import {
   FormGroupAutocomplete2,
   FormGroupDropdown2,
   FormGroupRadio2,
-} from '../src/forms2';
+} from '../dist/main';
 
 export function Form2Examples() {
   const [bootstrapFormValidation, setBootstrapFormValidation] = useState(false);
