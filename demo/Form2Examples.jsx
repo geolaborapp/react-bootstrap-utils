@@ -368,7 +368,8 @@ function FormVersion() {
 }
 
 function FormArray() {
-  const { getValue, setValue, isRegistered } = useFormControl2('arr', 'array');
+  const formArrayState = useState();
+  const { getValue, setValue, isRegistered } = useFormControl2('arr', 'array', { state: formArrayState });
   const [refresh, shouldRefresh] = useState(false);
 
   useEffect(() => {
@@ -423,7 +424,8 @@ function FormArray() {
 }
 
 function FormArrayOfObjects() {
-  const { getValue } = useFormControl2('arrObj');
+  const formArrayOfObjectsState = useState();
+  const { getValue } = useFormControl2('arrObj', 'array', { state: formArrayOfObjectsState });
 
   return (getValue() || []).map((v, index) => <FormInput2 key={index} name={`arrObj[${index}].o`} />);
 }
