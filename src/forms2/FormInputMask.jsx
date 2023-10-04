@@ -23,8 +23,8 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
     ref.current.value = valueFormatado;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const formControl = useFormControl2(name, undefined, { state, afterSetValue: (v) => setFormattedValue(v) });
+  const afterSetValue = useCallback((v) => setFormattedValue(v), [setFormattedValue]);
+  const formControl = useFormControl2(name, undefined, { state, afterSetValue });
   const valorInicial = useMemo(() => getValueByPath(formControl.getFormData(), name), [formControl, name]);
 
   const handleKeyDown = useCallback(
