@@ -1,8 +1,6 @@
-import React, { useRef, useCallback, useMemo, useEffect, Fragment, useState } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import { isUndefined } from 'js-var-type';
 import PropTypes from 'prop-types';
-
-import { getValueByPath } from '../utils/getters-setters';
 
 import { useFormControl2 } from './helpers/useFormControl';
 import { FormInput2 } from './FormInput';
@@ -25,7 +23,6 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
   }, []);
   const afterSetValue = useCallback((v) => setFormattedValue(v), [setFormattedValue]);
   const formControl = useFormControl2(name, undefined, { state, afterSetValue });
-  const valorInicial = useMemo(() => getValueByPath(formControl.getFormData(), name), [formControl, name]);
 
   const handleKeyDown = useCallback(
     (e) => {
@@ -42,10 +39,6 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
     [afterChange, formControl]
   );
 
-  useEffect(() => {
-    setFormattedValue(valorInicial);
-  }, [setFormattedValue, valorInicial]);
-
   return (
     <>
       <input
@@ -54,12 +47,10 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
         name={`__mask.${name}`}
         defaultValue=""
         onChange={(e) => {
-          const { maskedValue, rawValue } = mask?.parse?.(e.target.value) ?? {
-            maskedValue: e.target.value,
+          const { rawValue } = mask?.parse?.(e.target.value) ?? {
             rawValue: e.target.value,
           };
 
-          e.target.value = maskedValue;
           const previousValue = formControl.getValue();
 
           formControl.setValue(rawValue);
