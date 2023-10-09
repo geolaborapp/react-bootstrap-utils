@@ -1,6 +1,7 @@
 /* eslint-disable import/max-dependencies */
 export * from './Form';
 export * from './FormAutocomplete';
+export * from './FormAutocompleteTag';
 export * from './FormCheckbox';
 export * from './FormDropdown';
 export * from './FormGroup';
