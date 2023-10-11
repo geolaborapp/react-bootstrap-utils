@@ -222,7 +222,7 @@ export function FormAutocompleteTag({
   }, [controlFeedback, formSubmitedAttempted, getFormSubmitedAttempted, isValid]);
 
   return (
-    <div className={formatClasses(['d-flex', 'mb-3', 'form-input-tag', controlFeedback])}>
+    <div className={formatClasses(['d-flex', 'form-input-tag', controlFeedback])}>
       <div className="w-100">
         <input
           placeholder={placeholder}
@@ -282,7 +282,7 @@ export function FormAutocompleteTag({
         ></Dropdown>
       </div>
       {allowUnlistedValue && (
-        <button type="button" className="btn btn-secondary rounded-start-0" onClick={onClick}>
+        <button type="button" className="btn btn-secondary rounded-start-0" onClick={onClick} disabled={disabled}>
           <i className="bi bi-plus-lg" />
         </button>
       )}

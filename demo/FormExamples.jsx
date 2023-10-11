@@ -266,6 +266,7 @@ export function FormExamples() {
             ]}
             allowRemove
             openOnFocus
+            disabled
           />
         </div>
         <div className="col">
@@ -289,6 +290,10 @@ export function FormExamples() {
             ]}
             allowRemove
             openOnFocus
+            afterChange={(newValue, lastValue) =>
+              console.log('autocompleteTag2 changed. From: ', lastValue, ' To:', newValue)
+            }
+            onSearch={(searchedValue) => console.log('autocompleteTag2 serachedValue changed to: ', searchedValue)}
           />
         </div>
         <div className="col">
@@ -313,6 +318,7 @@ export function FormExamples() {
             ]}
             allowRemove
             openOnFocus
+            help="Add at least one tag to this field"
           />
         </div>
         <div className="col">
@@ -337,6 +343,7 @@ export function FormExamples() {
             allowRemove
             openOnFocus
             trackBy="_id"
+            help="Write something and press Enter or click on the button"
           />
         </div>
       </div>
@@ -364,6 +371,12 @@ export function FormExamples() {
             allowRemove
             openOnFocus
             trackBy="_id"
+            help="unhelpfull help"
+            template={(v) => (
+              <em>
+                <b>{v}</b>
+              </em>
+            )}
           />
         </div>
         <div className="col">
@@ -393,6 +406,7 @@ export function FormExamples() {
             allowRemove
             openOnFocus
             trackBy="_id"
+            placeholder="Select one or more tags"
           />
         </div>
       </div>
@@ -671,7 +685,7 @@ function FormAutocompleteTagsWithCustomLabel() {
   const tags = useMemo(() => autocompleteTag6FormControl.getValue() || []);
 
   return (
-    <div className="row">
+    <div className="row mb-3">
       <div className="col">
         <label className="form-label">Autocomplete with tags - Custom label:</label>
         <Table
