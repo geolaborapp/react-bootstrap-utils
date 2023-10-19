@@ -35,6 +35,7 @@ export function Form2Examples() {
           arrObj: [{ o: 1 }, { o: 2 }, { o: 3 }],
           textarea1:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque praesentium quisquam reiciendis expedita. Ad quod voluptas aliquid illum veniam odio? Nulla sed, illum eligendi amet fuga optio officia itaque nisi',
+          dateMask: '0410202',
         }}
         onSubmit={(data) => console.log('onSubmit', data)}
         onChange={(data) => console.log('onChange', data)}
@@ -227,7 +228,7 @@ export function Form2Examples() {
           label="Masked date"
           mask={{
             parse: dateMask,
-            format: (value) => value,
+            format: (value) => dateMask(value).maskedValue,
           }}
         />
 
@@ -367,7 +368,8 @@ function FormVersion() {
 }
 
 function FormArray() {
-  const { getValue, setValue, isRegistered } = useFormControl2('arr', 'array');
+  const formArrayState = useState();
+  const { getValue, setValue, isRegistered } = useFormControl2('arr', 'array', { state: formArrayState });
   const [refresh, shouldRefresh] = useState(false);
 
   useEffect(() => {
@@ -422,7 +424,8 @@ function FormArray() {
 }
 
 function FormArrayOfObjects() {
-  const { getValue } = useFormControl2('arrObj');
+  const formArrayOfObjectsState = useState();
+  const { getValue } = useFormControl2('arrObj', 'array', { state: formArrayOfObjectsState });
 
   return (getValue() || []).map((v, index) => <FormInput2 key={index} name={`arrObj[${index}].o`} />);
 }
@@ -740,7 +743,7 @@ function FormInputMaskSetValueTeste1({}) {
           name="datemask1"
           mask={{
             parse: dateMask,
-            format: (value) => value,
+            format: (value) => dateMask(value).maskedValue,
           }}
           inputAttrs={{
             maxLength: '10',
@@ -754,7 +757,7 @@ function FormInputMaskSetValueTeste1({}) {
           name="datemask2"
           mask={{
             parse: dateMask,
-            format: (value) => value,
+            format: (value) => dateMask(value).maskedValue,
           }}
           inputAttrs={{
             maxLength: '10',
@@ -773,7 +776,7 @@ function FormInputMaskSetValueTeste2({}) {
         name="datemask3"
         mask={{
           parse: dateMask,
-          format: (value) => value,
+          format: (value) => dateMask(value).maskedValue,
         }}
         inputAttrs={{
           maxLength: '10',
