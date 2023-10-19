@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.47](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.46...v0.26.47) (2023-10-19)
+
+
+### Features
+
+* adiciona FormAutocompleteTag ([#55](https://github.com/geolaborapp/react-bootstrap-utils/issues/55)) ([3b2e6d0](https://github.com/geolaborapp/react-bootstrap-utils/commit/3b2e6d0c4f8f24e4eed2c65fc9e3d39c49ed542d))
+
+
+### Bug Fixes
+
+* **form2:** corrige atualização do setValue do formControl ([#54](https://github.com/geolaborapp/react-bootstrap-utils/issues/54)) ([a0acfc5](https://github.com/geolaborapp/react-bootstrap-utils/commit/a0acfc57921c259311aeb46df608c71b91da4f64))
+
 ### [0.26.46](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.45...v0.26.46) (2023-09-20)
 
 
