@@ -18,6 +18,12 @@ import {
 
 export function Form2Examples() {
   const [bootstrapFormValidation, setBootstrapFormValidation] = useState(false);
+  const [transform, setTransform] = useState(null);
+
+  const transform2 = useCallback((formData) => {
+    console.log('transform2', formData);
+  }, []);
+
   return (
     <div className="pb-4">
       <h4>Alternative Form implementation</h4>
@@ -29,31 +35,36 @@ export function Form2Examples() {
           arrObj: [{ o: 1 }, { o: 2 }, { o: 3 }],
           textarea1:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque praesentium quisquam reiciendis expedita. Ad quod voluptas aliquid illum veniam odio? Nulla sed, illum eligendi amet fuga optio officia itaque nisi',
+          dateMask: '0410202',
         }}
         onSubmit={(data) => console.log('onSubmit', data)}
         onChange={(data) => console.log('onChange', data)}
-        transform={(formData) => {
-          console.log('transform', formData);
+        transform={
+          transform === 2
+            ? transform2
+            : (formData) => {
+                console.log('transform', formData);
 
-          return {
-            __v: formData.__v ? formData.__v + 1 : 1,
-            attrB: `${formData.attrB || ''}A`,
-            Obj: {
-              y: `${formData.Obj.y || ''}X`,
-              w: {
-                z: formData.__v ? formData.__v * 2 : 1,
-              },
-              t: formData.__v % 2 ? null : undefined,
-              u: new Date(),
-            },
-            arr: formData.arr.map((v) => parseFloat(v) + 1),
-            arrObj: formData.arrObj.map((v) => {
-              v.o = parseFloat(v.o) ** 2;
+                return {
+                  __v: formData.__v ? formData.__v + 1 : 1,
+                  attrB: `${formData.attrB || ''}A`,
+                  Obj: {
+                    y: `${formData.Obj.y || ''}X`,
+                    w: {
+                      z: formData.__v ? formData.__v * 2 : 1,
+                    },
+                    t: formData.__v % 2 ? null : undefined,
+                    u: new Date(),
+                  },
+                  arr: formData.arr.map((v) => parseFloat(v) + 1),
+                  arrObj: formData.arrObj.map((v) => {
+                    v.o = parseFloat(v.o) ** 2;
 
-              return v;
-            }),
-          };
-        }}
+                    return v;
+                  }),
+                };
+              }
+        }
         customValidation={bootstrapFormValidation}
         validations={{
           autocomplete2Field2: [
@@ -217,7 +228,7 @@ export function Form2Examples() {
           label="Masked date"
           mask={{
             parse: dateMask,
-            format: (value) => value,
+            format: (value) => dateMask(value).maskedValue,
           }}
         />
 
@@ -283,6 +294,15 @@ export function Form2Examples() {
         />
 
         <h4>SetValue Test</h4>
+
+        <button
+          className="btn btn-info"
+          type="button"
+          onClick={() => (transform === 2 ? setTransform(null) : setTransform(2))}
+        >
+          Toggle transform
+        </button>
+
         <h5>FormInput</h5>
         <div className="row mb-2">
           <FormInputSetValueTeste1 />
@@ -348,7 +368,8 @@ function FormVersion() {
 }
 
 function FormArray() {
-  const { getValue, setValue, isRegistered } = useFormControl2('arr', 'array');
+  const formArrayState = useState();
+  const { getValue, setValue, isRegistered } = useFormControl2('arr', 'array', { state: formArrayState });
   const [refresh, shouldRefresh] = useState(false);
 
   useEffect(() => {
@@ -403,7 +424,8 @@ function FormArray() {
 }
 
 function FormArrayOfObjects() {
-  const { getValue } = useFormControl2('arrObj');
+  const formArrayOfObjectsState = useState();
+  const { getValue } = useFormControl2('arrObj', 'array', { state: formArrayOfObjectsState });
 
   return (getValue() || []).map((v, index) => <FormInput2 key={index} name={`arrObj[${index}].o`} />);
 }
@@ -636,7 +658,7 @@ function FormDropdownSetValueTeste1({}) {
       <div className="col">
         <FormGroupDropdown2
           label="Dropdown 1"
-          name="dropdown2"
+          name="dropdown1"
           afterChange={afterChange}
           options={[
             {
@@ -721,7 +743,7 @@ function FormInputMaskSetValueTeste1({}) {
           name="datemask1"
           mask={{
             parse: dateMask,
-            format: (value) => value,
+            format: (value) => dateMask(value).maskedValue,
           }}
           inputAttrs={{
             maxLength: '10',
@@ -735,7 +757,7 @@ function FormInputMaskSetValueTeste1({}) {
           name="datemask2"
           mask={{
             parse: dateMask,
-            format: (value) => value,
+            format: (value) => dateMask(value).maskedValue,
           }}
           inputAttrs={{
             maxLength: '10',
@@ -754,7 +776,7 @@ function FormInputMaskSetValueTeste2({}) {
         name="datemask3"
         mask={{
           parse: dateMask,
-          format: (value) => value,
+          format: (value) => dateMask(value).maskedValue,
         }}
         inputAttrs={{
           maxLength: '10',

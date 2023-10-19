@@ -27,6 +27,10 @@ export class FormHelper {
       formControl.setValue(value);
     }
 
+    this.setFormControl(name, formControl);
+  }
+
+  setFormControl(name, formControl) {
     this.formControls.set(name, formControl);
   }
 
@@ -112,6 +116,9 @@ export function useFormHelper(initialValues, { debounceWait, transform, onChange
       if (formControl) {
         formControl.setValue(value);
       }
+    },
+    setFormControl(name, formControl) {
+      formHelper.current.setFormControl(name, formControl);
     },
     getFormData() {
       return formHelper.current.formData;

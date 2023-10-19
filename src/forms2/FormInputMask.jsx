@@ -1,8 +1,6 @@
-import React, { useRef, useCallback, useMemo, useEffect, Fragment, useState } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import { isUndefined } from 'js-var-type';
 import PropTypes from 'prop-types';
-
-import { getValueByPath } from '../utils/getters-setters';
 
 import { useFormControl2 } from './helpers/useFormControl';
 import { FormInput2 } from './FormInput';
@@ -23,9 +21,8 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
     ref.current.value = valueFormatado;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const formControl = useFormControl2(name, undefined, { state, afterSetValue: (v) => setFormattedValue(v) });
-  const valorInicial = useMemo(() => getValueByPath(formControl.getFormData(), name), [formControl, name]);
+  const afterSetValue = useCallback((v) => setFormattedValue(v), [setFormattedValue]);
+  const formControl = useFormControl2(name, undefined, { state, afterSetValue });
 
   const handleKeyDown = useCallback(
     (e) => {
@@ -42,12 +39,6 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
     [afterChange, formControl]
   );
 
-  useEffect(() => {
-    //formatação do valor inicial do input, deve ser executada apenas uma vez
-    setFormattedValue(valorInicial);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <>
       <input
@@ -56,12 +47,10 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
         name={`__mask.${name}`}
         defaultValue=""
         onChange={(e) => {
-          const { maskedValue, rawValue } = mask?.parse?.(e.target.value) ?? {
-            maskedValue: e.target.value,
+          const { rawValue } = mask?.parse?.(e.target.value) ?? {
             rawValue: e.target.value,
           };
 
-          e.target.value = maskedValue;
           const previousValue = formControl.getValue();
 
           formControl.setValue(rawValue);
