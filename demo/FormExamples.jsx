@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   Form,
   FormGroupInput,
@@ -11,6 +11,9 @@ import {
   FormGroupAutocomplete,
   FormGroupDropdown,
   useFormControl,
+  FormGroupAutocompleteTag,
+  Table,
+  FormAutocompleteTag,
   // eslint-disable-next-line import/no-unresolved
 } from '../dist/main';
 
@@ -22,6 +25,7 @@ export function FormExamples() {
         textField: 'abc',
         autocompleteField1: { _id: '2345', name: '2345 name' },
         autocompleteField4: 'unlisted item',
+        autocompleteTag2: [{ label: 'preSelected', value: 'preSelected' }],
         selectField4: { e: 2, c: 'b' },
         switchField2: true,
         checkboxField2: true,
@@ -244,6 +248,169 @@ export function FormExamples() {
           />
         </div>
       </div>
+      <div className="row">
+        <div className="col">
+          <FormGroupAutocompleteTag
+            name="autocompleteTag1"
+            label="Autocomplete with tags"
+            repeatedTagErrorMessage="Impossible to add repeated tag"
+            options={[
+              {
+                label: '1',
+                value: '1',
+              },
+              {
+                label: 'tag',
+                value: 'tag',
+              },
+            ]}
+            allowRemove
+            openOnFocus
+            disabled
+          />
+        </div>
+        <div className="col">
+          <FormGroupAutocompleteTag
+            name="autocompleteTag2"
+            label="Autocomplete with tags2"
+            repeatedTagErrorMessage="Impossible to add repeated tag"
+            options={[
+              {
+                label: '1',
+                value: '1',
+              },
+              {
+                label: 'tag',
+                value: 'tag',
+              },
+              {
+                label: 'preSelected',
+                value: 'preSelected',
+              },
+            ]}
+            allowRemove
+            openOnFocus
+            afterChange={(newValue, lastValue) =>
+              console.log('autocompleteTag2 changed. From: ', lastValue, ' To:', newValue)
+            }
+            onSearch={(searchedValue) => console.log('autocompleteTag2 serachedValue changed to: ', searchedValue)}
+          />
+        </div>
+        <div className="col">
+          <FormGroupAutocompleteTag
+            name="autocompleteTag3"
+            label="Autocomplete with tags3 - Required"
+            required
+            repeatedTagErrorMessage="Impossible to add repeated tag"
+            options={[
+              {
+                label: '1',
+                value: '1',
+              },
+              {
+                label: 'tag',
+                value: 'tag',
+              },
+              {
+                label: 'preSelected',
+                value: 'preSelected',
+              },
+            ]}
+            allowRemove
+            openOnFocus
+            help="Add at least one tag to this field"
+          />
+        </div>
+        <div className="col">
+          <FormGroupAutocompleteTag
+            name="autocompleteTag4"
+            label="Autocomplete with tags4 - Tracking by _id"
+            repeatedTagErrorMessage="Impossible to add repeated tag"
+            options={[
+              {
+                label: '1',
+                _id: '1',
+              },
+              {
+                label: 'tag',
+                _id: '2',
+              },
+              {
+                label: 'preSelected',
+                _id: '3',
+              },
+            ]}
+            allowRemove
+            openOnFocus
+            trackBy="_id"
+            help="Write something and press Enter or click on the button"
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <FormGroupAutocompleteTag
+            name="autocompleteTag5"
+            label="Autocomplete with tags5 - Tracking by _id - Without new tags"
+            repeatedTagErrorMessage="Impossible to add repeated tag"
+            options={[
+              {
+                label: '1',
+                _id: '1',
+              },
+              {
+                label: 'tag',
+                _id: '2',
+              },
+              {
+                label: 'preSelected',
+                _id: '3',
+              },
+            ]}
+            allowUnlistedValue={false}
+            allowRemove
+            openOnFocus
+            trackBy="_id"
+            help="unhelpfull help"
+            template={(v) => (
+              <em>
+                <b>{v}</b>
+              </em>
+            )}
+          />
+        </div>
+        <div className="col">
+          <FormGroupAutocompleteTag
+            name="autocompleteTag6"
+            label="Autocomplete with tags6 - Tracking by _id - Without new tags, with repeated options"
+            repeatedTagErrorMessage="Impossible to add repeated tag"
+            options={[
+              {
+                label: '1',
+                _id: '1',
+              },
+              {
+                label: 'Repeated 1',
+                _id: '1',
+              },
+              {
+                label: 'tag',
+                _id: '2',
+              },
+              {
+                label: 'Repeated tag',
+                _id: '2',
+              },
+            ]}
+            allowUnlistedValue={false}
+            allowRemove
+            openOnFocus
+            trackBy="_id"
+            placeholder="Select one or more tags"
+          />
+        </div>
+      </div>
+      <FormAutocompleteTagsWithCustomLabel />
 
       <div className="row">
         <div className="col-4">
@@ -512,3 +679,39 @@ const FormSwitchExample = () => {
     />
   );
 };
+
+function FormAutocompleteTagsWithCustomLabel() {
+  const autocompleteTag6FormControl = useFormControl('autocompleteTag7');
+  const tags = useMemo(() => autocompleteTag6FormControl.getValue() || []);
+
+  return (
+    <div className="row mb-3">
+      <div className="col">
+        <label className="form-label">Autocomplete with tags - Custom label:</label>
+        <Table
+          docs={tags}
+          columns={[
+            { attribute: 'label', label: 'Label' },
+            { attribute: 'value', label: 'Value' },
+          ]}
+        />
+        <FormAutocompleteTag
+          name="autocompleteTag7"
+          repeatedTagErrorMessage="Impossible to add repeated tag"
+          options={[
+            {
+              label: '1',
+              value: '1',
+            },
+            {
+              label: 'tag',
+              value: 'tag',
+            },
+          ]}
+          allowRemove
+          openOnFocus
+        />
+      </div>
+    </div>
+  );
+}

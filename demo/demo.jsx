@@ -34,7 +34,11 @@ ReactDOM.render(
           },
           {
             title: 'Forms',
-            content: <FormExamples />,
+            content: (
+              <ToastsContainer>
+                <FormExamples />
+              </ToastsContainer>
+            ),
           },
           {
             title: 'Forms2',
