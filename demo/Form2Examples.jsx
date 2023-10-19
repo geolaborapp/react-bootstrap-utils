@@ -655,7 +655,7 @@ function FormDropdownSetValueTeste1({}) {
       <div className="col">
         <FormGroupDropdown2
           label="Dropdown 1"
-          name="dropdown2"
+          name="dropdown1"
           afterChange={afterChange}
           options={[
             {
