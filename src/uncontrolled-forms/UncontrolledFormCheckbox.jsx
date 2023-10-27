@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { useFormControl2 } from './helpers/useFormControl';
+import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
 import { booleanOrFunction } from './helpers/form-helpers';
-import { FormGroup2 } from './FormGroup';
+import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
-export function FormCheckbox2({
+export function UncontrolledFormCheckbox({
   id,
   name,
   required: _required,
@@ -15,9 +15,13 @@ export function FormCheckbox2({
   ...props
 }) {
   const state = useState('');
-  const { getValue, handleOnChangeFactory, registerInputRef, getFormData } = useFormControl2(name, 'boolean', {
-    state,
-  });
+  const { getValue, handleOnChangeFactory, registerInputRef, getFormData } = useUncontrolledFormControl(
+    name,
+    'boolean',
+    {
+      state,
+    }
+  );
 
   const disabled = booleanOrFunction(_disabled, getFormData());
   const required = booleanOrFunction(_required, getFormData());
@@ -40,7 +44,7 @@ export function FormCheckbox2({
   );
 }
 
-FormCheckbox2.propTypes = {
+UncontrolledFormCheckbox.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   id: PropTypes.string.isRequired,
@@ -49,15 +53,15 @@ FormCheckbox2.propTypes = {
   valueLabel: PropTypes.node,
 };
 
-export function FormGroupCheckbox2(props) {
+export function UncontrolledFormGroupCheckbox(props) {
   return (
-    <FormGroup2 mockInvalidSibling={true} {...props}>
-      <FormCheckbox2 {...props} />
-    </FormGroup2>
+    <UncontrolledFormGroup mockInvalidSibling={true} {...props}>
+      <UncontrolledFormCheckbox {...props} />
+    </UncontrolledFormGroup>
   );
 }
 
-FormGroupCheckbox2.propTypes = {
+UncontrolledFormGroupCheckbox.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   falseLabel: PropTypes.node,

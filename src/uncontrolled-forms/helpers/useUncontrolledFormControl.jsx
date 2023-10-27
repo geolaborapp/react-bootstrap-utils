@@ -5,16 +5,16 @@ import { getValueByPath } from '../../utils/getters-setters';
 
 import { decode, getTargetValue, encode } from './form-helpers';
 
-import { FormContext } from './useFormHelper';
+import { UncontrolledFormContext } from './useUncontrolledFormHelper';
 
 /* O state é repassado como parâmetro para resolver problemas de renderização de um formulário
    formado de "uncontrolled components".
    Caso seja desejado usar este hook desassociado de um FormElement, isto é, fazer:
-    useFormControl2('nameNaoReferenciadoPorFormElement')
+    useUncontrolledFormControl('nameNaoReferenciadoPorFormElement')
   para alguma manipulação do valor do formData, o desenvolvedor precisa passar um state como parâmetro.
 */
-export function useFormControl2(name, type, { state, afterSetValue } = {}) {
-  const formHelper = useContext(FormContext);
+export function useUncontrolledFormControl(name, type, { state, afterSetValue } = {}) {
+  const formHelper = useContext(UncontrolledFormContext);
 
   const [stateValue, setStateValue] = useMemo(() => state ?? [], [state]);
   const [isRegistered, setIsRegistered] = useState(false);

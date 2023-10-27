@@ -2,11 +2,11 @@ import React, { useRef, useCallback, useState } from 'react';
 import { isUndefined } from 'js-var-type';
 import PropTypes from 'prop-types';
 
-import { useFormControl2 } from './helpers/useFormControl';
-import { FormInput2 } from './FormInput';
-import { FormGroup2 } from './FormGroup';
+import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
+import { UncontrolledFormInput } from './UncontrolledFormInput';
+import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
-export function FormInputMask2({ mask, name, inputAttrs }) {
+export function UncontrolledFormInputMask({ mask, name, inputAttrs }) {
   const state = useState('');
   const ref = useRef(null);
   const { afterChange, ..._inputAttrs } = inputAttrs;
@@ -22,7 +22,7 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const afterSetValue = useCallback((v) => setFormattedValue(v), [setFormattedValue]);
-  const formControl = useFormControl2(name, undefined, { state, afterSetValue });
+  const formControl = useUncontrolledFormControl(name, undefined, { state, afterSetValue });
 
   const handleKeyDown = useCallback(
     (e) => {
@@ -60,16 +60,16 @@ export function FormInputMask2({ mask, name, inputAttrs }) {
         disabled={inputAttrs?.disabled}
         {..._inputAttrs}
       />
-      <FormInput2 name={name} style={{ display: 'none' }} />
+      <UncontrolledFormInput name={name} style={{ display: 'none' }} />
     </>
   );
 }
 
-FormInputMask2.defaultProps = {
+UncontrolledFormInputMask.defaultProps = {
   inputAttrs: {},
 };
 
-FormInputMask2.propTypes = {
+UncontrolledFormInputMask.propTypes = {
   mask: PropTypes.shape({
     format: PropTypes.func.isRequired,
     parse: PropTypes.func.isRequired,
@@ -78,15 +78,15 @@ FormInputMask2.propTypes = {
   inputAttrs: PropTypes.object,
 };
 
-export function FormGroupInputMask2(props) {
+export function UncontrolledFormGroupInputMask(props) {
   return (
-    <FormGroup2 {...props}>
-      <FormInputMask2 {...props} />
-    </FormGroup2>
+    <UncontrolledFormGroup {...props}>
+      <UncontrolledFormInputMask {...props} />
+    </UncontrolledFormGroup>
   );
 }
 
-FormGroupInputMask2.propTypes = {
+UncontrolledFormGroupInputMask.propTypes = {
   label: PropTypes.node.isRequired,
   mask: PropTypes.shape({
     format: PropTypes.func.isRequired,
