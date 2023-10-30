@@ -16,6 +16,7 @@ import { useFormControl } from './helpers/useFormControl';
 import { FormGroup } from './FormGroup';
 
 export function FormAutocompleteTag({
+  addButtonIcon,
   afterChange,
   repeatedTagErrorMessage,
   allowUnlistedValue,
@@ -283,7 +284,7 @@ export function FormAutocompleteTag({
       </div>
       {allowUnlistedValue && (
         <button type="button" className="btn btn-secondary rounded-start-0" onClick={onClick} disabled={disabled}>
-          <i className="bi bi-plus-lg" />
+          {addButtonIcon}
         </button>
       )}
     </div>
@@ -302,9 +303,11 @@ FormAutocompleteTag.defaultProps = {
   },
   template: (x) => x,
   repeatedTagErrorMessage: 'Impossible to add repeated tag',
+  addButtonIcon: <i className="bi bi-plus-lg" />,
 };
 
 FormAutocompleteTag.propTypes = {
+  addButtonIcon: PropTypes.node,
   afterChange: PropTypes.func,
   allowUnlistedValue: PropTypes.bool,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
@@ -325,6 +328,8 @@ FormAutocompleteTag.propTypes = {
 };
 
 export function FormGroupAutocompleteTag({
+  addButtonIcon,
+  removeButtonIcon,
   allowUnlistedValue,
   afterChange,
   disabled,
@@ -380,19 +385,20 @@ export function FormGroupAutocompleteTag({
 
             {allowRemove && (
               <a href="" className="text-light ml-1" onClick={(e) => removeTag(e, index)}>
-                <i className="bi bi-x-lg"></i>
+                {removeButtonIcon}
               </a>
             )}
           </span>
         ))}
       </>
     ),
-    [removeTag, label, allowRemove, tags]
+    [label, tags, allowRemove, removeButtonIcon, removeTag]
   );
 
   return (
     <FormGroup label={tagsLabel} name={name} help={help} required={required}>
       <FormAutocompleteTag
+        addButtonIcon={addButtonIcon}
         afterChange={afterChange}
         allowUnlistedValue={allowUnlistedValue}
         disabled={disabled}
@@ -413,12 +419,16 @@ export function FormGroupAutocompleteTag({
 }
 FormGroupAutocompleteTag.defaultProps = {
   allowUnlistedValue: true,
+  addButtonIcon: <i className="bi bi-plus-lg" />,
+  removeButtonIcon: <i className="bi bi-x-lg" />,
 };
 
 FormGroupAutocompleteTag.propTypes = {
   afterChange: PropTypes.func,
   allowRemove: PropTypes.bool,
   allowUnlistedValue: PropTypes.bool,
+  addButtonIcon: PropTypes.node,
+  removeButtonIcon: PropTypes.node,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   filter: PropTypes.func,
   listContainerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]),
