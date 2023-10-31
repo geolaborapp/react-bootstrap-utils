@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.48](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.47...v0.26.48) (2023-10-31)
+
+
+### Features
+
+* Possibilita trocar icone dos botões do FormGroupAutocompleteTag e do FormAutocompleteTag ([#57](https://github.com/geolaborapp/react-bootstrap-utils/issues/57)) ([3994da5](https://github.com/geolaborapp/react-bootstrap-utils/commit/3994da57675a89d5cb603e2a093684df27f65806))
+
 ### [0.26.47](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.46...v0.26.47) (2023-10-19)
 
 
