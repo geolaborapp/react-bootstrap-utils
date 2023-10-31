@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.49](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.48...v0.26.49) (2023-10-31)
+
 ### [0.26.48](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.47...v0.26.48) (2023-10-31)
 
 
