@@ -1,10 +1,10 @@
 import React, { useCallback, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { useFormHelper, FormContext } from './helpers/useFormHelper';
-import { FormActions } from './FormActions';
+import { useUncontrolledFormHelper, UncontrolledFormContext } from './helpers/useUncontrolledFormHelper';
+import { UncontrolledFormActions } from './UncontrolledFormActions';
 
-export function Form2({
+export function UncontrolledForm({
   cancelLabel,
   children,
   customActions,
@@ -18,7 +18,7 @@ export function Form2({
   validations,
   transform,
 }) {
-  const formHelper = useFormHelper(initialValues, { debounceWait, transform, onChange, validations });
+  const formHelper = useUncontrolledFormHelper(initialValues, { debounceWait, transform, onChange, validations });
   const formRef = useRef(null);
   const [isSubmiting, setIsSubmiting] = useState(false);
 
@@ -77,13 +77,13 @@ export function Form2({
 
   return (
     <form {...formProps}>
-      <FormContext.Provider value={formHelper}>{children}</FormContext.Provider>
-      <FormActions {...{ submitLabel, cancelLabel, onCancel: handleCancel, isSubmiting, customActions }} />
+      <UncontrolledFormContext.Provider value={formHelper}>{children}</UncontrolledFormContext.Provider>
+      <UncontrolledFormActions {...{ submitLabel, cancelLabel, onCancel: handleCancel, isSubmiting, customActions }} />
     </form>
   );
 }
 
-Form2.defaultProps = {
+UncontrolledForm.defaultProps = {
   cancelLabel: 'Cancel',
   customValidation: false,
   debounceWait: 500,
@@ -91,7 +91,7 @@ Form2.defaultProps = {
   submitLabel: 'Submit',
 };
 
-Form2.propTypes = {
+UncontrolledForm.propTypes = {
   cancelLabel: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
   customActions: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),

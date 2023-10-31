@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { formatClasses } from '../utils/attributes';
 
-export function FormHelp2({ id, inline, message }) {
+export function UncontrolledFormHelp({ id, inline, message }) {
   return (
     <small id={`${id}-help`} className={formatClasses(['text-muted', inline ? 'ms-2' : 'form-text'])}>
       {message}
@@ -11,11 +11,11 @@ export function FormHelp2({ id, inline, message }) {
   );
 }
 
-FormHelp2.defaultProps = {
+UncontrolledFormHelp.defaultProps = {
   inline: false,
 };
 
-FormHelp2.propTypes = {
+UncontrolledFormHelp.propTypes = {
   id: PropTypes.string,
   message: PropTypes.node.isRequired,
   inline: PropTypes.bool,

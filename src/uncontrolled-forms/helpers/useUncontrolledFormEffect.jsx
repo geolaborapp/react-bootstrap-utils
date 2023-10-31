@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react';
 
-import { FormContext } from './useFormHelper';
+import { UncontrolledFormContext } from './useUncontrolledFormHelper';
 
-export function useFormEffect(name, observerFn, deps = []) {
-  const formHelper = useContext(FormContext);
+export function useUncontrolledFormEffect(name, observerFn, deps = []) {
+  const formHelper = useContext(UncontrolledFormContext);
 
   useEffect(() => {
     const unsubscribe = formHelper.subscribe(name, observerFn);

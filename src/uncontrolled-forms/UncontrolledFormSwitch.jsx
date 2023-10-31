@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import { booleanOrFunction } from './helpers/form-helpers';
 
-import { useFormControl2 } from './helpers/useFormControl';
-import { FormGroup2 } from './FormGroup';
+import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
+import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
-export function FormSwitch2({
+export function UncontrolledFormSwitch({
   id,
   name,
   required: _required,
@@ -18,9 +18,13 @@ export function FormSwitch2({
 }) {
   const state = useState('');
 
-  const { getValue, handleOnChangeFactory, getFormData, registerInputRef } = useFormControl2(name, 'boolean', {
-    state,
-  });
+  const { getValue, handleOnChangeFactory, getFormData, registerInputRef } = useUncontrolledFormControl(
+    name,
+    'boolean',
+    {
+      state,
+    }
+  );
 
   const value = getValue();
   const disabled = booleanOrFunction(_disabled, getFormData());
@@ -44,7 +48,7 @@ export function FormSwitch2({
   );
 }
 
-FormSwitch2.propTypes = {
+UncontrolledFormSwitch.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   falseLabel: PropTypes.node,
@@ -54,15 +58,15 @@ FormSwitch2.propTypes = {
   trueLabel: PropTypes.node,
 };
 
-export function FormGroupSwitch2(props) {
+export function UncontrolledFormGroupSwitch(props) {
   return (
-    <FormGroup2 mockInvalidSibling={true} {...props}>
-      <FormSwitch2 {...props} />
-    </FormGroup2>
+    <UncontrolledFormGroup mockInvalidSibling={true} {...props}>
+      <UncontrolledFormSwitch {...props} />
+    </UncontrolledFormGroup>
   );
 }
 
-FormGroupSwitch2.propTypes = {
+UncontrolledFormGroupSwitch.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   falseLabel: PropTypes.node,

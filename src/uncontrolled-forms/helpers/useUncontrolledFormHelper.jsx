@@ -7,9 +7,9 @@ import { useArrayValueMap } from '../../utils/useValueMap';
 
 import { validateFormElement } from './form-helpers';
 
-export const FormContext = React.createContext(null);
+export const UncontrolledFormContext = React.createContext(null);
 
-export class FormHelper {
+export class UncontrolledFormHelper {
   constructor(initialValues, debounceWait) {
     this.initialValues = initialValues;
     this.formData = { ...initialValues };
@@ -103,8 +103,8 @@ export class FormHelper {
   }
 }
 
-export function useFormHelper(initialValues, { debounceWait, transform, onChange, validations } = {}) {
-  const formHelper = useRef(new FormHelper(initialValues, debounceWait));
+export function useUncontrolledFormHelper(initialValues, { debounceWait, transform, onChange, validations } = {}) {
+  const formHelper = useRef(new UncontrolledFormHelper(initialValues, debounceWait));
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const { getAllKeys: getElementNames, get: getElementRefs, push: registerElementRef } = useArrayValueMap();
   const formState = formHelper.current.formData;

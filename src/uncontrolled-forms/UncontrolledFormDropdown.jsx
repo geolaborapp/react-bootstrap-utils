@@ -7,10 +7,10 @@ import { useOpenState } from '../utils/useOpenState';
 import { formatClasses } from '../utils/attributes';
 
 import { getSelectedOption, normalizeOptions } from './helpers/form-helpers';
-import { useFormControl2 } from './helpers/useFormControl';
-import { FormGroup2 } from './FormGroup';
+import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
+import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
-export const FormDropdown2 = ({
+export const UncontrolledFormDropdown = ({
   afterChange,
   childClassName,
   disabled,
@@ -29,7 +29,7 @@ export const FormDropdown2 = ({
   const dropdownRef = useRef(null);
   const state = useState('');
 
-  const { getFormData, getValue, setValue: _setValue } = useFormControl2(name, undefined, { state });
+  const { getFormData, getValue, setValue: _setValue } = useUncontrolledFormControl(name, undefined, { state });
 
   const value = getValue();
   const items = normalizeOptions(options, getFormData());
@@ -127,7 +127,7 @@ export const FormDropdown2 = ({
   );
 };
 
-FormDropdown2.defaultProps = {
+UncontrolledFormDropdown.defaultProps = {
   includeEmptyItem: true,
   menuClassName: 'p-0 w-100',
   template: (x) => x,
@@ -140,7 +140,7 @@ FormDropdown2.defaultProps = {
   },
 };
 
-FormDropdown2.propTypes = {
+UncontrolledFormDropdown.propTypes = {
   afterChange: PropTypes.func,
   childClassName: PropTypes.string,
   disabled: PropTypes.bool,
@@ -160,15 +160,15 @@ FormDropdown2.propTypes = {
   trackBy: PropTypes.string,
 };
 
-export function FormGroupDropdown2(props) {
+export function UncontrolledFormGroupDropdown(props) {
   return (
-    <FormGroup2 {...props}>
-      <FormDropdown2 {...props} />
-    </FormGroup2>
+    <UncontrolledFormGroup {...props}>
+      <UncontrolledFormDropdown {...props} />
+    </UncontrolledFormGroup>
   );
 }
 
-FormGroupDropdown2.propTypes = {
+UncontrolledFormGroupDropdown.propTypes = {
   afterChange: PropTypes.func,
   childClassName: PropTypes.string,
   disabled: PropTypes.bool,

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import { formatClasses } from '../utils/attributes';
 
-import { useFormControl2 } from './helpers/useFormControl';
+import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
 import { booleanOrFunction } from './helpers/form-helpers';
-import { FormGroup2 } from './FormGroup';
+import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
-export function FormRadio2({
+export function UncontrolledFormRadio({
   id,
   name,
   required: _required,
@@ -18,9 +18,13 @@ export function FormRadio2({
   afterChange,
   state,
 }) {
-  const { getValue, handleOnChangeFactory, registerInputRef, getFormData } = useFormControl2(name, undefined, {
-    state,
-  });
+  const { getValue, handleOnChangeFactory, registerInputRef, getFormData } = useUncontrolledFormControl(
+    name,
+    undefined,
+    {
+      state,
+    }
+  );
   const value = getValue();
   const disabled = booleanOrFunction(_disabled, getFormData());
   const required = booleanOrFunction(_required, getFormData());
@@ -43,11 +47,11 @@ export function FormRadio2({
   );
 }
 
-FormRadio2.defaultProps = {
+UncontrolledFormRadio.defaultProps = {
   inline: false,
 };
 
-FormRadio2.propTypes = {
+UncontrolledFormRadio.propTypes = {
   afterChange: PropTypes.func,
   checkedValue: PropTypes.any,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
@@ -59,14 +63,14 @@ FormRadio2.propTypes = {
   state: PropTypes.array.isRequired,
 };
 
-export function FormGroupRadio2({ options, id, ...props }) {
+export function UncontrolledFormGroupRadio({ options, id, ...props }) {
   const state = useState('');
 
   return (
-    <FormGroup2 mockInvalidSibling={true} {...props}>
+    <UncontrolledFormGroup mockInvalidSibling={true} {...props}>
       <div>
         {options.map((option, index) => (
-          <FormRadio2
+          <UncontrolledFormRadio
             state={state}
             key={index}
             {...props}
@@ -76,15 +80,15 @@ export function FormGroupRadio2({ options, id, ...props }) {
           />
         ))}
       </div>
-    </FormGroup2>
+    </UncontrolledFormGroup>
   );
 }
 
-FormGroupRadio2.defaultProps = {
+UncontrolledFormGroupRadio.defaultProps = {
   inline: true,
 };
 
-FormGroupRadio2.propTypes = {
+UncontrolledFormGroupRadio.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   help: PropTypes.node,

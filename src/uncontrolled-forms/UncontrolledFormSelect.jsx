@@ -9,10 +9,10 @@ import {
   serializeValue,
 } from './helpers/form-helpers';
 
-import { useFormControl2 } from './helpers/useFormControl';
-import { FormGroup2 } from './FormGroup';
+import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
+import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
-export function FormSelect2({
+export function UncontrolledFormSelect({
   name,
   options,
   required: _required,
@@ -24,9 +24,13 @@ export function FormSelect2({
 }) {
   const state = useState('');
 
-  const { getFormData, getValue, handleOnChangeFactory, registerInputRef } = useFormControl2(name, undefined, {
-    state,
-  });
+  const { getFormData, getValue, handleOnChangeFactory, registerInputRef } = useUncontrolledFormControl(
+    name,
+    undefined,
+    {
+      state,
+    }
+  );
   const value = getValue();
 
   const normalizedOptions = normalizeOptions(options, getFormData());
@@ -54,7 +58,7 @@ export function FormSelect2({
   );
 }
 
-FormSelect2.propTypes = {
+UncontrolledFormSelect.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   id: PropTypes.string,
@@ -82,15 +86,15 @@ function renderOptions(options, trackBy) {
   ));
 }
 
-export function FormGroupSelect2(props) {
+export function UncontrolledFormGroupSelect(props) {
   return (
-    <FormGroup2 {...props}>
-      <FormSelect2 {...props} />
-    </FormGroup2>
+    <UncontrolledFormGroup {...props}>
+      <UncontrolledFormSelect {...props} />
+    </UncontrolledFormGroup>
   );
 }
 
-FormGroupSelect2.propTypes = {
+UncontrolledFormGroupSelect.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   help: PropTypes.node,
