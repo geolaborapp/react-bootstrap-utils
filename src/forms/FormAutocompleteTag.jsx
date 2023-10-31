@@ -384,7 +384,7 @@ export function FormGroupAutocompleteTag({
             {isDefined(tag?.label) ? tag.label : tag}
 
             {allowRemove && (
-              <a href="" className="text-light ml-1" onClick={(e) => removeTag(e, index)}>
+              <a href="" className="text-light ms-1" onClick={(e) => removeTag(e, index)}>
                 {removeButtonIcon}
               </a>
             )}
