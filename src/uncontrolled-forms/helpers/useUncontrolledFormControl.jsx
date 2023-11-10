@@ -19,10 +19,28 @@ export function useUncontrolledFormControl(name, type, { state, afterSetValue } 
   const [stateValue, setStateValue] = useMemo(() => state ?? [], [state]);
   const [isRegistered, setIsRegistered] = useState(false);
 
-  const setFormControlValue = useCallback(
+  const getNextValue = useCallback(
     (newValue) => {
       const newValueFn = isFunction(newValue) ? newValue : () => newValue;
       const nextValue = newValueFn(stateValue);
+
+      return nextValue;
+    },
+    [stateValue]
+  );
+
+  const setInitialStateValue = useCallback(
+    (newValue) => {
+      const nextValue = getNextValue(newValue);
+
+      setStateValue?.(isDefined(nextValue) ? nextValue : '');
+    },
+    [getNextValue, setStateValue]
+  );
+
+  const setFormControlValue = useCallback(
+    (newValue) => {
+      const nextValue = getNextValue(newValue);
 
       // utilizar o setState como função trouxe problemas na ficha de ensaio
       // não foi possível identificar o motivo, porém o callback não era acionado e o valor não era atualizado
@@ -34,7 +52,7 @@ export function useUncontrolledFormControl(name, type, { state, afterSetValue } 
         afterSetValue(nextValue);
       }
     },
-    [stateValue, setStateValue, formHelper, name, afterSetValue]
+    [getNextValue, setStateValue, formHelper, name, afterSetValue]
   );
 
   const setValue = useCallback((newValue) => formHelper?.setFormControlValue?.(name, newValue), [formHelper, name]);
@@ -53,9 +71,13 @@ export function useUncontrolledFormControl(name, type, { state, afterSetValue } 
 
   useEffect(() => {
     if (isFunction(setStateValue) && isFunction(formHelper.register)) {
-      formHelper.register(name, {
-        setValue: setFormControlValue,
-      });
+      formHelper.register(
+        name,
+        {
+          setValue: setFormControlValue,
+        },
+        setInitialStateValue
+      );
     }
 
     setIsRegistered(true);
