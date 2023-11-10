@@ -1,5 +1,5 @@
 import React from 'react';
-import { isFunction, isUndefined, isArray, isObject, isEmptyStringLike, isBoolean } from 'js-var-type';
+import { isFunction, isUndefined, isArray, isObject, isEmptyStringLike, isBoolean, isDate } from 'js-var-type';
 
 import { getValueByPath } from '../../utils/getters-setters';
 import { fromDatetimeLocal, toDatetimeLocal } from '../../utils/formatters';
@@ -151,6 +151,14 @@ export function encode(value, type) {
   return value;
 }
 
+function isValidDate(date) {
+  if (!isDate(date) || isNaN(date.getDate()) || date.toString() === 'Invalid Date') {
+    return false;
+  }
+
+  return true;
+}
+
 export function decode(value, type) {
   if (type === 'number') {
     const parsedValue = parseFloat(value);
@@ -160,6 +168,10 @@ export function decode(value, type) {
 
   if (type === 'boolean') {
     return isBoolean(value) ? value : value === 'true';
+  }
+
+  if (type === 'datetime-local') {
+    return isValidDate(value) ? value : getEmptyValue(type);
   }
 
   return value;

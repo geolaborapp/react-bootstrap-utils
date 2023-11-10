@@ -115,6 +115,9 @@ export function UncontrolledFormExamples() {
           <label htmlFor="">Array of objects</label>
           <FormArrayOfObjects />
         </div>
+        <div className="mb-3">
+          <UncontrolledFormGroupInput label="Input date" name="inputDate" type="datetime-local" />
+        </div>
         <UncontrolledFormGroupAutocomplete
           name="autocomplete2Field1"
           label="Autocomplete Object Options"

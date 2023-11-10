@@ -37,7 +37,7 @@ export function FormExamples() {
         },
         dropdownField2: '03',
       }}
-      onChange={console.info}
+      onChange={(data) => console.log('onChange', data)}
       onSubmit={(formData) => {
         console.log('onSubmit', formData);
 
