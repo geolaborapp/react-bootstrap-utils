@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { debounce } from 'lodash-es';
-import { isDefined } from 'js-var-type';
+import { isDefined, isFunction } from 'js-var-type';
 
 import { flattenObject, getValueByPath, setValueByPath } from '../../utils/getters-setters';
 import { useArrayValueMap } from '../../utils/useValueMap';
@@ -20,11 +20,15 @@ export class UncontrolledFormHelper {
     this.submitAttempted = false;
   }
 
-  register(name, formControl) {
+  register(name, formControl, setInitialStateValue) {
     const value = getValueByPath(this.formData, name);
 
     if (isDefined(value)) {
-      formControl.setValue(value);
+      if (isFunction(setInitialStateValue)) {
+        setInitialStateValue(value);
+      } else {
+        formControl.setValue(value);
+      }
     }
 
     this.setFormControl(name, formControl);
@@ -139,8 +143,8 @@ export function useUncontrolledFormHelper(initialValues, { debounceWait, transfo
         onChange(formData);
       });
     },
-    register(name, formControl) {
-      formHelper.current.register(name, formControl);
+    register(name, formControl, setInitialStateValue) {
+      formHelper.current.register(name, formControl, setInitialStateValue);
     },
     registerRef(name, inputRef) {
       registerElementRef(name, inputRef);
