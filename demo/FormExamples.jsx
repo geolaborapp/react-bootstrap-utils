@@ -79,7 +79,7 @@ export function FormExamples() {
           },
         },
       ],
-      variableValidationTest: [
+      variableCustomValidation: [
         {
           message: `Must be filled with "${changeCustomValidation ? 'b' : 'a'}"`,
           validate(value, formData) {
