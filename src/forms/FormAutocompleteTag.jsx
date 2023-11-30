@@ -8,7 +8,7 @@ import { formatClasses } from '../utils/attributes';
 
 import { useToasts } from '../toasts/useToasts';
 
-import { getValueByPath } from '../utils/getters-setters';
+import { getValueByPath, setValueByPath } from '../utils/getters-setters';
 
 import { booleanOrFunction, handleInputChange, normalizeOptions } from './helpers/form-helpers';
 import { useFormControl } from './helpers/useFormControl';
@@ -61,13 +61,21 @@ export function FormAutocompleteTag({
       return tag?.label ? tag.label : tag;
     });
 
-    return _options.filter((tag) => {
-      if (trackBy && isObject(tag)) {
-        return !tagsInUse.includes(getValueByPath(tag, trackBy));
-      }
+    return _options
+      .map((option) => {
+        if (trackBy && isObject(option) && !option?.label) {
+          return { ...option, label: getValueByPath(option, trackBy) };
+        }
 
-      return !tagsInUse.includes(tag?.label ? tag.label : tag);
-    });
+        return option;
+      })
+      .filter((tag) => {
+        if (trackBy && isObject(tag)) {
+          return !tagsInUse.includes(getValueByPath(tag, trackBy));
+        }
+
+        return !tagsInUse.includes(tag?.label ? tag.label : tag);
+      });
   }, [_options, trackBy, value]);
   const items = useMemo(
     () => normalizeOptions(options, getFormData(), searchValue),
@@ -136,11 +144,18 @@ export function FormAutocompleteTag({
 
       const newTags = [...value];
 
-      if (!newTag?.label) {
-        newTags?.push({
+      if (isString(newTag) || (trackBy && !isDefined(getValueByPath(newTag, trackBy)))) {
+        const tag = {
           label: newTag,
-          value: newTag,
-        });
+        };
+
+        if (trackBy) {
+          setValueByPath(tag, trackBy, newTag);
+        } else {
+          tag.value = newTag;
+        }
+
+        newTags?.push(tag);
       } else {
         newTags?.push(newTag);
       }
@@ -381,7 +396,7 @@ export function FormGroupAutocompleteTag({
         {label}
         {tags?.map((tag, index) => (
           <span key={index} className={`badge bg-${allowRemove ? 'info' : 'secondary'} mx-1`}>
-            {isDefined(tag?.label) ? tag.label : tag}
+            {isDefined(tag?.label) ? tag.label : isDefined(trackBy) ? getValueByPath(tag, trackBy) : tag}
 
             {allowRemove && (
               <a href="" className="text-light ms-1" onClick={(e) => removeTag(e, index)}>
@@ -392,7 +407,7 @@ export function FormGroupAutocompleteTag({
         ))}
       </>
     ),
-    [label, tags, allowRemove, removeButtonIcon, removeTag]
+    [label, tags, allowRemove, trackBy, removeButtonIcon, removeTag]
   );
 
   return (

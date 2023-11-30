@@ -304,20 +304,7 @@ export function FormExamples() {
             repeatedTagErrorMessage="Impossible to add repeated tag"
             addButtonIcon={<i className="bi bi-person-add" />}
             removeButtonIcon={<i className="bi bi-person-dash" />}
-            options={[
-              {
-                label: '1',
-                value: '1',
-              },
-              {
-                label: 'tag',
-                value: 'tag',
-              },
-              {
-                label: 'preSelected',
-                value: 'preSelected',
-              },
-            ]}
+            options={['1', 'tag', 'preSelected']}
             allowRemove
             openOnFocus
             help="Add at least one tag to this field"
@@ -367,6 +354,9 @@ export function FormExamples() {
               {
                 label: 'preSelected',
                 _id: '3',
+              },
+              {
+                _id: '4',
               },
             ]}
             allowUnlistedValue={false}
