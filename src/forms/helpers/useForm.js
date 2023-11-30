@@ -136,6 +136,7 @@ export function useForm(initialState, { validations, onChange, transform }) {
       return submitAttempted;
     },
     getValidationMessage,
+    validateForm,
   };
 }
 
