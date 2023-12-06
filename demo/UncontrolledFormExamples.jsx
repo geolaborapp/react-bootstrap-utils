@@ -1,22 +1,22 @@
 /* eslint-disable no-console */
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-  Form2,
-  FormGroupCheckbox2,
-  FormGroupInput2,
-  FormGroupInputMask2,
-  FormGroupSelect2,
-  FormGroupSwitch2,
-  FormGroupTextarea2,
-  FormInput2,
-  useFormControl2,
-  useFormEffect,
-  FormGroupAutocomplete2,
-  FormGroupDropdown2,
-  FormGroupRadio2,
+  UncontrolledForm,
+  UncontrolledFormGroupCheckbox,
+  UncontrolledFormGroupInput,
+  UncontrolledFormGroupInputMask,
+  UncontrolledFormGroupSelect,
+  UncontrolledFormGroupSwitch,
+  UncontrolledFormGroupTextarea,
+  UncontrolledFormInput,
+  useUncontrolledFormControl,
+  useUncontrolledFormEffect,
+  UncontrolledFormGroupAutocomplete,
+  UncontrolledFormGroupDropdown,
+  UncontrolledFormGroupRadio,
 } from '../dist/main';
 
-export function Form2Examples() {
+export function UncontrolledFormExamples() {
   const [bootstrapFormValidation, setBootstrapFormValidation] = useState(false);
   const [transform, setTransform] = useState(null);
 
@@ -27,7 +27,7 @@ export function Form2Examples() {
   return (
     <div className="pb-4">
       <h4>Alternative Form implementation</h4>
-      <Form2
+      <UncontrolledForm
         initialValues={{
           attrA: 'ABC',
           Obj: { x: 'X', z: 0 },
@@ -86,7 +86,7 @@ export function Form2Examples() {
         }}
       >
         <h5>Form configuration:</h5>
-        <FormGroupSwitch2
+        <UncontrolledFormGroupSwitch
           id="bootstrapForms2Validation"
           name="bootstrapForm2Validation"
           label="Use bootstrap form validation?"
@@ -97,13 +97,13 @@ export function Form2Examples() {
           <label htmlFor="">Obj</label>
           <div className="row">
             <div className="col">
-              <FormInput2 name="Obj.x" />
+              <UncontrolledFormInput name="Obj.x" />
             </div>
             <div className="col">
-              <FormInput2 name="Obj.y" />
+              <UncontrolledFormInput name="Obj.y" />
             </div>
             <div className="col">
-              <FormInput2 name="Obj.z" type="number" step="0.1" />
+              <UncontrolledFormInput name="Obj.z" type="number" step="0.1" />
             </div>
           </div>
         </div>
@@ -115,7 +115,10 @@ export function Form2Examples() {
           <label htmlFor="">Array of objects</label>
           <FormArrayOfObjects />
         </div>
-        <FormGroupAutocomplete2
+        <div className="mb-3">
+          <UncontrolledFormGroupInput label="Input date" name="inputDate" type="datetime-local" />
+        </div>
+        <UncontrolledFormGroupAutocomplete
           name="autocomplete2Field1"
           label="Autocomplete Object Options"
           options={[
@@ -129,7 +132,7 @@ export function Form2Examples() {
           allowUnlistedValue
         />
 
-        <FormGroupAutocomplete2
+        <UncontrolledFormGroupAutocomplete
           name="autocomplete2Field2"
           label="Autocomplete Field with Custom Validation"
           options={['1', '2', '3']}
@@ -137,7 +140,7 @@ export function Form2Examples() {
           allowUnlistedValue
         />
 
-        <FormGroupAutocomplete2
+        <UncontrolledFormGroupAutocomplete
           name="autocomplete2Field3"
           label="Autocomplete with item template"
           options={Array.from({ length: 10 }).map((_, index) => ({
@@ -153,7 +156,7 @@ export function Form2Examples() {
           required={() => true}
         />
 
-        <FormGroupAutocomplete2
+        <UncontrolledFormGroupAutocomplete
           name="autocomplete2Field4"
           label="Autocomplete Field that logs when searched value is cleared"
           options={['1', '2', '3']}
@@ -166,12 +169,12 @@ export function Form2Examples() {
           }}
         />
 
-        <FormGroupInput2 label="AttrA" name="attrA"></FormGroupInput2>
-        <FormGroupInput2 label="AttrB" name="attrB"></FormGroupInput2>
-        <FormGroupSelect2 label="AttrC" name="attrC" options={[1, 2, 3]}></FormGroupSelect2>
-        <FormGroupSwitch2 id="attrD" label="AttrD" name="attrD"></FormGroupSwitch2>
+        <UncontrolledFormGroupInput label="AttrA" name="attrA"></UncontrolledFormGroupInput>
+        <UncontrolledFormGroupInput label="AttrB" name="attrB"></UncontrolledFormGroupInput>
+        <UncontrolledFormGroupSelect label="AttrC" name="attrC" options={[1, 2, 3]}></UncontrolledFormGroupSelect>
+        <UncontrolledFormGroupSwitch id="attrD" label="AttrD" name="attrD"></UncontrolledFormGroupSwitch>
 
-        <FormGroupCheckbox2
+        <UncontrolledFormGroupCheckbox
           id="checkboxFieldId"
           name="checkboxField"
           label="Checkbox field"
@@ -179,14 +182,14 @@ export function Form2Examples() {
           help="Checkbox help"
         />
 
-        <FormGroupCheckbox2 id="checkboxFieldId2" name="checkboxField2" label="Checkbox field 2" disabled />
+        <UncontrolledFormGroupCheckbox id="checkboxFieldId2" name="checkboxField2" label="Checkbox field 2" disabled />
 
         <div className="mb-3">
           <label htmlFor="">Version</label>
           <FormVersion />
         </div>
 
-        <FormGroupTextarea2
+        <UncontrolledFormGroupTextarea
           label="Textarea"
           name="textarea1"
           rows="5"
@@ -204,7 +207,7 @@ export function Form2Examples() {
           <FormObserver2 />
         </div>
 
-        <FormGroupInputMask2
+        <UncontrolledFormGroupInputMask
           name="decimalMask"
           label="Masked 3 decimal with"
           mask={{
@@ -220,7 +223,7 @@ export function Form2Examples() {
           }}
         />
 
-        <FormGroupInputMask2
+        <UncontrolledFormGroupInputMask
           name="dateMask"
           inputAttrs={{
             maxLength: '10',
@@ -232,7 +235,7 @@ export function Form2Examples() {
           }}
         />
 
-        <FormGroupInputMask2
+        <UncontrolledFormGroupInputMask
           name="hourMask"
           inputAttrs={{
             maxLength: '5',
@@ -244,7 +247,7 @@ export function Form2Examples() {
           }}
         />
 
-        <FormGroupInputMask2
+        <UncontrolledFormGroupInputMask
           name="currencyMask"
           label="Currency mask"
           mask={{
@@ -253,7 +256,7 @@ export function Form2Examples() {
           }}
         />
 
-        <FormGroupDropdown2
+        <UncontrolledFormGroupDropdown
           label="FormDropdown2"
           name="dropdown"
           options={[
@@ -272,7 +275,7 @@ export function Form2Examples() {
           ]}
           template={(linha) => <p className="mb-0">{linha}</p>}
         />
-        <FormGroupDropdown2
+        <UncontrolledFormGroupDropdown
           label="FormDropdown2 disabled"
           name="dropdown-desabilitado"
           options={[
@@ -356,20 +359,20 @@ export function Form2Examples() {
           <FormTextareaSetValueTeste1 />
           <FormTextareaSetValueTeste2 />
         </div>
-      </Form2>
+      </UncontrolledForm>
     </div>
   );
 }
 
 function FormVersion() {
-  const { getValue } = useFormControl2('__v');
+  const { getValue } = useUncontrolledFormControl('__v');
 
   return <div>{getValue() || ''}</div>;
 }
 
 function FormArray() {
   const formArrayState = useState();
-  const { getValue, setValue, isRegistered } = useFormControl2('arr', 'array', { state: formArrayState });
+  const { getValue, setValue, isRegistered } = useUncontrolledFormControl('arr', 'array', { state: formArrayState });
   const [refresh, shouldRefresh] = useState(false);
 
   useEffect(() => {
@@ -406,7 +409,7 @@ function FormArray() {
     <>
       {(getValue() || []).map((v, index) => (
         <div className="input-group mb-2">
-          <FormInput2 key={index} name={`arr[${index}]`} />
+          <UncontrolledFormInput key={index} name={`arr[${index}]`} />
 
           <button className="btn btn-danger" onClick={() => remove(index)}>
             Remove
@@ -425,15 +428,15 @@ function FormArray() {
 
 function FormArrayOfObjects() {
   const formArrayOfObjectsState = useState();
-  const { getValue } = useFormControl2('arrObj', 'array', { state: formArrayOfObjectsState });
+  const { getValue } = useUncontrolledFormControl('arrObj', 'array', { state: formArrayOfObjectsState });
 
-  return (getValue() || []).map((v, index) => <FormInput2 key={index} name={`arrObj[${index}].o`} />);
+  return (getValue() || []).map((v, index) => <UncontrolledFormInput key={index} name={`arrObj[${index}].o`} />);
 }
 
 function FormObserver() {
   const [state, setState] = useState(0);
 
-  useFormEffect('Obj', (data) => {
+  useUncontrolledFormEffect('Obj', (data) => {
     console.log('FormObserver :>> ', data);
     setState((p) => p + 1);
   });
@@ -494,7 +497,7 @@ function FormObserver2() {
   return (
     <div>
       <div className=" mb-2">
-        <FormGroupSwitch2
+        <UncontrolledFormGroupSwitch
           id="formObserver2"
           label="Element observed switch"
           name="formObserver2"
@@ -511,7 +514,7 @@ function FormObserver2() {
 function FormObserved2ObservedComponent({ name }) {
   const [value, setValue] = useState();
 
-  useFormEffect(
+  useUncontrolledFormEffect(
     name,
     (value) => {
       setValue(value);
@@ -525,14 +528,14 @@ function FormObserved2ObservedComponent({ name }) {
         <div className="col-6">{`Input observed "${name}"`}</div>
         <div className="col-6">{`Value "${value}"`}</div>
       </div>
-      <FormGroupSwitch2 id={name} label="Observed input switch" name={name} />
+      <UncontrolledFormGroupSwitch id={name} label="Observed input switch" name={name} />
     </div>
   );
 }
 
 function FormInputSetValueTeste1({}) {
-  const input2 = useFormControl2('input2');
-  const input3 = useFormControl2('input3');
+  const input2 = useUncontrolledFormControl('input2');
+  const input3 = useUncontrolledFormControl('input3');
 
   const afterChange = useCallback((v) => {
     input2.setValue(v);
@@ -542,10 +545,10 @@ function FormInputSetValueTeste1({}) {
   return (
     <>
       <div className="col">
-        <FormGroupInput2 label="Input 1" name="input1" afterChange={afterChange} />
+        <UncontrolledFormGroupInput label="Input 1" name="input1" afterChange={afterChange} />
       </div>
       <div className="col">
-        <FormGroupInput2 label="Replicates Input 1 with setValue - same component" name="input2" />
+        <UncontrolledFormGroupInput label="Replicates Input 1 with setValue - same component" name="input2" />
       </div>
     </>
   );
@@ -554,14 +557,14 @@ function FormInputSetValueTeste1({}) {
 function FormInputSetValueTeste2({}) {
   return (
     <div className="col">
-      <FormGroupInput2 label="Replicates Input 1 with setValue - different component" name="input3" />
+      <UncontrolledFormGroupInput label="Replicates Input 1 with setValue - different component" name="input3" />
     </div>
   );
 }
 
 function FormAutocompleteSetValueTeste1({}) {
-  const autoComplete2 = useFormControl2('autoComplete2');
-  const autoComplete3 = useFormControl2('autoComplete3');
+  const autoComplete2 = useUncontrolledFormControl('autoComplete2');
+  const autoComplete3 = useUncontrolledFormControl('autoComplete3');
 
   const afterChange = useCallback((v) => {
     autoComplete2.setValue(v);
@@ -571,7 +574,7 @@ function FormAutocompleteSetValueTeste1({}) {
   return (
     <>
       <div className="col">
-        <FormGroupAutocomplete2
+        <UncontrolledFormGroupAutocomplete
           label="AutoComplete 1"
           name="autoComplete1"
           afterChange={afterChange}
@@ -581,7 +584,7 @@ function FormAutocompleteSetValueTeste1({}) {
         />
       </div>
       <div className="col">
-        <FormGroupAutocomplete2
+        <UncontrolledFormGroupAutocomplete
           label="Replicates AutoComplete 1 with setValue - same component"
           name="autoComplete2"
           allowUnlistedValue
@@ -596,7 +599,7 @@ function FormAutocompleteSetValueTeste1({}) {
 function FormAutocompleteSetValueTeste2({}) {
   return (
     <div className="col">
-      <FormGroupAutocomplete2
+      <UncontrolledFormGroupAutocomplete
         label="Replicates AutoComplete 1 with setValue - different component"
         name="autoComplete3"
         allowUnlistedValue
@@ -608,8 +611,8 @@ function FormAutocompleteSetValueTeste2({}) {
 }
 
 function FormCheckboxSetValueTeste1({}) {
-  const checkbox2 = useFormControl2('checkbox2');
-  const checkbox3 = useFormControl2('checkbox3');
+  const checkbox2 = useUncontrolledFormControl('checkbox2');
+  const checkbox3 = useUncontrolledFormControl('checkbox3');
 
   const afterChange = useCallback((v) => {
     checkbox2.setValue(v);
@@ -619,10 +622,10 @@ function FormCheckboxSetValueTeste1({}) {
   return (
     <>
       <div className="col">
-        <FormGroupCheckbox2 label="Checkbox 1" name="checkbox1" id="checkbox1" afterChange={afterChange} />
+        <UncontrolledFormGroupCheckbox label="Checkbox 1" name="checkbox1" id="checkbox1" afterChange={afterChange} />
       </div>
       <div className="col">
-        <FormGroupCheckbox2
+        <UncontrolledFormGroupCheckbox
           label="Replicates Checkbox 1 with setValue - same component"
           name="checkbox2"
           id="checkbox2"
@@ -635,7 +638,7 @@ function FormCheckboxSetValueTeste1({}) {
 function FormCheckboxSetValueTeste2({}) {
   return (
     <div className="col">
-      <FormGroupCheckbox2
+      <UncontrolledFormGroupCheckbox
         label="Replicates Checkbox 1 with setValue - different component"
         name="checkbox3"
         id="checkbox3"
@@ -645,8 +648,8 @@ function FormCheckboxSetValueTeste2({}) {
 }
 
 function FormDropdownSetValueTeste1({}) {
-  const dropdown2 = useFormControl2('dropdown2');
-  const dropdown3 = useFormControl2('dropdown3');
+  const dropdown2 = useUncontrolledFormControl('dropdown2');
+  const dropdown3 = useUncontrolledFormControl('dropdown3');
 
   const afterChange = useCallback((v) => {
     dropdown2.setValue(v);
@@ -656,7 +659,7 @@ function FormDropdownSetValueTeste1({}) {
   return (
     <>
       <div className="col">
-        <FormGroupDropdown2
+        <UncontrolledFormGroupDropdown
           label="Dropdown 1"
           name="dropdown1"
           afterChange={afterChange}
@@ -677,7 +680,7 @@ function FormDropdownSetValueTeste1({}) {
         />
       </div>
       <div className="col">
-        <FormGroupDropdown2
+        <UncontrolledFormGroupDropdown
           label="Replicates Dropdown 1 with setValue - same component"
           name="dropdown2"
           options={[
@@ -704,7 +707,7 @@ function FormDropdownSetValueTeste1({}) {
 function FormDropdownSetValueTeste2({}) {
   return (
     <div className="col">
-      <FormGroupDropdown2
+      <UncontrolledFormGroupDropdown
         label="Replicates Dropdown 1 with setValue - different component"
         name="dropdown3"
         options={[
@@ -727,8 +730,8 @@ function FormDropdownSetValueTeste2({}) {
 }
 
 function FormInputMaskSetValueTeste1({}) {
-  const datemask2 = useFormControl2('datemask2');
-  const datemask3 = useFormControl2('datemask3');
+  const datemask2 = useUncontrolledFormControl('datemask2');
+  const datemask3 = useUncontrolledFormControl('datemask3');
 
   const afterChange = useCallback((v) => {
     datemask2.setValue(v);
@@ -738,7 +741,7 @@ function FormInputMaskSetValueTeste1({}) {
   return (
     <>
       <div className="col">
-        <FormGroupInputMask2
+        <UncontrolledFormGroupInputMask
           label="Input Mask 1"
           name="datemask1"
           mask={{
@@ -752,7 +755,7 @@ function FormInputMaskSetValueTeste1({}) {
         />
       </div>
       <div className="col">
-        <FormGroupInputMask2
+        <UncontrolledFormGroupInputMask
           label="Replicates Input Mask 1 with setValue - same component"
           name="datemask2"
           mask={{
@@ -771,7 +774,7 @@ function FormInputMaskSetValueTeste1({}) {
 function FormInputMaskSetValueTeste2({}) {
   return (
     <div className="col">
-      <FormGroupInputMask2
+      <UncontrolledFormGroupInputMask
         label="Replicates Input Mask 1 with setValue - different component"
         name="datemask3"
         mask={{
@@ -787,8 +790,8 @@ function FormInputMaskSetValueTeste2({}) {
 }
 
 function FormRadioSetValueTeste1({}) {
-  const radio2 = useFormControl2('radio2');
-  const radio3 = useFormControl2('radio3');
+  const radio2 = useUncontrolledFormControl('radio2');
+  const radio3 = useUncontrolledFormControl('radio3');
 
   const afterChange = useCallback((v) => {
     radio2.setValue(v);
@@ -798,7 +801,7 @@ function FormRadioSetValueTeste1({}) {
   return (
     <>
       <div className="col">
-        <FormGroupRadio2
+        <UncontrolledFormGroupRadio
           required
           label="Radio 1"
           name="radio1"
@@ -821,7 +824,7 @@ function FormRadioSetValueTeste1({}) {
         />
       </div>
       <div className="col">
-        <FormGroupRadio2
+        <UncontrolledFormGroupRadio
           label="Replicates Radio 1 with setValue - same component"
           name="radio2"
           id="radio2"
@@ -848,7 +851,7 @@ function FormRadioSetValueTeste1({}) {
 function FormRadioSetValueTeste2({}) {
   return (
     <div className="col">
-      <FormGroupRadio2
+      <UncontrolledFormGroupRadio
         label="Replicates Radio 1 with setValue - different component"
         name="radio3"
         id="radio3"
@@ -872,8 +875,8 @@ function FormRadioSetValueTeste2({}) {
 }
 
 function FormSelectSetValueTeste1({}) {
-  const select2 = useFormControl2('select2');
-  const select3 = useFormControl2('select3');
+  const select2 = useUncontrolledFormControl('select2');
+  const select3 = useUncontrolledFormControl('select3');
 
   const afterChange = useCallback((v) => {
     select2.setValue(v);
@@ -883,7 +886,7 @@ function FormSelectSetValueTeste1({}) {
   return (
     <>
       <div className="col">
-        <FormGroupSelect2
+        <UncontrolledFormGroupSelect
           label="Select 1"
           name="select1"
           afterChange={afterChange}
@@ -904,7 +907,7 @@ function FormSelectSetValueTeste1({}) {
         />
       </div>
       <div className="col">
-        <FormGroupSelect2
+        <UncontrolledFormGroupSelect
           label="Replicates Select 1 with setValue - same component"
           name="select2"
           options={[
@@ -930,7 +933,7 @@ function FormSelectSetValueTeste1({}) {
 function FormSelectSetValueTeste2({}) {
   return (
     <div className="col">
-      <FormGroupSelect2
+      <UncontrolledFormGroupSelect
         label="Replicates Select 1 with setValue - different component"
         name="select3"
         options={[
@@ -953,8 +956,8 @@ function FormSelectSetValueTeste2({}) {
 }
 
 function FormSwitchSetValueTeste1({}) {
-  const switch2 = useFormControl2('switch2');
-  const switch3 = useFormControl2('switch3');
+  const switch2 = useUncontrolledFormControl('switch2');
+  const switch3 = useUncontrolledFormControl('switch3');
 
   const afterChange = useCallback((v) => {
     switch2.setValue(v);
@@ -964,10 +967,14 @@ function FormSwitchSetValueTeste1({}) {
   return (
     <>
       <div className="col">
-        <FormGroupSwitch2 label="Switch 1" name="switch1" id="switch1" afterChange={afterChange} />
+        <UncontrolledFormGroupSwitch label="Switch 1" name="switch1" id="switch1" afterChange={afterChange} />
       </div>
       <div className="col">
-        <FormGroupSwitch2 label="Replicates Switch 1 with setValue - same component" name="switch2" id="switch2" />
+        <UncontrolledFormGroupSwitch
+          label="Replicates Switch 1 with setValue - same component"
+          name="switch2"
+          id="switch2"
+        />
       </div>
     </>
   );
@@ -976,14 +983,18 @@ function FormSwitchSetValueTeste1({}) {
 function FormSwitchSetValueTeste2({}) {
   return (
     <div className="col">
-      <FormGroupSwitch2 label="Replicates Switch 1 with setValue - different component" name="switch3" id="switch3" />
+      <UncontrolledFormGroupSwitch
+        label="Replicates Switch 1 with setValue - different component"
+        name="switch3"
+        id="switch3"
+      />
     </div>
   );
 }
 
 function FormTextareaSetValueTeste1({}) {
-  const textarea2 = useFormControl2('textarea2');
-  const textarea3 = useFormControl2('textarea3');
+  const textarea2 = useUncontrolledFormControl('textarea2');
+  const textarea3 = useUncontrolledFormControl('textarea3');
 
   const afterChange = useCallback((v) => {
     textarea2.setValue(v);
@@ -993,10 +1004,14 @@ function FormTextareaSetValueTeste1({}) {
   return (
     <>
       <div className="col">
-        <FormGroupTextarea2 label="Textarea 1" name="textarea1x" afterChange={afterChange} rows="5" />
+        <UncontrolledFormGroupTextarea label="Textarea 1" name="textarea1x" afterChange={afterChange} rows="5" />
       </div>
       <div className="col">
-        <FormGroupTextarea2 label="Replicates Textarea 1 with setValue - same component" name="textarea2" rows="5" />
+        <UncontrolledFormGroupTextarea
+          label="Replicates Textarea 1 with setValue - same component"
+          name="textarea2"
+          rows="5"
+        />
       </div>
     </>
   );
@@ -1005,7 +1020,11 @@ function FormTextareaSetValueTeste1({}) {
 function FormTextareaSetValueTeste2({}) {
   return (
     <div className="col">
-      <FormGroupTextarea2 label="Replicates Textarea 1 with setValue - different component" name="textarea3" rows="5" />
+      <UncontrolledFormGroupTextarea
+        label="Replicates Textarea 1 with setValue - different component"
+        name="textarea3"
+        rows="5"
+      />
     </div>
   );
 }

@@ -37,7 +37,7 @@ export function FormExamples() {
         },
         dropdownField2: '03',
       }}
-      onChange={console.info}
+      onChange={(data) => console.log('onChange', data)}
       onSubmit={(formData) => {
         console.log('onSubmit', formData);
 
@@ -302,6 +302,8 @@ export function FormExamples() {
             label="Autocomplete with tags3 - Required"
             required
             repeatedTagErrorMessage="Impossible to add repeated tag"
+            addButtonIcon={<i className="bi bi-person-add" />}
+            removeButtonIcon={<i className="bi bi-person-dash" />}
             options={[
               {
                 label: '1',

@@ -14,7 +14,7 @@ import { ListGroupExamples } from './ListGroupExamples';
 import { ToastsExamples } from './ToastsExamples';
 import { DropdownExamples } from './DropdownExamples';
 import { TreeViewExamples } from './TreeViewExamples';
-import { Form2Examples } from './Form2Examples';
+import { UncontrolledFormExamples } from './UncontrolledFormExamples';
 
 ReactDOM.render(
   <div className="mt-3">
@@ -41,8 +41,8 @@ ReactDOM.render(
             ),
           },
           {
-            title: 'Forms2',
-            content: <Form2Examples />,
+            title: 'Uncontrolled Forms',
+            content: <UncontrolledFormExamples />,
           },
           {
             title: 'List groups',

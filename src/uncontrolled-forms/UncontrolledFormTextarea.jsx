@@ -3,14 +3,20 @@ import PropTypes from 'prop-types';
 
 import { booleanOrFunction } from './helpers/form-helpers';
 
-import { FormGroup2 } from './FormGroup';
+import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
-import { useFormControl2 } from './helpers/useFormControl';
+import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
 
-export function FormTextarea2({ name, required: _required, disabled: _disabled, afterChange, ..._attrs }) {
+export function UncontrolledFormTextarea({ name, required: _required, disabled: _disabled, afterChange, ..._attrs }) {
   const state = useState('');
 
-  const { handleOnChangeFactory, getFormData, getValue, registerInputRef } = useFormControl2(name, undefined, { state });
+  const { handleOnChangeFactory, getFormData, getValue, registerInputRef } = useUncontrolledFormControl(
+    name,
+    undefined,
+    {
+      state,
+    }
+  );
 
   const disabled = booleanOrFunction(_disabled, getFormData());
   const required = booleanOrFunction(_required, getFormData());
@@ -33,11 +39,11 @@ export function FormTextarea2({ name, required: _required, disabled: _disabled, 
   );
 }
 
-FormTextarea2.defaultProps = {
+UncontrolledFormTextarea.defaultProps = {
   type: 'text',
 };
 
-FormTextarea2.propTypes = {
+UncontrolledFormTextarea.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   id: PropTypes.string,
@@ -47,15 +53,15 @@ FormTextarea2.propTypes = {
   rows: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-export function FormGroupTextarea2(props) {
+export function UncontrolledFormGroupTextarea(props) {
   return (
-    <FormGroup2 {...props}>
-      <FormTextarea2 {...props} />
-    </FormGroup2>
+    <UncontrolledFormGroup {...props}>
+      <UncontrolledFormTextarea {...props} />
+    </UncontrolledFormGroup>
   );
 }
 
-FormGroupTextarea2.propTypes = {
+UncontrolledFormGroupTextarea.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   help: PropTypes.node,

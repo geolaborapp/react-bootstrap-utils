@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.50](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.49...v0.26.50) (2023-11-13)
+
+
+### Bug Fixes
+
+* corrige invalid date ao limpar input datetime-local ([#58](https://github.com/geolaborapp/react-bootstrap-utils/issues/58)) ([62ae4fa](https://github.com/geolaborapp/react-bootstrap-utils/commit/62ae4fa3787ad21e5599c6b3a98810108b4c46c7))
+* deixa de executar transform na inicialização do UncontrolledForm ([#59](https://github.com/geolaborapp/react-bootstrap-utils/issues/59)) ([44a3221](https://github.com/geolaborapp/react-bootstrap-utils/commit/44a3221751da450b7fec7e5df3619cfe2b8546c6))
+
+### [0.26.49](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.48...v0.26.49) (2023-10-31)
+
+### [0.26.48](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.47...v0.26.48) (2023-10-31)
+
+
+### Features
+
+* Possibilita trocar icone dos botões do FormGroupAutocompleteTag e do FormAutocompleteTag ([#57](https://github.com/geolaborapp/react-bootstrap-utils/issues/57)) ([3994da5](https://github.com/geolaborapp/react-bootstrap-utils/commit/3994da57675a89d5cb603e2a093684df27f65806))
+
 ### [0.26.47](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.46...v0.26.47) (2023-10-19)
 
 

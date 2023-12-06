@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { isBoolean } from 'js-var-type';
 
-export function FormLabel2({ id, label, required: _required }) {
+export function UncontrolledFormLabel({ id, label, required: _required }) {
   const required = isBoolean(_required) && _required;
 
   return (
@@ -14,7 +14,7 @@ export function FormLabel2({ id, label, required: _required }) {
   );
 }
 
-FormLabel2.propTypes = {
+UncontrolledFormLabel.propTypes = {
   id: PropTypes.string,
   label: PropTypes.node.isRequired,
   required: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),

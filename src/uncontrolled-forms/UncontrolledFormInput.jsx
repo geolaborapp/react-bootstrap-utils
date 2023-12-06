@@ -3,13 +3,20 @@ import PropTypes from 'prop-types';
 
 import { booleanOrFunction } from './helpers/form-helpers';
 
-import { useFormControl2 } from './helpers/useFormControl';
-import { FormGroup2 } from './FormGroup';
+import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
+import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
-export function FormInput2({ type, name, required: _required, disabled: _disabled, afterChange, ..._attrs }) {
+export function UncontrolledFormInput({
+  type,
+  name,
+  required: _required,
+  disabled: _disabled,
+  afterChange,
+  ..._attrs
+}) {
   const state = useState('');
 
-  const { getValue, handleOnChangeFactory, getFormData, registerInputRef } = useFormControl2(name, type, {
+  const { getValue, handleOnChangeFactory, getFormData, registerInputRef } = useUncontrolledFormControl(name, type, {
     state,
   });
 
@@ -40,11 +47,11 @@ export function FormInput2({ type, name, required: _required, disabled: _disable
   );
 }
 
-FormInput2.defaultProps = {
+UncontrolledFormInput.defaultProps = {
   type: 'text',
 };
 
-FormInput2.propTypes = {
+UncontrolledFormInput.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   id: PropTypes.string,
@@ -61,15 +68,15 @@ FormInput2.propTypes = {
   type: PropTypes.string,
 };
 
-export function FormGroupInput2(props) {
+export function UncontrolledFormGroupInput(props) {
   return (
-    <FormGroup2 {...props}>
-      <FormInput2 {...props} />
-    </FormGroup2>
+    <UncontrolledFormGroup {...props}>
+      <UncontrolledFormInput {...props} />
+    </UncontrolledFormGroup>
   );
 }
 
-FormGroupInput2.propTypes = {
+UncontrolledFormGroupInput.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   help: PropTypes.node,

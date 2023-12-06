@@ -15,8 +15,8 @@ import {
   serializeValue,
   valuesAreEqual,
 } from './helpers/form-helpers';
-import { useFormControl2 } from './helpers/useFormControl';
-import { FormGroup2 } from './FormGroup';
+import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
+import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
 function getSelectedItem(value, items, allowUnlistedValue, trackBy) {
   const selectedItem = getSelectedOption(value, items, trackBy);
@@ -29,7 +29,7 @@ function getSelectedItem(value, items, allowUnlistedValue, trackBy) {
 
   return selectedItem;
 }
-export function FormAutocomplete2({
+export function UncontrolledFormAutocomplete({
   afterChange,
   allowUnlistedValue,
   disabled: _disabled,
@@ -55,7 +55,7 @@ export function FormAutocomplete2({
     isValid,
     getFormSubmitedAttempted,
     getFormData,
-  } = useFormControl2(name, undefined, { state });
+  } = useUncontrolledFormControl(name, undefined, { state });
   const value = getValue();
 
   const setValue = useCallback(
@@ -253,7 +253,7 @@ export function FormAutocomplete2({
   );
 }
 
-FormAutocomplete2.defaultProps = {
+UncontrolledFormAutocomplete.defaultProps = {
   openOnFocus: false,
   onSearch: () => {},
   onClearSearch: () => {},
@@ -266,7 +266,7 @@ FormAutocomplete2.defaultProps = {
   template: (x) => x,
 };
 
-FormAutocomplete2.propTypes = {
+UncontrolledFormAutocomplete.propTypes = {
   afterChange: PropTypes.func,
   allowUnlistedValue: PropTypes.bool,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
@@ -287,15 +287,15 @@ FormAutocomplete2.propTypes = {
   trackBy: PropTypes.string,
 };
 
-export function FormGroupAutocomplete2(props) {
+export function UncontrolledFormGroupAutocomplete(props) {
   return (
-    <FormGroup2 {...props}>
-      <FormAutocomplete2 {...props} />
-    </FormGroup2>
+    <UncontrolledFormGroup {...props}>
+      <UncontrolledFormAutocomplete {...props} />
+    </UncontrolledFormGroup>
   );
 }
 
-FormGroupAutocomplete2.propTypes = {
+UncontrolledFormGroupAutocomplete.propTypes = {
   afterChange: PropTypes.func,
   allowUnlistedValue: PropTypes.bool,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),

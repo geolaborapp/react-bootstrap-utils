@@ -1,14 +1,13 @@
 import React, { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import { FormContext } from './helpers/useFormHelper';
+import { UncontrolledFormContext } from './helpers/useUncontrolledFormHelper';
 
-export function FormValidationFeedback({ name, mockInvalidSibling }) {
-  const formHelper = useContext(FormContext);
+export function UncontrolledFormValidationFeedback({ name, mockInvalidSibling }) {
+  const formHelper = useContext(UncontrolledFormContext);
 
   const validationMessage = useMemo(() => formHelper.getValidationMessage(name), [formHelper, name]);
   const submitAttemped = useMemo(() => formHelper.getSubmitedAttempted(), [formHelper]);
-
 
   return (
     <>
@@ -20,11 +19,11 @@ export function FormValidationFeedback({ name, mockInvalidSibling }) {
   );
 }
 
-FormValidationFeedback.defaultProps = {
+UncontrolledFormValidationFeedback.defaultProps = {
   mockInvalidSibling: false,
 };
 
-FormValidationFeedback.propTypes = {
+UncontrolledFormValidationFeedback.propTypes = {
   name: PropTypes.string.isRequired,
   mockInvalidSibling: PropTypes.bool,
 };
