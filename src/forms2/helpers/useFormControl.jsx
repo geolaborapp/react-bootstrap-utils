@@ -34,8 +34,12 @@ export function useFormControl2(name, type, { state, afterSetValue } = {}) {
       const nextValue = getNextValue(newValue);
 
       setStateValue?.(isDefined(nextValue) ? nextValue : '');
+
+      if (isFunction(afterSetValue)) {
+        afterSetValue(nextValue);
+      }
     },
-    [getNextValue, setStateValue]
+    [afterSetValue, getNextValue, setStateValue]
   );
 
   const setFormControlValue = useCallback(
