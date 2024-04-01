@@ -5,6 +5,7 @@ import { booleanOrFunction } from './helpers/form-helpers';
 
 import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
 import { UncontrolledFormGroup } from './UncontrolledFormGroup';
+import { formatClasses } from '../utils/attributes';
 
 export function UncontrolledFormInput({
   type,
@@ -12,6 +13,7 @@ export function UncontrolledFormInput({
   required: _required,
   disabled: _disabled,
   afterChange,
+  inputClassName,
   ..._attrs
 }) {
   const state = useState('');
@@ -39,7 +41,7 @@ export function UncontrolledFormInput({
 
   return (
     <input
-      className="form-control"
+      className={formatClasses(['form-control', inputClassName])}
       {...attrs}
       onChange={handleOnChangeFactory(afterChange, type)}
       ref={registerInputRef}
@@ -55,6 +57,7 @@ UncontrolledFormInput.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   id: PropTypes.string,
+  inputClassName: PropTypes.string,
   max: PropTypes.string,
   maxLength: PropTypes.string,
   min: PropTypes.string,
@@ -81,6 +84,7 @@ UncontrolledFormGroupInput.propTypes = {
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   help: PropTypes.node,
   id: PropTypes.string,
+  inputClassName: PropTypes.string,
   label: PropTypes.node.isRequired,
   max: PropTypes.string,
   maxLength: PropTypes.string,

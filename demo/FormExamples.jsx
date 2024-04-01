@@ -166,6 +166,7 @@ export function FormExamples() {
             required
             placeholder="Fill some value"
             afterChange={console.log.bind(console, 'afterChange input')}
+            inputClassName={'text-danger text-uppercase'}
           />
         </div>
         <div className="col">

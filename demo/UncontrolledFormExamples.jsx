@@ -170,7 +170,11 @@ export function UncontrolledFormExamples() {
         />
 
         <UncontrolledFormGroupInput label="AttrA" name="attrA"></UncontrolledFormGroupInput>
-        <UncontrolledFormGroupInput label="AttrB" name="attrB"></UncontrolledFormGroupInput>
+        <UncontrolledFormGroupInput
+          label="AttrB"
+          name="attrB"
+          inputClassName={'text-danger text-uppercase'}
+        ></UncontrolledFormGroupInput>
         <UncontrolledFormGroupSelect label="AttrC" name="attrC" options={[1, 2, 3]}></UncontrolledFormGroupSelect>
         <UncontrolledFormGroupSwitch id="attrD" label="AttrD" name="attrD"></UncontrolledFormGroupSwitch>
 
@@ -253,6 +257,18 @@ export function UncontrolledFormExamples() {
           mask={{
             parse: currencyMask,
             format: (value) => value,
+          }}
+        />
+
+        <UncontrolledFormGroupInputMask
+          name="maskWithCustomCss"
+          inputAttrs={{
+            inputClassName: 'text-danger text-uppercase',
+          }}
+          label="Mask with custom classes"
+          mask={{
+            parse: (v) => ({ rawValue: v, maskedValue: v }),
+            format: (v) => v,
           }}
         />
 
