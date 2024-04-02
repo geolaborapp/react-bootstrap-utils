@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.52](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.50...v0.26.52) (2024-04-02)
+
+
+### Features
+
+* facilita adicionar classes em FormInput, UncontrolledFormInput e UncontrolledFormInputMask ([#65](https://github.com/geolaborapp/react-bootstrap-utils/issues/65)) ([f494436](https://github.com/geolaborapp/react-bootstrap-utils/commit/f4944368298df8842b1ec8ae1db8d5b5a2b7378a))
+
+
+### Bug Fixes
+
+* corrige uso de label de tag e melhora uso do trackBy no FormAutocompleteTag ([#61](https://github.com/geolaborapp/react-bootstrap-utils/issues/61)) ([dcbff61](https://github.com/geolaborapp/react-bootstrap-utils/commit/dcbff615296a2e4e067b6159ec9bf447519d39d7))
+* corrige validação do form quando validations muda ([#60](https://github.com/geolaborapp/react-bootstrap-utils/issues/60)) ([cdf44a6](https://github.com/geolaborapp/react-bootstrap-utils/commit/cdf44a69879ea1037e69d4640fd69563eb89cdf4))
+
 ### [0.26.51](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.50...v0.26.51) (2023-12-11)
 
 
