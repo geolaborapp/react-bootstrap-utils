@@ -173,7 +173,7 @@ export function UncontrolledFormExamples() {
         <UncontrolledFormGroupInput
           label="AttrB"
           name="attrB"
-          inputClassName={'text-danger text-uppercase'}
+          inputClassName="text-danger text-uppercase"
         ></UncontrolledFormGroupInput>
         <UncontrolledFormGroupSelect label="AttrC" name="attrC" options={[1, 2, 3]}></UncontrolledFormGroupSelect>
         <UncontrolledFormGroupSwitch id="attrD" label="AttrD" name="attrD"></UncontrolledFormGroupSwitch>
