@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { formatClasses } from '../utils/attributes';
+
 import { booleanOrFunction } from './helpers/form-helpers';
 
 import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
 import { UncontrolledFormGroup } from './UncontrolledFormGroup';
-import { formatClasses } from '../utils/attributes';
 
 export function UncontrolledFormInput({
   type,

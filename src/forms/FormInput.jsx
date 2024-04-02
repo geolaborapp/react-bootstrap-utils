@@ -1,12 +1,21 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
+import { formatClasses } from '../utils/attributes';
+
 import { useFormControl } from './helpers/useFormControl';
 import { booleanOrFunction } from './helpers/form-helpers';
 import { FormGroup } from './FormGroup';
-import { formatClasses } from '../utils/attributes';
 
-export function FormInput({ type, name, required: _required, disabled: _disabled, afterChange, inputClassName,..._attrs }) {
+export function FormInput({
+  type,
+  name,
+  required: _required,
+  disabled: _disabled,
+  afterChange,
+  inputClassName,
+  ..._attrs
+}) {
   const { getValue, handleOnChangeFactory, register, getFormData } = useFormControl(name, type);
   const registerRef = useCallback(register, [register]);
   const disabled = booleanOrFunction(_disabled, getFormData());
@@ -26,7 +35,14 @@ export function FormInput({ type, name, required: _required, disabled: _disabled
     attrs.value = getValue();
   }
 
-  return <input className={formatClasses(["form-control",inputClassName])} {...attrs} onChange={handleOnChangeFactory(afterChange)} ref={registerRef} />;
+  return (
+    <input
+      className={formatClasses(['form-control', inputClassName])}
+      {...attrs}
+      onChange={handleOnChangeFactory(afterChange)}
+      ref={registerRef}
+    />
+  );
 }
 
 FormInput.defaultProps = {
@@ -37,7 +53,7 @@ FormInput.propTypes = {
   afterChange: PropTypes.func,
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   id: PropTypes.string,
-  inputClassName:PropTypes.string,
+  inputClassName: PropTypes.string,
   max: PropTypes.string,
   maxLength: PropTypes.string,
   min: PropTypes.string,
@@ -64,7 +80,7 @@ FormGroupInput.propTypes = {
   disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   help: PropTypes.node,
   id: PropTypes.string,
-  inputClassName:PropTypes.string,
+  inputClassName: PropTypes.string,
   label: PropTypes.node.isRequired,
   max: PropTypes.string,
   maxLength: PropTypes.string,
