@@ -15,6 +15,7 @@ import { ToastsExamples } from './ToastsExamples';
 import { DropdownExamples } from './DropdownExamples';
 import { TreeViewExamples } from './TreeViewExamples';
 import { UncontrolledFormExamples } from './UncontrolledFormExamples';
+import { ToastsWithMessageFormatterExamples } from './ToastsWithMessageFormatterExamples';
 
 ReactDOM.render(
   <div className="mt-3">
@@ -67,6 +68,10 @@ ReactDOM.render(
                 <ToastsExamples />
               </ToastsContainer>
             ),
+          },
+          {
+            title: 'Toasts with message formatter',
+            content: <ToastsWithMessageFormatterExamples />,
           },
           {
             title: 'TreeView',
