@@ -5,8 +5,8 @@ import { ToastsContext, TOASTS_VALID_POSITIONS } from './toasts-helpers';
 import { ToastsRegion } from './ToastsRegion';
 import { useToastState } from './useToastState';
 
-export function ToastsContainer({ children, unique, noStyle }) {
-  const toastsState = useToastState({ unique });
+export function ToastsContainer({ children, unique, noStyle, messageFormatter }) {
+  const toastsState = useToastState({ unique, messageFormatter });
 
   return (
     <ToastsContext.Provider value={toastsState}>
@@ -30,4 +30,5 @@ ToastsContainer.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
   noStyle: PropTypes.bool,
   unique: PropTypes.bool,
+  messageFormatter: PropTypes.func,
 };

@@ -1,11 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { isNumber } from 'js-var-type';
+import { isFunction, isNumber } from 'js-var-type';
 
 import { useArrayValueMap } from '../utils/useValueMap';
 
 import { TOASTS_VALID_TYPES, TOASTS_VALID_POSITIONS } from './toasts-helpers';
 
-export function useToastState({ unique }) {
+export function useToastState({ unique, messageFormatter }) {
   const [nextId, setNextId] = useState(0);
   const timeoutRefs = useRef({});
 
@@ -26,10 +26,11 @@ export function useToastState({ unique }) {
       }
 
       const toastId = nextId;
+      const _message = isFunction(messageFormatter) ? messageFormatter(message) : message;
 
       push(position, {
         id: toastId,
-        message,
+        message: _message,
         type,
         position,
         closeControl: !autoClose,
@@ -47,7 +48,7 @@ export function useToastState({ unique }) {
 
       return toastId;
     },
-    [close, nextId, push]
+    [close, messageFormatter, nextId, push]
   );
 
   const close = useCallback(
