@@ -2,11 +2,13 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { isFunction, isNumber } from 'js-var-type';
 
 import { useArrayValueMap } from '../utils/useValueMap';
+import { usePrevious } from '../utils/usePrevious';
 
 import { TOASTS_VALID_TYPES, TOASTS_VALID_POSITIONS } from './toasts-helpers';
 
-export function useToastState({ unique, messageFormatter }) {
+export function useToastState({ unique, messageFormatter, allCustomToasts }) {
   const [nextId, setNextId] = useState(0);
+  const prevCustomToasts = usePrevious(allCustomToasts);
   const timeoutRefs = useRef({});
 
   const { push, unset, get, reset } = useArrayValueMap(
@@ -14,6 +16,8 @@ export function useToastState({ unique, messageFormatter }) {
       equalityComparator: (a) => (b) => a.message === b.message,
     }
   );
+
+  const prepareNextId = useCallback(() => setNextId((prevId) => prevId + 1), []);
 
   const show = useCallback(
     (message, { type = 'info', autoClose = 5000, position = 'TOP_RIGHT' } = {}) => {
@@ -44,11 +48,11 @@ export function useToastState({ unique, messageFormatter }) {
         timeoutRefs.current[toastId] = { timeoutId, position };
       }
 
-      setNextId((prevId) => prevId + 1);
+      prepareNextId();
 
       return toastId;
     },
-    [close, messageFormatter, nextId, push]
+    [close, messageFormatter, nextId, push, prepareNextId]
   );
 
   const close = useCallback(
@@ -61,7 +65,7 @@ export function useToastState({ unique, messageFormatter }) {
 
       delete timeoutRefs.current[toastId];
 
-      unset(position, (toast) => toast.id !== toastId);
+      unset(position, (toast) => toast?.id !== toastId);
     },
     [unset]
   );
@@ -73,6 +77,24 @@ export function useToastState({ unique, messageFormatter }) {
 
     reset();
   }, [close, reset]);
+
+  const handleCustomState = useCallback(() => {
+    const customIds = allCustomToasts?.map?.(({ _id } = {}) => _id);
+    const prevCustomIds = prevCustomToasts?.map?.(({ _id } = {}) => _id);
+
+    const newToasts = allCustomToasts?.filter?.((toast) => !prevCustomIds?.includes?.(toast?._id));
+    const removedToasts = prevCustomToasts?.filter?.((toast) => !customIds?.includes?.(toast?._id));
+
+    for (const toast of newToasts ?? []) {
+      push(toast.position, { ...toast, id: nextId });
+      prepareNextId();
+    }
+    for (const removedToast of removedToasts ?? []) {
+      unset(removedToast.position, (toast) => toast?._id !== removedToast?._id);
+    }
+  }, [allCustomToasts, nextId, prepareNextId, prevCustomToasts, push, unset]);
+
+  useEffect(handleCustomState, [handleCustomState]);
 
   useEffect(
     () => closeAll,
