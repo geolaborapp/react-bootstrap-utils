@@ -16,7 +16,7 @@ import { DropdownExamples } from './DropdownExamples';
 import { TreeViewExamples } from './TreeViewExamples';
 import { UncontrolledFormExamples } from './UncontrolledFormExamples';
 import { ToastsWithMessageFormatterExamples } from './ToastsWithMessageFormatterExamples';
-import { ToastWithCustomState } from './ToastWithCusromState';
+import { ToastWithCustomState } from './ToastWithCustomState';
 
 ReactDOM.render(
   <div className="mt-3">
