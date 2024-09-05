@@ -2,13 +2,13 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { isFunction, isNumber } from 'js-var-type';
 
 import { useArrayValueMap } from '../utils/useValueMap';
-import { usePrevious } from '../utils/usePrevious';
+import { usePreviousValue } from '../utils/usePreviousValue';
 
 import { TOASTS_VALID_TYPES, TOASTS_VALID_POSITIONS } from './toasts-helpers';
 
 export function useToastState({ unique, messageFormatter, allCustomToasts }) {
   const [nextId, setNextId] = useState(0);
-  const prevCustomToasts = usePrevious(allCustomToasts);
+  const prevCustomToasts = usePreviousValue(allCustomToasts);
   const timeoutRefs = useRef({});
 
   const { push, unset, get, reset } = useArrayValueMap(
