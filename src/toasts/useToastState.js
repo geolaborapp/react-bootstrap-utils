@@ -6,9 +6,9 @@ import { usePreviousValue } from '../utils/usePreviousValue';
 
 import { TOASTS_VALID_TYPES, TOASTS_VALID_POSITIONS } from './toasts-helpers';
 
-export function useToastState({ unique, messageFormatter, allCustomToasts }) {
+export function useToastState({ unique, messageFormatter, customToasts }) {
   const [nextId, setNextId] = useState(0);
-  const prevCustomToasts = usePreviousValue(allCustomToasts);
+  const prevCustomToasts = usePreviousValue(customToasts);
   const timeoutRefs = useRef({});
 
   const { push, unset, get, reset } = useArrayValueMap(
@@ -78,11 +78,11 @@ export function useToastState({ unique, messageFormatter, allCustomToasts }) {
     reset();
   }, [close, reset]);
 
-  const handleCustomState = useCallback(() => {
-    const customIds = allCustomToasts?.map?.(({ _id } = {}) => _id);
+  const handleCustomToasts = useCallback(() => {
+    const customIds = customToasts?.map?.(({ _id } = {}) => _id);
     const prevCustomIds = prevCustomToasts?.map?.(({ _id } = {}) => _id);
 
-    const newToasts = allCustomToasts?.filter?.((toast) => !prevCustomIds?.includes?.(toast?._id));
+    const newToasts = customToasts?.filter?.((toast) => !prevCustomIds?.includes?.(toast?._id));
     const removedToasts = prevCustomToasts?.filter?.((toast) => !customIds?.includes?.(toast?._id));
 
     for (const toast of newToasts ?? []) {
@@ -92,9 +92,9 @@ export function useToastState({ unique, messageFormatter, allCustomToasts }) {
     for (const removedToast of removedToasts ?? []) {
       unset(removedToast.position, (toast) => toast?._id !== removedToast?._id);
     }
-  }, [allCustomToasts, nextId, prepareNextId, prevCustomToasts, push, unset]);
+  }, [customToasts, nextId, prepareNextId, prevCustomToasts, push, unset]);
 
-  useEffect(handleCustomState, [handleCustomState]);
+  useEffect(handleCustomToasts, [handleCustomToasts]);
 
   useEffect(
     () => closeAll,

@@ -4,7 +4,7 @@ import { ToastsContainer } from '../dist/main';
 import { ToastsExamples } from './ToastsExamples';
 
 export function ToastWithCustomState() {
-  const [allCustomToasts, setAllCustomToasts] = useState([]);
+  const [customToasts, setCustomToasts] = useState([]);
   const [toastId, setToastId] = useState(0);
 
   return (
@@ -15,7 +15,7 @@ export function ToastWithCustomState() {
           <button
             className="btn btn-info mb-2 text-white"
             onClick={() => {
-              setAllCustomToasts((last) => [
+              setCustomToasts((last) => [
                 ...last,
                 {
                   _id: toastId,
@@ -26,7 +26,7 @@ export function ToastWithCustomState() {
               ]);
 
               setTimeout(() => {
-                setAllCustomToasts((last) => last.filter(({ _id }) => _id !== toastId));
+                setCustomToasts((last) => last.filter(({ _id }) => _id !== toastId));
               }, [5000]);
               setToastId((last) => last + 1);
             }}
@@ -36,7 +36,7 @@ export function ToastWithCustomState() {
           <button
             className="btn btn-info mb-2 text-white"
             onClick={() => {
-              setAllCustomToasts((last) => [
+              setCustomToasts((last) => [
                 ...last,
                 {
                   _id: toastId,
@@ -47,7 +47,7 @@ export function ToastWithCustomState() {
               ]);
 
               setTimeout(() => {
-                setAllCustomToasts((last) => last.filter(({ _id }) => _id !== toastId));
+                setCustomToasts((last) => last.filter(({ _id }) => _id !== toastId));
               }, [5000]);
               setToastId((last) => last + 1);
             }}
@@ -56,7 +56,7 @@ export function ToastWithCustomState() {
           </button>
         </div>
       </div>
-      <ToastsContainer allCustomToasts={allCustomToasts}>
+      <ToastsContainer customToasts={customToasts}>
         <ToastsExamples />
       </ToastsContainer>
     </div>
