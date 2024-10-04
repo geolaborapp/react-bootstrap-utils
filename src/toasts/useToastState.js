@@ -1,14 +1,16 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { isFunction, isNumber } from 'js-var-type';
+import { isDefined, isFunction, isNumber } from 'js-var-type';
 
 import { useArrayValueMap } from '../utils/useValueMap';
 import { usePreviousValue } from '../utils/usePreviousValue';
+import { serializeValue } from '../forms/helpers/form-helpers';
 
 import { TOASTS_VALID_TYPES, TOASTS_VALID_POSITIONS } from './toasts-helpers';
 
 export function useToastState({ unique, messageFormatter, customToasts }) {
   const [nextId, setNextId] = useState(0);
   const prevCustomToasts = usePreviousValue(customToasts);
+  const [currentCustomToasts, setCurrentCustomToasts] = useState({});
   const timeoutRefs = useRef({});
 
   const { push, unset, get, reset } = useArrayValueMap(
@@ -79,20 +81,35 @@ export function useToastState({ unique, messageFormatter, customToasts }) {
   }, [close, reset]);
 
   const handleCustomToasts = useCallback(() => {
-    const customIds = customToasts?.map?.(({ _id } = {}) => _id);
-    const prevCustomIds = prevCustomToasts?.map?.(({ _id } = {}) => _id);
+    const serializedCustomToasts = customToasts?.map?.((toast) => serializeValue(toast));
+    const prevSerializedCustomToasts = prevCustomToasts?.map?.((toast) => serializeValue(toast));
 
-    const newToasts = customToasts?.filter?.((toast) => !prevCustomIds?.includes?.(toast?._id));
-    const removedToasts = prevCustomToasts?.filter?.((toast) => !customIds?.includes?.(toast?._id));
+    const newToasts = customToasts?.filter?.((toast) => !prevSerializedCustomToasts?.includes?.(serializeValue(toast)));
+    const removedToasts = prevCustomToasts?.filter?.(
+      (toast) => !serializedCustomToasts?.includes?.(serializeValue(toast))
+    );
 
     for (const toast of newToasts ?? []) {
       push(toast.position, { ...toast, id: nextId });
+      setCurrentCustomToasts((prev) => ({ ...prev, [serializeValue(toast)]: nextId }));
       prepareNextId();
     }
     for (const removedToast of removedToasts ?? []) {
-      unset(removedToast.position, (toast) => toast?._id !== removedToast?._id);
+      const serializedRemovedToast = serializeValue(removedToast);
+      const customToastId = currentCustomToasts?.[serializedRemovedToast];
+
+      unset(removedToast.position, (toast) => toast.id !== customToastId);
+      setCurrentCustomToasts((prev) => {
+        const newVal = { ...prev };
+
+        if (isDefined(newVal?.[serializedRemovedToast])) {
+          delete newVal[serializedRemovedToast];
+        }
+
+        return newVal;
+      });
     }
-  }, [customToasts, nextId, prepareNextId, prevCustomToasts, push, unset]);
+  }, [currentCustomToasts, customToasts, nextId, prepareNextId, prevCustomToasts, push, unset]);
 
   useEffect(handleCustomToasts, [handleCustomToasts]);
 
