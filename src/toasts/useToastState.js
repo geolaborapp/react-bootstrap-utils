@@ -7,7 +7,7 @@ import { serializeValue } from '../forms/helpers/form-helpers';
 
 import { TOASTS_VALID_TYPES, TOASTS_VALID_POSITIONS } from './toasts-helpers';
 
-export function useToastState({ unique, messageFormatter, customToasts }) {
+export function useToastState({ unique, messageFormatter, customToasts, onClose }) {
   const [nextId, setNextId] = useState(0);
   const prevCustomToasts = usePreviousValue(customToasts);
   const [currentCustomToasts, setCurrentCustomToasts] = useState({});
@@ -67,9 +67,15 @@ export function useToastState({ unique, messageFormatter, customToasts }) {
 
       delete timeoutRefs.current[toastId];
 
+      if (isFunction(onClose)) {
+        const toast = get(position)?.find?.(({ id }) => id === toastId);
+
+        onClose?.(toast);
+      }
+
       unset(position, (toast) => toast?.id !== toastId);
     },
-    [unset]
+    [onClose, unset, get]
   );
 
   const closeAll = useCallback(() => {
@@ -77,8 +83,16 @@ export function useToastState({ unique, messageFormatter, customToasts }) {
       close(position, toastId);
     }
 
+    if (isFunction(onClose)) {
+      for (const { id, position } of Object.values(currentCustomToasts)) {
+        const toast = get(position)?.find?.(({ id: toastId }) => id === toastId);
+
+        onClose?.(toast);
+      }
+    }
+
     reset();
-  }, [close, reset]);
+  }, [close, currentCustomToasts, get, onClose, reset]);
 
   const handleCustomToasts = useCallback(() => {
     const serializedCustomToasts = customToasts?.map?.((toast) => serializeValue(toast));
@@ -90,13 +104,22 @@ export function useToastState({ unique, messageFormatter, customToasts }) {
     );
 
     for (const toast of newToasts ?? []) {
-      push(toast.position, { ...toast, id: nextId });
-      setCurrentCustomToasts((prev) => ({ ...prev, [serializeValue(toast)]: nextId }));
+      const newToast = { ...toast, message: toast?.message, type: toast?.type, position: toast?.position, id: nextId };
+
+      if (isDefined(toast?.autoClose)) {
+        newToast.closeControl = !toast?.autoClose;
+      }
+
+      push(toast?.position, newToast);
+      setCurrentCustomToasts((prev) => ({
+        ...prev,
+        [serializeValue(toast)]: { id: nextId, position: toast?.position },
+      }));
       prepareNextId();
     }
     for (const removedToast of removedToasts ?? []) {
       const serializedRemovedToast = serializeValue(removedToast);
-      const customToastId = currentCustomToasts?.[serializedRemovedToast];
+      const customToastId = currentCustomToasts?.[serializedRemovedToast]?.id;
 
       unset(removedToast.position, (toast) => toast.id !== customToastId);
       setCurrentCustomToasts((prev) => {
