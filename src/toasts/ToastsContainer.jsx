@@ -32,11 +32,6 @@ ToastsContainer.propTypes = {
   noStyle: PropTypes.bool,
   unique: PropTypes.bool,
   messageFormatter: PropTypes.func,
-  customToasts: PropTypes.arrayOf(
-    PropTypes.shape({
-      ...toastPropsBaseShape,
-      _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    })
-  ),
+  customToasts: PropTypes.arrayOf(PropTypes.shape(toastPropsBaseShape)),
   onClose: PropTypes.func,
 };
