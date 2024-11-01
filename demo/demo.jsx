@@ -1,7 +1,7 @@
 /* eslint-disable import/max-dependencies */
 /* eslint-disable no-console */
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom';
 
 // eslint-disable-next-line import/no-unresolved
 import { StatefulTabs, Pagination, ToastsContainer } from '../dist/main';
@@ -17,7 +17,10 @@ import { TreeViewExamples } from './TreeViewExamples';
 import { UncontrolledFormExamples } from './UncontrolledFormExamples';
 import { ToastsWithMessageFormatterExamples } from './ToastsWithMessageFormatterExamples';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
   <div className="mt-3">
     <React.StrictMode>
       <StatefulTabs
@@ -80,8 +83,7 @@ ReactDOM.render(
         ]}
       />
     </React.StrictMode>
-  </div>,
-  document.getElementById('root')
+  </div>
 );
 
 // eslint-disable-next-line no-undef
