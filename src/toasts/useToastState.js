@@ -57,6 +57,17 @@ export function useToastState({ unique, messageFormatter, customToasts, onClose 
     [close, messageFormatter, nextId, push, prepareNextId]
   );
 
+  const onCloseToast = useCallback(
+    ({ position, toastId }) => {
+      if (isFunction(onClose)) {
+        const toast = get(position)?.find?.(({ id }) => id === toastId);
+
+        onClose?.(toast);
+      }
+    },
+    [get, onClose]
+  );
+
   const close = useCallback(
     (position, toastId) => {
       const { timeoutId } = timeoutRefs.current?.[toastId] ?? {};
@@ -67,15 +78,11 @@ export function useToastState({ unique, messageFormatter, customToasts, onClose 
 
       delete timeoutRefs.current[toastId];
 
-      if (isFunction(onClose)) {
-        const toast = get(position)?.find?.(({ id }) => id === toastId);
-
-        onClose?.(toast);
-      }
+      onCloseToast({ position, toastId });
 
       unset(position, (toast) => toast?.id !== toastId);
     },
-    [onClose, unset, get]
+    [unset, onCloseToast]
   );
 
   const closeAll = useCallback(() => {
@@ -83,16 +90,12 @@ export function useToastState({ unique, messageFormatter, customToasts, onClose 
       close(position, toastId);
     }
 
-    if (isFunction(onClose)) {
-      for (const { id, position } of Object.values(currentCustomToasts)) {
-        const toast = get(position)?.find?.(({ id: toastId }) => id === toastId);
-
-        onClose?.(toast);
-      }
+    for (const { id, position } of Object.values(currentCustomToasts)) {
+      onCloseToast({ position, toastId: id });
     }
 
     reset();
-  }, [close, currentCustomToasts, get, onClose, reset]);
+  }, [close, currentCustomToasts, onCloseToast, reset]);
 
   const handleCustomToasts = useCallback(() => {
     const serializedCustomToasts = customToasts?.map?.((toast) => serializeValue(toast));
