@@ -16,6 +16,7 @@ import { DropdownExamples } from './DropdownExamples';
 import { TreeViewExamples } from './TreeViewExamples';
 import { UncontrolledFormExamples } from './UncontrolledFormExamples';
 import { ToastsWithMessageFormatterExamples } from './ToastsWithMessageFormatterExamples';
+import { ToastWithCustomState } from './ToastWithCustomState';
 
 ReactDOM.render(
   <div className="mt-3">
@@ -72,6 +73,10 @@ ReactDOM.render(
           {
             title: 'Toasts with message formatter',
             content: <ToastsWithMessageFormatterExamples />,
+          },
+          {
+            title: 'Toasts with custom state',
+            content: <ToastWithCustomState />,
           },
           {
             title: 'TreeView',
