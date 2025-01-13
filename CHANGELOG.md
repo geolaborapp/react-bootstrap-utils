@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ## [1.0.0](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.53...v1.0.0) (2024-11-01)
+## [0.27.0](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.53...v0.27.0) (2024-11-08)
+
+
+### Features
+
+* Permite passar um estado customizado para os toasts ([#68](https://github.com/geolaborapp/react-bootstrap-utils/issues/68)) ([333e8eb](https://github.com/geolaborapp/react-bootstrap-utils/commit/333e8eb6361b3fbd46da8351562842ff3ea790a8))
 
 ### [0.26.53](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.50...v0.26.53) (2024-05-24)
 

@@ -16,6 +16,7 @@ import { DropdownExamples } from './DropdownExamples';
 import { TreeViewExamples } from './TreeViewExamples';
 import { UncontrolledFormExamples } from './UncontrolledFormExamples';
 import { ToastsWithMessageFormatterExamples } from './ToastsWithMessageFormatterExamples';
+import { ToastWithCustomState } from './ToastWithCustomState';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -75,6 +76,10 @@ root.render(
           {
             title: 'Toasts with message formatter',
             content: <ToastsWithMessageFormatterExamples />,
+          },
+          {
+            title: 'Toasts with custom state',
+            content: <ToastWithCustomState />,
           },
           {
             title: 'TreeView',
