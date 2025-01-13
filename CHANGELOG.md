@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.27.0...v1.1.0) (2025-01-13)
+
+## [1.0.0](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.53...v1.0.0) (2024-11-01)
+
 ## [1.0.0](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.53...v1.0.0) (2024-11-01)
 ## [0.27.0](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.53...v0.27.0) (2024-11-08)
 
