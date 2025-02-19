@@ -2,6 +2,8 @@ import React, { useRef, useCallback, useState } from 'react';
 import { isUndefined } from 'js-var-type';
 import PropTypes from 'prop-types';
 
+import { formatClasses } from '../utils/attributes';
+
 import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl';
 import { UncontrolledFormInput } from './UncontrolledFormInput';
 import { UncontrolledFormGroup } from './UncontrolledFormGroup';
@@ -9,7 +11,7 @@ import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 export function UncontrolledFormInputMask({ mask, name, inputAttrs }) {
   const state = useState('');
   const ref = useRef(null);
-  const { afterChange, ..._inputAttrs } = inputAttrs;
+  const { afterChange, inputClassName, ..._inputAttrs } = inputAttrs;
 
   const setFormattedValue = useCallback((value) => {
     const valueFormatado = mask?.format?.(value) ?? value;
@@ -43,7 +45,7 @@ export function UncontrolledFormInputMask({ mask, name, inputAttrs }) {
     <>
       <input
         ref={ref}
-        className="form-control"
+        className={formatClasses(['form-control', inputClassName])}
         name={`__mask.${name}`}
         defaultValue=""
         onChange={(e) => {
@@ -98,6 +100,7 @@ UncontrolledFormGroupInputMask.propTypes = {
     disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     help: PropTypes.node,
     id: PropTypes.string,
+    inputClassName: PropTypes.string,
     max: PropTypes.string,
     maxLength: PropTypes.string,
     min: PropTypes.string,

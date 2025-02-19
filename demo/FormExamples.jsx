@@ -19,6 +19,85 @@ import {
 
 export function FormExamples() {
   const [bootstrapFormValidation, setBootstrapFormValidation] = useState(false);
+  const [changeCustomValidation, setChangeCustomValidation] = useState(false);
+
+  const validations = useMemo(
+    () => ({
+      numberField: [
+        {
+          message: 'Must be filled if textField is not empty',
+          validate(value, formData) {
+            return !formData.textField || value;
+          },
+        },
+      ],
+      autocompleteField: [
+        {
+          message: 'Must be filled',
+          validate(value) {
+            return value;
+          },
+        },
+      ],
+      selectField: [
+        {
+          message: 'Must be filled if autocompleteField1 is empty',
+          validate(value, formData) {
+            return formData.autocompleteField1 || value;
+          },
+        },
+      ],
+      switchField: [
+        {
+          message: 'Must be filled if selectField is empty',
+          validate(value, formData) {
+            return formData.selectField || value;
+          },
+        },
+      ],
+      checkboxField: [
+        {
+          message: 'Must be filled if switchField is empty',
+          validate(value, formData) {
+            return formData.switchField || value;
+          },
+        },
+      ],
+      radioField: [
+        {
+          message: 'Must be filled if checkboxField is empty',
+          validate(value, formData) {
+            return formData.checkboxField || value;
+          },
+        },
+      ],
+      textareaField: [
+        {
+          message: 'Must be filled if radioField is empty',
+          validate(value, formData) {
+            return formData.radioField || value;
+          },
+        },
+      ],
+      variableCustomValidation: [
+        {
+          message: `Must be filled with "${changeCustomValidation ? 'b' : 'a'}"`,
+          validate(value, formData) {
+            return changeCustomValidation ? value === 'b' : value === 'a';
+          },
+        },
+      ],
+      undefinedMessageField: [
+        {
+          validate(value, formData) {
+            return formData.undefinedMessageField || value;
+          },
+        },
+      ],
+    }),
+    [changeCustomValidation]
+  );
+
   return (
     <Form
       initialValues={{
@@ -57,71 +136,7 @@ export function FormExamples() {
         resetForm();
       }}
       customValidation={bootstrapFormValidation}
-      validations={{
-        numberField: [
-          {
-            message: 'Must be filled if textField is not empty',
-            validate(value, formData) {
-              return !formData.textField || value;
-            },
-          },
-        ],
-        autocompleteField: [
-          {
-            message: 'Must be filled',
-            validate(value) {
-              return value;
-            },
-          },
-        ],
-        selectField: [
-          {
-            message: 'Must be filled if autocompleteField1 is empty',
-            validate(value, formData) {
-              return formData.autocompleteField1 || value;
-            },
-          },
-        ],
-        switchField: [
-          {
-            message: 'Must be filled if selectField is empty',
-            validate(value, formData) {
-              return formData.selectField || value;
-            },
-          },
-        ],
-        checkboxField: [
-          {
-            message: 'Must be filled if switchField is empty',
-            validate(value, formData) {
-              return formData.switchField || value;
-            },
-          },
-        ],
-        radioField: [
-          {
-            message: 'Must be filled if checkboxField is empty',
-            validate(value, formData) {
-              return formData.checkboxField || value;
-            },
-          },
-        ],
-        textareaField: [
-          {
-            message: 'Must be filled if radioField is empty',
-            validate(value, formData) {
-              return formData.radioField || value;
-            },
-          },
-        ],
-        undefinedMessageField: [
-          {
-            validate(value, formData) {
-              return formData.undefinedMessageField || value;
-            },
-          },
-        ],
-      }}
+      validations={validations}
     >
       <h5>Form configuration:</h5>
       <FormGroupSwitch
@@ -130,7 +145,23 @@ export function FormExamples() {
         label="Use bootstrap form validation?"
         afterChange={(value) => setBootstrapFormValidation(value)}
       />
+      <FormGroupSwitch
+        id="changeVariableCustomValidation"
+        name="changeVariableCustomValidation"
+        label="Change validation for variable custom validation?"
+        afterChange={(value) => setChangeCustomValidation(value)}
+      />
       <hr />
+      <div className="row">
+        <div className="col">
+          <FormGroupInput
+            name="variableCustomValidation"
+            label="Variable custom validation"
+            placeholder={'Type "a" or "b"'}
+            help={'if "Change validation for variable custom validation" is not setted this should be "a" else "b" '}
+          />
+        </div>
+      </div>
       <div className="row">
         <div className="col">
           <FormGroupInput name="textField" label="Text field" disabled help="Text field help" />
@@ -142,6 +173,7 @@ export function FormExamples() {
             required
             placeholder="Fill some value"
             afterChange={console.log.bind(console, 'afterChange input')}
+            inputClassName="text-danger text-uppercase"
           />
         </div>
         <div className="col">
@@ -311,20 +343,7 @@ export function FormExamples() {
             repeatedTagErrorMessage="Impossible to add repeated tag"
             addButtonIcon={<i className="bi bi-person-add" />}
             removeButtonIcon={<i className="bi bi-person-dash" />}
-            options={[
-              {
-                label: '1',
-                value: '1',
-              },
-              {
-                label: 'tag',
-                value: 'tag',
-              },
-              {
-                label: 'preSelected',
-                value: 'preSelected',
-              },
-            ]}
+            options={['1', 'tag', 'preSelected']}
             allowRemove
             openOnFocus
             help="Add at least one tag to this field"
@@ -374,6 +393,9 @@ export function FormExamples() {
               {
                 label: 'preSelected',
                 _id: '3',
+              },
+              {
+                _id: '4',
               },
             ]}
             allowUnlistedValue={false}

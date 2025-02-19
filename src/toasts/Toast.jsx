@@ -27,12 +27,14 @@ export function Toast({ id, type, message, closeControl, position, noStyle }) {
     </div>
   );
 }
-
-Toast.propTypes = {
+export const toastPropsBaseShape = {
   closeControl: PropTypes.bool,
-  id: PropTypes.number.isRequired,
   message: PropTypes.string.isRequired,
   noStyle: PropTypes.bool,
   position: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+};
+Toast.propTypes = {
+  id: PropTypes.number.isRequired,
+  ...toastPropsBaseShape,
 };

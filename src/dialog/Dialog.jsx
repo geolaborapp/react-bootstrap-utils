@@ -36,7 +36,7 @@ export function Dialog({ children, onlyRenderContentIfIsOpen, onClose, ...props 
   const onCloseDialog = async () => {
     await onClose();
     close();
-  }
+  };
 
   return (
     <React.Fragment>
