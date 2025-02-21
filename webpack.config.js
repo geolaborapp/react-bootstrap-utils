@@ -1,6 +1,6 @@
 'use strict';
 
-const webpack = require('webpack');
+const path = require('path');
 
 module.exports = [
   {
@@ -26,22 +26,16 @@ module.exports = [
     },
   },
   {
+    mode: 'development',
+    devtool: 'eval-source-map',
     entry: './demo/demo.jsx',
     output: {
-      path: `${__dirname}/demo`,
+      path: path.join(__dirname, 'demo'),
       filename: 'demo.js',
     },
     devServer: {
-      contentBase: `${__dirname}/demo`,
+      static: path.join(__dirname, 'demo'),
       hot: true,
-    },
-    plugins: [new webpack.HotModuleReplacementPlugin()],
-  },
-  {
-    entry: './docs/docs.jsx',
-    output: {
-      path: `${__dirname}/docs`,
-      filename: 'scripts.js',
     },
   },
 ].map((setup) => ({
