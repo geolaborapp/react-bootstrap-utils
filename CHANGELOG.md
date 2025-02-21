@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.27.1](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.27.0...v0.27.1) (2025-02-21)
+
+
+### Features
+
+* Permite não passar a propriedade message nas validations do Form ([#70](https://github.com/geolaborapp/react-bootstrap-utils/issues/70)) ([8e38725](https://github.com/geolaborapp/react-bootstrap-utils/commit/8e38725e3b39aaca1dac20da19e72a9c0b229e6e))
+
 ## [0.27.0](https://github.com/geolaborapp/react-bootstrap-utils/compare/v0.26.53...v0.27.0) (2024-11-08)
 
 
