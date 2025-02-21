@@ -89,8 +89,8 @@ export function FormExamples() {
       ],
       undefinedMessageField: [
         {
-          validate(value, formData) {
-            return formData.undefinedMessageField || value;
+          validate(value) {
+            return value;
           },
         },
       ],
