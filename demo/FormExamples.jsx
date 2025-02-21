@@ -87,6 +87,13 @@ export function FormExamples() {
           },
         },
       ],
+      undefinedMessageField: [
+        {
+          validate(value) {
+            return value;
+          },
+        },
+      ],
     }),
     [changeCustomValidation]
   );
@@ -583,6 +590,8 @@ export function FormExamples() {
         afterChange={console.log.bind(console, 'afterChange textarea')}
       />
       <FormGroupTextarea name="textareaField2" label="Textarea field 2" disabled rows="1" />
+
+      <FormGroupTextarea name="undefinedMessageField" label="Undefined message field" rows="1" />
 
       {[0, 1].map((index) => (
         <div className="row" key={index}>

@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { isEmptyLike } from 'js-var-type';
 
 import { FormContext } from './helpers/form-helpers';
 
 export function FormValidationFeedback({ name, mockInvalidSibling }) {
   const formState = useContext(FormContext);
-  const validationMessage = formState.getValidationMessage(name);
+  let validationMessage = formState.getValidationMessage(name);
+
+  if (validationMessage === 'undefined' || validationMessage === 'null' || isEmptyLike(validationMessage)) {
+    validationMessage = '';
+  }
 
   return (
     <>
