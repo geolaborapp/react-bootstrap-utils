@@ -1,0 +1,35 @@
+name: Publish Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version type to release'
+        required: true
+        type: choice
+        options:
+          - Major
+          - Minor
+          - Patch
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Release version
+        run: |
+          if [ "${{ github.event.inputs.version_type }}" = "Major" ]; then
+            npm run release-major
+          elif [ "${{ github.event.inputs.version_type }}" = "Minor" ]; then
+            npm run release-minor
+          else
+            npm run release-patch
+          fi
+
+      - name: Publish package
+        run: git push --follow-tags origin master && npm publish
