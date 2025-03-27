@@ -23,6 +23,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Setup Git
+        run: |
+          git config --global user.email "noreply@github.com"
+          git config --global user.name "GitHub Actions"
+
       - name: Release version
         run: |
           if [ "${{ github.event.inputs.version_type }}" = "Major" ]; then
