@@ -1,7 +1,5 @@
 name: Publish Package
 
-run-name: Publish Package ${{ inputs.version }} 
-
 on:
   workflow_dispatch:
     inputs:
@@ -13,6 +11,8 @@ on:
           - Major
           - Minor
           - Patch
+
+run-name: Publish Package ${{ inputs.version }} 
 
 jobs:
   publish:
