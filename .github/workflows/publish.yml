@@ -34,6 +34,9 @@ jobs:
           registry-url: "https://npm.pkg.github.com/"
           scope: "@geolaborapp"
 
+      - name: install package dependencies
+        run: npm install
+
       - name: release-major
         if: ${{ github.event.inputs.version_type == 'Major' }}
         run: npm run release-major
