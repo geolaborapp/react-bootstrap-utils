@@ -23,6 +23,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.GEOLABORAPP_DEPLOY_KEY }}
+
       - name: Setup Git
         run: |
           git config --global user.email "noreply@github.com"
