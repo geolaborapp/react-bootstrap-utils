@@ -1,0 +1,52 @@
+name: Publish
+
+on: 
+  workflow_dispatch: 
+    inputs: 
+      version_type:
+        type: choice
+        description: 'Version type'
+        options: 
+          - Major 
+          - Minor
+          - Patch
+
+run-name: Publish Package ${{inputs.version_type}}
+
+jobs: 
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: webfactory/ssh-agent@v0.9.0
+        with: 
+          ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
+
+      - name: Setup Git
+        run: |
+          git config --global user.email "noreply@github.com"
+          git config --global user.name "Github Actions"
+
+      - uses: actions/setup-node@v4
+        with: 
+          node-version: "18.x"
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@geolaborapp"
+
+      - name: release-major
+        if: ${{ github.event.inputs.version_type == 'Major' }}
+        run: npm run release-major
+      
+      - name: release-minor
+        if: ${{ github.event.inputs.version_type == 'Minor'}}
+        run: npm run release-minor
+
+      - name: release-patch
+        if: ${{ github.event.inputs.version_type == 'Patch'}}
+        run: npm run release-patch
+
+      - name: publish package
+        run: git push --follow-tags origin master && npm publish
+        env: 
+          NODE_AUTH_TOKEN: ${{secrets.GEOLABOR_GITHUB_TOKEN}}
