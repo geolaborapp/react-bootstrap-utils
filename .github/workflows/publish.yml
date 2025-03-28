@@ -47,5 +47,5 @@ jobs:
 
       - name: Publish package
         run: git push --follow-tags origin master && npm publish
-        env:
-          GH_TOKEN: ${{ secrets.GEOLABOR_GITHUB_TOKEN }}
+        # env:
+        #   GH_TOKEN: ${{ secrets.GEOLABOR_GITHUB_TOKEN }}
