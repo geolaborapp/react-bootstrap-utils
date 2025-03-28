@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GEOLABOR_GITHUB_TOKEN }}
-          fetch-depth: 0
+        # with:
+        #   token: ${{ secrets.GEOLABOR_GITHUB_TOKEN }}
+        #   fetch-depth: 0
 
       - uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -47,5 +47,5 @@ jobs:
 
       - name: Publish package
         run: git push --follow-tags origin master && npm publish
-        env:
-          GH_TOKEN: ${{ secrets.GEOLABOR_GITHUB_TOKEN }}
+        # env:
+        #   GH_TOKEN: ${{ secrets.GEOLABOR_GITHUB_TOKEN }}
