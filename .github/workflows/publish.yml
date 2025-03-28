@@ -11,14 +11,17 @@ on:
           - Minor
           - Patch
 
+run-name: Publish Package ${{inputs.version_type}}
+
 jobs: 
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: webfactory/ssh-agent@v0.9.0
         with: 
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
 
       - name: Setup Git
         run: |
