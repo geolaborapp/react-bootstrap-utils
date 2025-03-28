@@ -12,25 +12,25 @@ on:
           - Minor
           - Patch
 
-run-name: Publish Package ${{ inputs.version }} 
+run-name: Publish Package ${{ inputs.version }}
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Install dependencies
-        run: npm install
 
       - uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{ secrets.GEOLABOR_GITHUB_TOKEN }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Setup Git
         run: |
           git config --global user.email "noreply@github.com"
           git config --global user.name "GitHub Actions"
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Release version
         run: |
