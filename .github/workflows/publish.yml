@@ -12,7 +12,7 @@ on:
           - Minor
           - Patch
 
-run-name: Publish Package ${{ inputs.version }}
+run-name: Publish Package ${{ inputs.version_type }}
 
 jobs:
   publish:
