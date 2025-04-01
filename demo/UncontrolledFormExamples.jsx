@@ -33,6 +33,7 @@ export function UncontrolledFormExamples() {
           Obj: { x: 'X', z: 0 },
           arr: [1, 2, 3, 4, 5],
           arrObj: [{ o: 1 }, { o: 2 }, { o: 3 }],
+          autocomplete2Field5: { _id: '2' },
           textarea1:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque praesentium quisquam reiciendis expedita. Ad quod voluptas aliquid illum veniam odio? Nulla sed, illum eligendi amet fuga optio officia itaque nisi',
           dateMask: '0410202',
@@ -167,6 +168,56 @@ export function UncontrolledFormExamples() {
           onClearSearch={() => {
             console.log('search has been cleared');
           }}
+        />
+
+        <UncontrolledFormGroupAutocomplete
+          name="autocomplete2Field5"
+          label="Autocomplete with custom template"
+          options={[
+            {
+              label: 'value that can be searched',
+              value: {
+                attribute1: 'value',
+                attribute2: 'that can',
+                attribute3: 'be searched',
+                _id: '1',
+              },
+            },
+            {
+              label: 'another value that can be searched',
+              value: {
+                attribute1: 'another value',
+                attribute2: 'that can',
+                attribute3: 'be searched',
+                _id: '2',
+              },
+            },
+            {
+              label: 'something that can be searched',
+              value: {
+                attribute1: 'something',
+                attribute2: 'that can',
+                attribute3: 'be searched',
+                _id: '3',
+              },
+            },
+          ]}
+          trackBy="_id"
+          placeholder="Type to search in the available options"
+          afterChange={(newValue, oldValue) => {
+            console.log(oldValue, ' changed to  :>> ', newValue);
+          }}
+          onClearSearch={() => {
+            console.log('search has been cleared');
+          }}
+          template={(label, value) => (
+            <div className="d-flex flex-column py-1">
+              <div>{value?.attribute1}</div>
+              <em>{value?.attribute2}</em>
+              <div>{value?.attribute3}</div>
+            </div>
+          )}
+          openOnFocus
         />
 
         <UncontrolledFormGroupInput label="AttrA" name="attrA"></UncontrolledFormGroupInput>

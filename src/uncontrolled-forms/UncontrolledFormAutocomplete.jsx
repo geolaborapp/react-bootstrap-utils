@@ -224,7 +224,11 @@ export function UncontrolledFormAutocomplete({
           disabled={disabled}
           onClick={enableSearchInput}
         >
-          {selectedItem ? (template ? template(selectedItem.label) : selectedItem.label) : placeholder}
+          {selectedItem
+            ? template
+              ? template(selectedItem?.label, selectedItem?.value)
+              : selectedItem?.label
+            : placeholder}
         </div>
       )}
 
