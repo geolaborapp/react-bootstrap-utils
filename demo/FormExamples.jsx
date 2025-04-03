@@ -105,6 +105,7 @@ export function FormExamples() {
         autocompleteField1: { _id: '2345', name: '2345 name' },
         autocompleteField4: 'unlisted item',
         autocompleteTag2: [{ label: 'preSelected', value: 'preSelected' }],
+        autocompleteField6: { _id: '2' },
         selectField4: { e: 2, c: 'b' },
         switchField2: true,
         checkboxField2: true,
@@ -284,6 +285,57 @@ export function FormExamples() {
             onClearSearch={() => {
               console.log('search has been cleared');
             }}
+          />
+        </div>
+        <div className="col">
+          <FormGroupAutocomplete
+            name="autocompleteField6"
+            label="Autocomplete with custom template"
+            options={[
+              {
+                label: 'value that can be searched',
+                value: {
+                  attribute1: 'value',
+                  attribute2: 'that can',
+                  attribute3: 'be searched',
+                  _id: '1',
+                },
+              },
+              {
+                label: 'another value that can be searched',
+                value: {
+                  attribute1: 'another value',
+                  attribute2: 'that can',
+                  attribute3: 'be searched',
+                  _id: '2',
+                },
+              },
+              {
+                label: 'something that can be searched',
+                value: {
+                  attribute1: 'something',
+                  attribute2: 'that can',
+                  attribute3: 'be searched',
+                  _id: '3',
+                },
+              },
+            ]}
+            trackBy="_id"
+            placeholder="Type to search in the available options"
+            afterChange={(newValue, oldValue) => {
+              console.log('autocompleteField6: ', oldValue, ' changed to  :>> ', newValue);
+            }}
+            onClearSearch={() => {
+              console.log('search has been cleared');
+            }}
+            template={(label, value) => (
+              <div className="d-flex flex-column py-1">
+                <div>{value?.attribute1}</div>
+                <em>{value?.attribute2}</em>
+                <div>{value?.attribute3}</div>
+              </div>
+            )}
+            openOnFocus
           />
         </div>
       </div>
