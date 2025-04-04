@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.1.1 (2025-04-04)
+
+
+### Bug Fixes
+
+* corrige exibição de campos autocomplete usando o "value" no template ([#77](https://github.com/geolaborapp/react-bootstrap-utils/issues/77)) ([0f177de](https://github.com/geolaborapp/react-bootstrap-utils/commit/0f177de47a47dad403636c98cf89411d7e1a50d5))
+
 ## 1.1.0 (2025-03-28)
 
 ### 1.0.1 (2025-03-28)
