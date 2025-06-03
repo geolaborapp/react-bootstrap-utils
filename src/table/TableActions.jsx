@@ -31,8 +31,7 @@ TableActions.propTypes = {
   docIndex: PropTypes.number.isRequired,
   actions: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.arrayOf(PropTypes.func),
-    PropTypes.arrayOf(PropTypes.object),
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),
   ]),
 };
 
