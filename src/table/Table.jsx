@@ -60,7 +60,11 @@ Table.defaultProps = {
 
 Table.propTypes = {
   actionLabel: PropTypes.string,
-  actions: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.object)]),
+  actions: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(PropTypes.func),
+    PropTypes.arrayOf(PropTypes.object),
+  ]),
   bordered: PropTypes.bool,
   caption: PropTypes.node,
   columnHeaderFormat: PropTypes.func,

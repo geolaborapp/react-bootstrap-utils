@@ -29,7 +29,11 @@ export function TableActions({ doc, docIndex, actions }) {
 TableActions.propTypes = {
   doc: PropTypes.object.isRequired,
   docIndex: PropTypes.number.isRequired,
-  actions: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.object)]),
+  actions: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(PropTypes.func),
+    PropTypes.arrayOf(PropTypes.object),
+  ]),
 };
 
 function TableAction({ doc, docIndex, action }) {
