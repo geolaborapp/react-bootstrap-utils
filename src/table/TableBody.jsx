@@ -42,7 +42,10 @@ export function TableBody({ columns, docs, rowRole, rowClass, actions, onRowClic
 }
 
 TableBody.propTypes = {
-  actions: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.object)]),
+  actions: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),
+  ]),
   columns: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
   docs: PropTypes.arrayOf(PropTypes.object),
   rowRole: PropTypes.string,

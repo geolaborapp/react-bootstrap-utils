@@ -222,6 +222,7 @@ export function TableExamples() {
                 title: 'Subtract',
                 content: <span>{doc.b - docIndex}?</span>,
               },
+              (doc, index) => <span>{`${doc.c}-${index}`}</span>,
             ]}
           />
         </div>
