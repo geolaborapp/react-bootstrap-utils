@@ -92,7 +92,7 @@ Form.defaultProps = {
 Form.propTypes = {
   cancelLabel: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-  customActions: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+  customActions: PropTypes.oneOfType([PropTypes.func, PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
   customValidation: PropTypes.bool,
   initialValues: PropTypes.object,
   onCancel: PropTypes.func,

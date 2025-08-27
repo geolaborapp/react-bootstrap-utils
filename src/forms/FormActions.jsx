@@ -24,6 +24,6 @@ FormActions.propTypes = {
   cancelLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   onCancel: PropTypes.func.isRequired,
   isSubmiting: PropTypes.bool,
-  customActions: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  customActions: PropTypes.oneOfType([PropTypes.func, PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
   resetForm: PropTypes.func,
 };
