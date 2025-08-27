@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { isFunction } from 'js-var-type';
 
-export function FormActions({ submitLabel, cancelLabel, onCancel, isSubmiting, customActions }) {
+export function FormActions({ submitLabel, cancelLabel, onCancel, isSubmiting, customActions, resetForm }) {
   if (customActions) {
-    return isFunction(customActions) ? customActions(isSubmiting) : customActions;
+    return isFunction(customActions) ? customActions(isSubmiting, { onCancel, resetForm }) : customActions;
   }
 
   return (
@@ -25,4 +25,5 @@ FormActions.propTypes = {
   onCancel: PropTypes.func.isRequired,
   isSubmiting: PropTypes.bool,
   customActions: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  resetForm: PropTypes.func,
 };

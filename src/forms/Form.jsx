@@ -76,7 +76,7 @@ export function Form({
     <form {...formProps}>
       <FormContext.Provider value={formState}>{children}</FormContext.Provider>
 
-      <FormActions {...{ submitLabel, cancelLabel, onCancel: handleCancel, isSubmiting, customActions }} />
+      <FormActions {...{ submitLabel, cancelLabel, onCancel: handleCancel, isSubmiting, customActions, resetForm }} />
     </form>
   );
 }

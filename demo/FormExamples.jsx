@@ -20,6 +20,7 @@ import {
 export function FormExamples() {
   const [bootstrapFormValidation, setBootstrapFormValidation] = useState(false);
   const [changeCustomValidation, setChangeCustomValidation] = useState(false);
+  const [useCustomActions, setUseCustomActions] = useState(false);
 
   const validations = useMemo(
     () => ({
@@ -138,6 +139,20 @@ export function FormExamples() {
       }}
       customValidation={bootstrapFormValidation}
       validations={validations}
+      customActions={
+        useCustomActions
+          ? (isSubmiting, { onCancel, resetForm }) => (
+              <div>
+                <button type="submit" className="btn btn-success">
+                  Custom save
+                </button>
+                <button type="button" className="btn btn-secondary" onClick={() => resetForm()}>
+                  Custom reset
+                </button>
+              </div>
+            )
+          : undefined
+      }
     >
       <h5>Form configuration:</h5>
       <FormGroupSwitch
@@ -151,6 +166,12 @@ export function FormExamples() {
         name="changeVariableCustomValidation"
         label="Change validation for variable custom validation?"
         afterChange={(value) => setChangeCustomValidation(value)}
+      />
+      <FormGroupSwitch
+        id="useCustomActions"
+        name="useCustomActions"
+        label="Use form custom actions?"
+        afterChange={(value) => setUseCustomActions(value)}
       />
       <hr />
       <div className="row">
@@ -734,9 +755,27 @@ export function FormExamples() {
         includeEmptyItem={false}
         menuClassName="p-4 w-100"
       />
+
+      <ResetForm />
     </Form>
   );
 }
+
+const ResetForm = () => {
+  const formControl = useFormControl();
+
+  const reset = () => {
+    console.log('reset form');
+
+    formControl.resetFormData();
+  };
+
+  return (
+    <button type="button" className="btn btn-outline-secondary mb-3" onClick={reset}>
+      Reset form
+    </button>
+  );
+};
 
 const FormSwitchExample = () => {
   const autocompleteField1FormControl = useFormControl('autocompleteField1');
