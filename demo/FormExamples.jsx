@@ -21,7 +21,6 @@ export function FormExamples() {
   const [bootstrapFormValidation, setBootstrapFormValidation] = useState(false);
   const [changeCustomValidation, setChangeCustomValidation] = useState(false);
   const [useCustomActions, setUseCustomActions] = useState(false);
-  console.log('🚀 ~ FormExamples ~ useCustomActions:', useCustomActions);
 
   const validations = useMemo(
     () => ({
