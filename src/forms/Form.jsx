@@ -76,7 +76,7 @@ export function Form({
     <form {...formProps}>
       <FormContext.Provider value={formState}>{children}</FormContext.Provider>
 
-      <FormActions {...{ submitLabel, cancelLabel, onCancel: handleCancel, isSubmiting, customActions }} />
+      <FormActions {...{ submitLabel, cancelLabel, onCancel: handleCancel, isSubmiting, customActions, resetForm }} />
     </form>
   );
 }
@@ -92,7 +92,7 @@ Form.defaultProps = {
 Form.propTypes = {
   cancelLabel: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-  customActions: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+  customActions: PropTypes.oneOfType([PropTypes.func, PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
   customValidation: PropTypes.bool,
   initialValues: PropTypes.object,
   onCancel: PropTypes.func,
