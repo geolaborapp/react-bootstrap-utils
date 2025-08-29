@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.2.0 (2025-08-29)
+
+
+### Features
+
+* exporta função de reset form ([#79](https://github.com/geolaborapp/react-bootstrap-utils/issues/79)) ([56da75f](https://github.com/geolaborapp/react-bootstrap-utils/commit/56da75fc280a3f4583b137f357243c51d6eee0d1))
+
 ### 1.1.2 (2025-06-26)
 
 ### 1.1.1 (2025-04-04)
