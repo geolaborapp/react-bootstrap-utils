@@ -22,12 +22,21 @@ export function Form({
   const formRef = useRef(null);
   const [isSubmiting, setIsSubmiting] = useState(false);
 
+  /* Resets to initial values/state */
   function resetForm() {
     if (formRef.current && formRef.current.classList) {
       formRef.current.classList.remove('was-validated');
     }
 
     formState.reset();
+  }
+
+  function clearForm() {
+    if (formRef.current && formRef.current.classList) {
+      formRef.current.classList.remove('was-validated');
+    }
+
+    formState.clear();
   }
 
   function handleSubmit(e) {
@@ -76,7 +85,17 @@ export function Form({
     <form {...formProps}>
       <FormContext.Provider value={formState}>{children}</FormContext.Provider>
 
-      <FormActions {...{ submitLabel, cancelLabel, onCancel: handleCancel, isSubmiting, customActions, resetForm }} />
+      <FormActions
+        {...{
+          submitLabel,
+          cancelLabel,
+          onCancel: handleCancel,
+          isSubmiting,
+          customActions,
+          resetForm,
+          clearForm,
+        }}
+      />
     </form>
   );
 }

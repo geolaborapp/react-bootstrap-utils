@@ -129,6 +129,8 @@ export function FormExamples() {
         });
       }}
       transform={(formData, _, update) => {
+        console.log('transform >> formData:', formData);
+
         formData.__v = formData.__v ? formData.__v + 1 : 1;
 
         update(formData);
@@ -141,13 +143,16 @@ export function FormExamples() {
       validations={validations}
       customActions={
         useCustomActions
-          ? (isSubmiting, { onCancel, resetForm }) => (
+          ? (isSubmiting, { onCancel, resetForm, clearForm }) => (
               <div>
-                <button type="submit" className="btn btn-success">
+                <button type="submit" className="btn btn-success me-2">
                   Custom save
                 </button>
-                <button type="button" className="btn btn-secondary" onClick={() => resetForm()}>
+                <button type="button" className="btn btn-secondary me-2" onClick={() => resetForm()}>
                   Custom reset
+                </button>
+                <button type="button" className="btn btn-info" onClick={() => clearForm()}>
+                  Custom clear
                 </button>
               </div>
             )
@@ -757,6 +762,7 @@ export function FormExamples() {
       />
 
       <ResetForm />
+      <ClearForm />
     </Form>
   );
 }
@@ -765,7 +771,7 @@ const ResetForm = () => {
   const formControl = useFormControl();
 
   const reset = () => {
-    console.log('reset form');
+    console.log('reset form - resets to initial state');
 
     formControl.resetFormData();
   };
@@ -773,6 +779,22 @@ const ResetForm = () => {
   return (
     <button type="button" className="btn btn-outline-secondary mb-3" onClick={reset}>
       Reset form
+    </button>
+  );
+};
+
+const ClearForm = () => {
+  const formControl = useFormControl();
+
+  const clear = () => {
+    console.log('clear form - sets empty state');
+
+    formControl.clearFormData();
+  };
+
+  return (
+    <button type="button" className="btn btn-outline-info ms-2 mb-3" onClick={clear}>
+      Clear form
     </button>
   );
 };
