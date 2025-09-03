@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.3.0 (2025-09-03)
+
+
+### Features
+
+* exporta função de clear Form ([#80](https://github.com/geolaborapp/react-bootstrap-utils/issues/80)) ([4bf8e8d](https://github.com/geolaborapp/react-bootstrap-utils/commit/4bf8e8d9a4165a4aeea584a1b5dffd569a5da7a1))
+
 ## 1.2.0 (2025-08-29)
 
 
