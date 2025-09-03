@@ -48,7 +48,8 @@ export function useFormControl(name, type) {
     handleOnChange,
     register,
     getFormData: () => formState.getFormData(),
-    resetFormData: () => formState.reset(),
+    resetFormData: () => formState.reset() /* Resets to initial values/state */,
+    clearFormData: () => formState.clear() /* Sets empty state */,
     isValid: () => formState.getValidationMessage(name) === '',
     getFormSubmitedAttempted: () => formState.getSubmitedAttempted(),
   };

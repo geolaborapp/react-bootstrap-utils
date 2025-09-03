@@ -44,15 +44,30 @@ function useFormState(initialState, { onChange, transform }) {
         return nextFormState;
       });
     },
+    /* Resets to initial values/state */
     resetState() {
       setIsDirty(false);
       setFormState(initialState);
+    },
+    /* Sets empty state */
+    clearState() {
+      setIsDirty(true);
+
+      setFormState(() => {
+        const nextFormState = {};
+
+        setTimeout(() => {
+          transformRef.current(nextFormState);
+        });
+
+        return nextFormState;
+      });
     },
   };
 }
 
 export function useForm(initialState, { validations, onChange, transform }) {
-  const { getState, updateState, resetState } = useFormState(initialState, { onChange, transform });
+  const { getState, updateState, resetState, clearState } = useFormState(initialState, { onChange, transform });
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const [, setRefreshForm] = useState(false);
   const { getAllKeys: getElementNames, get: getElementRefs, push: registerElementRef } = useArrayValueMap();
@@ -124,6 +139,9 @@ export function useForm(initialState, { validations, onChange, transform }) {
     },
     getValue(name) {
       return getValueByPath(formState, name);
+    },
+    clear() {
+      clearState();
     },
     reset() {
       resetState();
