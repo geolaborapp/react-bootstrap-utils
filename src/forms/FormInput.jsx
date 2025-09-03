@@ -27,13 +27,8 @@ export function FormInput({
     name,
     required,
     type,
+    value: getValue(),
   };
-
-  if (type === 'datetime-local') {
-    attrs.defaultValue = getValue();
-  } else {
-    attrs.value = getValue();
-  }
 
   return (
     <input
