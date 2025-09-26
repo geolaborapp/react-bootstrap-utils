@@ -1132,7 +1132,7 @@ function FormUncontrolledFormGroupTable1() {
           },
         ],
       }}
-      getRemoveComponent={(removeItem) => <i class="bi bi-trash-fill" onClick={() => removeItem()}></i>}
+      getRemoveComponent={(removeItem) => <i className="bi bi-trash-fill" onClick={() => removeItem()}></i>}
       getAddItemComponent={(addItem) => <AddFormGroupTableItem addItem={addItem} />}
     />
   );
@@ -1156,7 +1156,7 @@ function FormUncontrolledFormGroupTable2() {
           },
         ],
       }}
-      getRemoveComponent={(removeItem) => <i class="bi bi-trash-fill" onClick={() => removeItem()}></i>}
+      getRemoveComponent={(removeItem) => <i className="bi bi-trash-fill" onClick={() => removeItem()}></i>}
       getAddItemComponent={(addItem) => <AddFormGroupTableItem addItem={addItem} />}
     />
   );

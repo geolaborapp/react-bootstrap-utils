@@ -50,7 +50,7 @@ import { UncontrolledFormGroup } from './UncontrolledFormGroup';
  *         },
  *       ],
  *     }}
- *     getRemoveComponent={(removeItem) => <i class="bi bi-trash-fill" onClick={() => removeItem()}></i>}
+ *     getRemoveComponent={(removeItem) => <i className="bi bi-trash-fill" onClick={() => removeItem()}></i>}
  *     getAddItemComponent={(addItem) => <AddFormGroupTableItem addItem={addItem} />}
  *   />
  * );
@@ -107,35 +107,27 @@ export function UncontrolledFormTable({
 
   const removeItem = useCallback(
     (doc, index) => {
-      let newValue;
+      const newValue = value?.filter?.((_, i) => i !== index) ?? [];
 
-      setValue((prevState) => {
-        newValue = prevState?.filter?.((_, i) => i !== index) ?? [];
-
-        return newValue;
-      });
+      setValue(newValue);
 
       if (isFunction(afterChange)) {
         afterChange(newValue);
       }
     },
-    [afterChange, setValue]
+    [afterChange, setValue, value]
   );
   const addItem = useCallback(
     (item) => {
-      let newValue;
+      const newValue = [...(value || []), item];
 
-      setValue((prevState) => {
-        newValue = [...(prevState || []), item];
-
-        return newValue;
-      });
+      setValue(newValue);
 
       if (isFunction(afterChange)) {
         afterChange(newValue);
       }
     },
-    [afterChange, setValue]
+    [afterChange, setValue, value]
   );
 
   const addItemComponent = useMemo(() => getAddItemComponent?.(addItem) ?? <></>, [addItem, getAddItemComponent]);
