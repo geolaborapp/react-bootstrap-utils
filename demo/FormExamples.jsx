@@ -14,6 +14,8 @@ import {
   FormGroupAutocompleteTag,
   Table,
   FormAutocompleteTag,
+  FormGroupTable,
+  Dialog,
   // eslint-disable-next-line import/no-unresolved
 } from '../dist/main';
 
@@ -92,6 +94,14 @@ export function FormExamples() {
         {
           validate(value) {
             return value;
+          },
+        },
+      ],
+      formTable2: [
+        {
+          message: 'Must have more than 2 itens',
+          validate(value) {
+            return value?.length > 2;
           },
         },
       ],
@@ -761,6 +771,12 @@ export function FormExamples() {
         menuClassName="p-4 w-100"
       />
 
+      <h5>FormTable</h5>
+      <div className="row mb-2">
+        <FormGroupTable1 />
+        <FormGroupTable2 />
+      </div>
+
       <ResetForm />
       <ClearForm />
     </Form>
@@ -859,5 +875,84 @@ function FormAutocompleteTagsWithCustomLabel() {
         />
       </div>
     </div>
+  );
+}
+
+function FormGroupTable1() {
+  return (
+    <FormGroupTable
+      name="formTable1"
+      required
+      label="Simple FormTable"
+      afterChange={(...args) => console.log('formTable', args)}
+      tableProps={{
+        actionLabel: 'Actions',
+        columns: [
+          {
+            attribute: 'name',
+            label: 'Name',
+          },
+          {
+            attribute: 'number',
+            label: 'Number',
+          },
+        ],
+      }}
+      getRemoveComponent={(removeItem) => <i class="bi bi-trash-fill" onClick={() => removeItem()}></i>}
+      getAddItemComponent={(addItem) => <AddFormGroupTableItem addItem={addItem} />}
+    />
+  );
+}
+function FormGroupTable2() {
+  return (
+    <FormGroupTable
+      name="formTable2"
+      required
+      label="FormTable with minimum itens validation"
+      tableProps={{
+        actionLabel: 'Actions',
+        columns: [
+          {
+            attribute: 'name',
+            label: 'Name',
+          },
+          {
+            attribute: 'number',
+            label: 'Number',
+          },
+        ],
+      }}
+      getRemoveComponent={(removeItem) => <i class="bi bi-trash-fill" onClick={() => removeItem()}></i>}
+      getAddItemComponent={(addItem) => <AddFormGroupTableItem addItem={addItem} />}
+    />
+  );
+}
+
+function AddFormGroupTableItem({ addItem }) {
+  return (
+    <Dialog
+      title="Add item"
+      body={({ close }) => (
+        <Form
+          initialValues={{}}
+          onSubmit={(data) => {
+            console.info('submit', data);
+            addItem(data);
+            close();
+          }}
+          onCancel={() => {
+            console.warn('cancel');
+            close();
+          }}
+        >
+          <FormGroupInput name="name" label="Name" required />
+          <FormGroupInput name="number" label="Number" type="number" required />
+        </Form>
+      )}
+    >
+      <button type="button" className="btn btn-primary">
+        Add item
+      </button>
+    </Dialog>
   );
 }
