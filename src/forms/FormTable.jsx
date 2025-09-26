@@ -96,7 +96,6 @@ export function FormTable({
   getCustomActions,
   getAddItemComponent,
   getRemoveComponent,
-  ..._attrs
 }) {
   const { getValue, register, getFormData, setValue } = useFormControl(name, 'array');
   const registerRef = useCallback(register, [register]);
@@ -133,7 +132,6 @@ export function FormTable({
   const addItemComponent = useMemo(() => getAddItemComponent?.(addItem) ?? <></>, [addItem, getAddItemComponent]);
 
   const attrs = {
-    ..._attrs,
     disabled,
     name,
     required,

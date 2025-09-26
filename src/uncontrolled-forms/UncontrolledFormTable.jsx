@@ -96,7 +96,6 @@ export function UncontrolledFormTable({
   getCustomActions,
   getAddItemComponent,
   getRemoveComponent,
-  ..._attrs
 }) {
   const state = useState([]);
 
@@ -145,7 +144,6 @@ export function UncontrolledFormTable({
   const required = booleanOrFunction(_required, getFormData());
 
   const attrs = {
-    ..._attrs,
     disabled,
     name,
     required,
