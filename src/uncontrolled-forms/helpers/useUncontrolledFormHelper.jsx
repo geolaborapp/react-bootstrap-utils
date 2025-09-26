@@ -120,6 +120,10 @@ export function useUncontrolledFormHelper(initialValues, { debounceWait, transfo
       if (formControl) {
         formControl.setValue(value);
       }
+
+      if (validations) {
+        this.validateForm();
+      }
     },
     setFormControl(name, formControl) {
       formHelper.current.setFormControl(name, formControl);
