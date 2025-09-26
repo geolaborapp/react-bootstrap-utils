@@ -14,6 +14,8 @@ import {
   UncontrolledFormGroupAutocomplete,
   UncontrolledFormGroupDropdown,
   UncontrolledFormGroupRadio,
+  UncontrolledFormGroupTable,
+  Dialog,
 } from '../dist/main';
 
 export function UncontrolledFormExamples() {
@@ -81,6 +83,14 @@ export function UncontrolledFormExamples() {
               message: 'Must be filled if AttrA is not empty',
               validate(value, formData) {
                 return !formData.attrA || value;
+              },
+            },
+          ],
+          formTable2: [
+            {
+              message: 'Must have more than 2 itens',
+              validate(value) {
+                return value?.length > 2;
               },
             },
           ],
@@ -425,6 +435,12 @@ export function UncontrolledFormExamples() {
         <div className="row mb-2">
           <FormTextareaSetValueTeste1 />
           <FormTextareaSetValueTeste2 />
+        </div>
+
+        <h5>FormTable</h5>
+        <div className="row mb-2">
+          <FormUncontrolledFormGroupTable1 />
+          <FormUncontrolledFormGroupTable2 />
         </div>
       </UncontrolledForm>
     </div>
@@ -1093,5 +1109,84 @@ function FormTextareaSetValueTeste2({}) {
         rows="5"
       />
     </div>
+  );
+}
+
+function FormUncontrolledFormGroupTable1() {
+  return (
+    <UncontrolledFormGroupTable
+      name="formTable1"
+      required
+      label="Simple UncontrolledFormTable"
+      afterChange={(...args) => console.log('formTable', args)}
+      tableProps={{
+        actionLabel: 'Actions',
+        columns: [
+          {
+            attribute: 'name',
+            label: 'Name',
+          },
+          {
+            attribute: 'number',
+            label: 'Number',
+          },
+        ],
+      }}
+      getRemoveComponent={(removeItem) => <i class="bi bi-trash-fill" onClick={() => removeItem()}></i>}
+      getAddItemComponent={(addItem) => <AddFormGroupTableItem addItem={addItem} />}
+    />
+  );
+}
+function FormUncontrolledFormGroupTable2() {
+  return (
+    <UncontrolledFormGroupTable
+      name="formTable2"
+      required
+      label="UncontrolledFormTable with minimum itens validation"
+      tableProps={{
+        actionLabel: 'Actions',
+        columns: [
+          {
+            attribute: 'name',
+            label: 'Name',
+          },
+          {
+            attribute: 'number',
+            label: 'Number',
+          },
+        ],
+      }}
+      getRemoveComponent={(removeItem) => <i class="bi bi-trash-fill" onClick={() => removeItem()}></i>}
+      getAddItemComponent={(addItem) => <AddFormGroupTableItem addItem={addItem} />}
+    />
+  );
+}
+
+function AddFormGroupTableItem({ addItem }) {
+  return (
+    <Dialog
+      title="Add item"
+      body={({ close }) => (
+        <UncontrolledForm
+          initialValues={{}}
+          onSubmit={(data) => {
+            console.info('submit', data);
+            addItem(data);
+            close();
+          }}
+          onCancel={() => {
+            console.warn('cancel');
+            close();
+          }}
+        >
+          <UncontrolledFormGroupInput name="name" label="Name" required />
+          <UncontrolledFormGroupInput name="number" label="Number" type="number" required />
+        </UncontrolledForm>
+      )}
+    >
+      <button type="button" className="btn btn-primary">
+        Add item
+      </button>
+    </Dialog>
   );
 }
