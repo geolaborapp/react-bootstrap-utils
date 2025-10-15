@@ -466,7 +466,7 @@ function FormArray() {
 
   const newElement = useCallback(() => {
     setValue((prevValue) => [...prevValue, Math.max(...prevValue) + 1]);
-  });
+  }, [setValue]);
 
   if (refresh) {
     return <></>;
