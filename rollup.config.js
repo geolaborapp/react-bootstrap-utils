@@ -15,7 +15,7 @@ module.exports = {
       babelHelpers: 'runtime',
       exclude: /node_modules/,
       extensions: ['.js', '.jsx'],
-      presets: ['@babel/preset-env', ['@babel/preset-react', { runtime: 'classic' }]],
+      presets: ['@babel/preset-env', ['@babel/preset-react', { runtime: 'automatic' }]],
     }),
   ],
   output: {
