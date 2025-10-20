@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 2.0.0 (2025-10-20)
+
+
+### Features
+
+* Adiciona FormTable, FormGroupTable,  UncontrolledFormTable e UncontrolledFormGroupTable ([#82](https://github.com/geolaborapp/react-bootstrap-utils/issues/82)) ([39eb362](https://github.com/geolaborapp/react-bootstrap-utils/commit/39eb3622860a27ca674e36efc7ea811a702b663f))
+
 ## 1.3.0 (2025-09-03)
 
 
