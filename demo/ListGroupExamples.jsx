@@ -21,6 +21,34 @@ const items = [
   },
 ];
 
+const itemsWithBackgrounds = [
+  {
+    title: 'Primary Item',
+    description: 'This is a primary colored list item.',
+    background: 'primary',
+  },
+  {
+    title: 'Success Item',
+    description: 'This is a success colored list item.',
+    background: 'success',
+  },
+  {
+    title: 'Danger Item',
+    description: 'This is a danger colored list item.',
+    background: 'danger',
+  },
+  {
+    title: 'Warning Item',
+    description: 'This is a warning colored list item.',
+    background: 'warning',
+  },
+  {
+    title: 'Info Item',
+    description: 'This is an info colored list item.',
+    background: 'info',
+  },
+];
+
 export function ListGroupExamples() {
   return (
     <div className="row">
@@ -86,6 +114,31 @@ export function ListGroupExamples() {
         <h1 className="h4">Stateful list group</h1>
         <StatefulListGroup
           items={items}
+          template={(item) => (
+            <>
+              <strong>{item.title}</strong> <br />
+              {item.description}
+            </>
+          )}
+          linked={true}
+        />
+      </div>
+      <div className="col-6 mb-3">
+        <h1 className="h4">List group with item backgrounds</h1>
+        <ListGroup
+          items={itemsWithBackgrounds}
+          template={(item) => (
+            <>
+              <strong>{item.title}</strong> <br />
+              {item.description}
+            </>
+          )}
+        />
+      </div>
+      <div className="col-6 mb-3">
+        <h1 className="h4">Linked list group with backgrounds</h1>
+        <ListGroup
+          items={itemsWithBackgrounds}
           template={(item) => (
             <>
               <strong>{item.title}</strong> <br />

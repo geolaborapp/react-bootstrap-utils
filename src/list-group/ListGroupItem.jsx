@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import { safeClick } from '../utils/event-handlers';
 import { formatClasses } from '../utils/attributes';
 
-export function ListGroupItem({ index, isActive, isDisabled, item, linked, onSelect, children }) {
+export function ListGroupItem({ index, isActive, isDisabled, item, linked, onSelect, background, children }) {
   const classes = formatClasses([
     'list-group-item',
     isActive && 'active',
     isDisabled && 'disabled',
     linked && 'list-group-item-action',
+    background && `list-group-item-${background}`,
   ]);
 
   const onClick = safeClick(onSelect, index, item);
@@ -41,4 +42,5 @@ ListGroupItem.propTypes = {
   item: PropTypes.object.isRequired,
   linked: PropTypes.bool.isRequired,
   onSelect: PropTypes.func,
+  background: PropTypes.oneOf(['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']),
 };
