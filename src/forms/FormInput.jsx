@@ -37,7 +37,7 @@ export function FormInput({
     const value = getValue();
 
     //match em tudo antes do T da data ISO
-    attrs.value = isDateISOString(value) ? value.match(/^[^T]+/)[0] : value;
+    attrs.value = isDateISOString(value) ? value.split('T')[0] : value;
   } else {
     attrs.value = getValue();
   }
