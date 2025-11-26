@@ -39,6 +39,7 @@ export function UncontrolledFormExamples() {
           textarea1:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque praesentium quisquam reiciendis expedita. Ad quod voluptas aliquid illum veniam odio? Nulla sed, illum eligendi amet fuga optio officia itaque nisi',
           dateMask: '0410202',
+          inputDate2: new Date().toISOString(),
         }}
         onSubmit={(data) => console.log('onSubmit', data)}
         onChange={(data) => console.log('onChange', data)}
@@ -127,7 +128,13 @@ export function UncontrolledFormExamples() {
           <FormArrayOfObjects />
         </div>
         <div className="mb-3">
-          <UncontrolledFormGroupInput label="Input date" name="inputDate" type="datetime-local" />
+          <UncontrolledFormGroupInput label="Input date time" name="inputDateTime" type="datetime-local" />
+        </div>
+        <div className="mb-3">
+          <UncontrolledFormGroupInput label="Input date" name="inputDate1" type="date" />
+        </div>
+        <div className="mb-3">
+          <UncontrolledFormGroupInput label="Input date with ISO date initialValue" name="inputDate2" type="date" />
         </div>
         <UncontrolledFormGroupAutocomplete
           name="autocomplete2Field1"

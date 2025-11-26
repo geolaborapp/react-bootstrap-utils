@@ -122,7 +122,8 @@ export function FormExamples() {
         checkboxField2: true,
         radioField2: 'b',
         numberField: null,
-        dateField: new Date().toISOString(),
+        dateTimeField: new Date().toISOString(),
+        dateField2: new Date().toISOString(),
         dropdownField1: {
           title: 'Title two',
         },
@@ -222,7 +223,13 @@ export function FormExamples() {
           />
         </div>
         <div className="col">
-          <FormGroupInput name="dateField" label="Date field" type="datetime-local" />
+          <FormGroupInput name="dateTimeField" label="Datetime field" type="datetime-local" />
+        </div>
+        <div className="col">
+          <FormGroupInput name="dateField1" label="Date field" type="date" />
+        </div>
+        <div className="col">
+          <FormGroupInput name="dateField2" label="Date field with ISO date initialValue" type="date" />
         </div>
       </div>
 
