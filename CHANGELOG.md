@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 2.0.1 (2025-12-04)
+
+
+### Bug Fixes
+
+* faz campos tipo "date" aceitarem datas iso ([#85](https://github.com/geolaborapp/react-bootstrap-utils/issues/85)) ([#86](https://github.com/geolaborapp/react-bootstrap-utils/issues/86)) ([940f00b](https://github.com/geolaborapp/react-bootstrap-utils/commit/940f00b153c6e9bc6367aa34ea191b248772ebe2))
+
 ## 2.0.0 (2025-10-20)
 
 
