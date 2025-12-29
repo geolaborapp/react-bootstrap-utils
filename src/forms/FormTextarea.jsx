@@ -12,6 +12,7 @@ export function FormTextarea({ name, required: _required, disabled: _disabled, a
   const required = booleanOrFunction(_required, getFormData());
 
   const attrs = {
+    rows: 5,
     ..._attrs,
     disabled,
     name,
@@ -28,10 +29,6 @@ export function FormTextarea({ name, required: _required, disabled: _disabled, a
     ></textarea>
   );
 }
-
-FormTextarea.defaultProps = {
-  rows: 5,
-};
 
 FormTextarea.propTypes = {
   afterChange: PropTypes.func,

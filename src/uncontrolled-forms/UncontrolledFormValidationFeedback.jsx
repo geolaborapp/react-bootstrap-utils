@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { UncontrolledFormContext } from './helpers/useUncontrolledFormHelper';
 
-export function UncontrolledFormValidationFeedback({ name, mockInvalidSibling }) {
+export function UncontrolledFormValidationFeedback({ name, mockInvalidSibling = false }) {
   const formHelper = useContext(UncontrolledFormContext);
 
   const validationMessage = useMemo(() => formHelper.getValidationMessage(name), [formHelper, name]);
@@ -18,10 +18,6 @@ export function UncontrolledFormValidationFeedback({ name, mockInvalidSibling })
     </>
   );
 }
-
-UncontrolledFormValidationFeedback.defaultProps = {
-  mockInvalidSibling: false,
-};
 
 UncontrolledFormValidationFeedback.propTypes = {
   name: PropTypes.string.isRequired,

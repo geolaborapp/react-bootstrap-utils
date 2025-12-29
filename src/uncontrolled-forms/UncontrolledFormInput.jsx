@@ -11,7 +11,7 @@ import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl
 import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
 export function UncontrolledFormInput({
-  type,
+  type = 'text',
   name,
   required: _required,
   disabled: _disabled,
@@ -56,10 +56,6 @@ export function UncontrolledFormInput({
     />
   );
 }
-
-UncontrolledFormInput.defaultProps = {
-  type: 'text',
-};
 
 UncontrolledFormInput.propTypes = {
   afterChange: PropTypes.func,

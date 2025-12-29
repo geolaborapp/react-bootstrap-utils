@@ -15,15 +15,21 @@ export const FormDropdown = ({
   childClassName,
   disabled,
   dropdownClassName,
-  includeEmptyItem,
+  includeEmptyItem = true,
   itemClassName,
   listContainerRef,
-  menuClassName,
+  menuClassName = 'p-0 w-100',
   name,
   options,
   placeholder,
-  template,
-  toggleIcon,
+  template = (x) => x,
+  toggleIcon = function toggleIcon(isOpen) {
+    return (
+      <div className="d-flex align-items-center px-2">
+        <i className={`bi ${isOpen ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
+      </div>
+    );
+  },
   trackBy,
 }) => {
   const dropdownRef = useRef(null);
@@ -124,19 +130,6 @@ export const FormDropdown = ({
       </Dropdown>
     </div>
   );
-};
-
-FormDropdown.defaultProps = {
-  includeEmptyItem: true,
-  menuClassName: 'p-0 w-100',
-  template: (x) => x,
-  toggleIcon: function toggleIcon(isOpen) {
-    return (
-      <div className="d-flex align-items-center px-2">
-        <i className={`bi ${isOpen ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
-      </div>
-    );
-  },
 };
 
 FormDropdown.propTypes = {

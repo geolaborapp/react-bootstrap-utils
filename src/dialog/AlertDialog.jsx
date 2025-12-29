@@ -21,7 +21,13 @@ export function useAlertDialog({ title, message, ...footerProps }) {
   };
 }
 
-export function AlertDialog({ title, message, children, onClose, closeLabel }) {
+export function AlertDialog({
+  title = 'Atention required',
+  message,
+  children,
+  onClose = () => {},
+  closeLabel = 'Close',
+}) {
   return (
     <Dialog
       title={title}
@@ -33,12 +39,6 @@ export function AlertDialog({ title, message, children, onClose, closeLabel }) {
   );
 }
 
-AlertDialog.defaultProps = {
-  onClose: () => {},
-  title: 'Atention required',
-  closeLabel: 'Close',
-};
-
 AlertDialog.propTypes = {
   children: PropTypes.node,
   message: PropTypes.node,
@@ -47,17 +47,13 @@ AlertDialog.propTypes = {
   closeLabel: PropTypes.node,
 };
 
-function AlertDialogFooter({ close, onClose, closeLabel }) {
+function AlertDialogFooter({ close, onClose = () => {}, closeLabel = 'Close' }) {
   return (
     <button type="button" className="btn btn-primary" onClick={awaitForAsyncTask(onClose, close)}>
       {closeLabel}
     </button>
   );
 }
-AlertDialogFooter.defaultProps = {
-  onClose: () => {},
-  closeLabel: 'Close',
-};
 
 AlertDialogFooter.propTypes = {
   close: PropTypes.func,

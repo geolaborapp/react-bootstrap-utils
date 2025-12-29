@@ -6,7 +6,7 @@ import { ToastsRegion } from './ToastsRegion';
 import { useToastState } from './useToastState';
 import { toastPropsBaseShape } from './Toast';
 
-export function ToastsContainer({ children, unique, noStyle, messageFormatter, customToasts, onClose }) {
+export function ToastsContainer({ children, unique = true, noStyle = false, messageFormatter, customToasts, onClose }) {
   const toastsState = useToastState({ unique, messageFormatter, customToasts, onClose });
 
   return (
@@ -21,11 +21,6 @@ export function ToastsContainer({ children, unique, noStyle, messageFormatter, c
     </ToastsContext.Provider>
   );
 }
-
-ToastsContainer.defaultProps = {
-  noStyle: false,
-  unique: true,
-};
 
 ToastsContainer.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),

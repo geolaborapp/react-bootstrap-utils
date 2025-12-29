@@ -13,7 +13,7 @@ export function FormRadio({
   required: _required,
   checkedValue,
   valueLabel,
-  inline,
+  inline = false,
   disabled: _disabled,
   afterChange,
 }) {
@@ -41,10 +41,6 @@ export function FormRadio({
   );
 }
 
-FormRadio.defaultProps = {
-  inline: false,
-};
-
 FormRadio.propTypes = {
   afterChange: PropTypes.func,
   checkedValue: PropTypes.any,
@@ -56,7 +52,12 @@ FormRadio.propTypes = {
   valueLabel: PropTypes.node,
 };
 
-export function FormGroupRadio({ options, id, ...props }) {
+export function FormGroupRadio({ options, id, ..._props }) {
+  const props = {
+    inline: true,
+    ..._props,
+  };
+
   return (
     <FormGroup mockInvalidSibling={true} {...props}>
       <div>
@@ -73,10 +74,6 @@ export function FormGroupRadio({ options, id, ...props }) {
     </FormGroup>
   );
 }
-
-FormGroupRadio.defaultProps = {
-  inline: true,
-};
 
 FormGroupRadio.propTypes = {
   afterChange: PropTypes.func,

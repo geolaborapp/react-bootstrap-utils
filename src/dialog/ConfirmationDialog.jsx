@@ -22,7 +22,7 @@ export function useConfirmationDialog({ title, message, ...footerProps }) {
   };
 }
 
-export function ConfirmationDialog({ title, message, children, ...footerProps }) {
+export function ConfirmationDialog({ title = 'Atention required', message, children, ...footerProps }) {
   return (
     <Dialog
       title={title}
@@ -33,10 +33,6 @@ export function ConfirmationDialog({ title, message, children, ...footerProps })
     </Dialog>
   );
 }
-
-ConfirmationDialog.defaultProps = {
-  title: 'Atention required',
-};
 
 ConfirmationDialog.propTypes = {
   children: PropTypes.node,
@@ -49,7 +45,14 @@ ConfirmationDialog.propTypes = {
   proceedType: PropTypes.oneOf(['primary', 'danger', 'success']),
 };
 
-function ConfirmationDialogFooter({ close, onProceed, onCancel, cancelLabel, proceedLabel, proceedType }) {
+function ConfirmationDialogFooter({
+  close,
+  onProceed = () => {},
+  onCancel = () => {},
+  cancelLabel = 'Cancel',
+  proceedLabel = 'Proceed',
+  proceedType = 'primary',
+}) {
   return (
     <>
       <button type="button" className="btn btn-secondary" onClick={safeClick(awaitForAsyncTask(onCancel, close))}>
@@ -65,13 +68,7 @@ function ConfirmationDialogFooter({ close, onProceed, onCancel, cancelLabel, pro
     </>
   );
 }
-ConfirmationDialogFooter.defaultProps = {
-  onProceed: () => {},
-  onCancel: () => {},
-  cancelLabel: 'Cancel',
-  proceedLabel: 'Proceed',
-  proceedType: 'primary',
-};
+
 ConfirmationDialogFooter.propTypes = {
   close: PropTypes.func,
   onCancel: PropTypes.func,

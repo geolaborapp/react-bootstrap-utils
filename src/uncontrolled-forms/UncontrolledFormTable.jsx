@@ -92,7 +92,7 @@ export function UncontrolledFormTable({
   required: _required,
   disabled: _disabled,
   afterChange,
-  tableProps,
+  tableProps = {},
   getCustomActions,
   getAddItemComponent,
   getRemoveComponent,
@@ -166,10 +166,6 @@ export function UncontrolledFormTable({
     </>
   );
 }
-
-UncontrolledFormTable.defaultProps = {
-  tableProps: {},
-};
 
 const formTableProps = {
   afterChange: PropTypes.func,

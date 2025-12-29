@@ -9,11 +9,11 @@ export function Dropdown({
   items,
   onSelect,
   isDisabled,
-  isOpen,
+  isOpen = false,
   onTouchStart,
   onMouseEnter,
   onMouseLeave,
-  template,
+  template = (v) => v,
   className,
   itemClassName,
   menuClassName,
@@ -48,11 +48,6 @@ export function Dropdown({
     </div>
   );
 }
-
-Dropdown.defaultProps = {
-  isOpen: false,
-  template: (v) => v,
-};
 
 Dropdown.propTypes = {
   children: PropTypes.node,
