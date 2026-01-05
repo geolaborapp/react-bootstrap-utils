@@ -5,15 +5,15 @@ import { safeClick } from '../utils/event-handlers';
 import { formatClasses } from '../utils/attributes';
 
 export function Pagination({
-  actualPage,
-  ariaLabel,
-  firstLabel,
-  lastLabel,
+  actualPage = 1,
+  ariaLabel = 'Page navigation',
+  firstLabel = 'First',
+  lastLabel = 'Last',
   lastPage,
-  maxPageWindow,
-  nextLabel,
+  maxPageWindow = 5,
+  nextLabel = 'Next',
   onSelect,
-  previousLabel,
+  previousLabel = 'Previous',
 }) {
   const pageWindow = Math.min(maxPageWindow, lastPage);
   const centerOfPageWindow = Math.max(Math.floor(pageWindow / 2), 2);
@@ -80,16 +80,6 @@ export function Pagination({
     </nav>
   );
 }
-
-Pagination.defaultProps = {
-  actualPage: 1,
-  ariaLabel: 'Page navigation',
-  firstLabel: 'First',
-  lastLabel: 'Last',
-  maxPageWindow: 5,
-  nextLabel: 'Next',
-  previousLabel: 'Previous',
-};
 
 Pagination.propTypes = {
   actualPage: PropTypes.number,

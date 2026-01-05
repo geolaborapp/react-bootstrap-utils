@@ -8,7 +8,7 @@ import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl
 import { UncontrolledFormInput } from './UncontrolledFormInput';
 import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
-export function UncontrolledFormInputMask({ mask, name, inputAttrs }) {
+export function UncontrolledFormInputMask({ mask, name, inputAttrs = {} }) {
   const state = useState('');
   const ref = useRef(null);
   const { afterChange, inputClassName, ..._inputAttrs } = inputAttrs;
@@ -66,10 +66,6 @@ export function UncontrolledFormInputMask({ mask, name, inputAttrs }) {
     </>
   );
 }
-
-UncontrolledFormInputMask.defaultProps = {
-  inputAttrs: {},
-};
 
 UncontrolledFormInputMask.propTypes = {
   mask: PropTypes.shape({

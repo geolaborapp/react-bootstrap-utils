@@ -5,7 +5,16 @@ import { formatClasses } from '../utils/attributes';
 
 import { ListGroupItem } from './ListGroupItem';
 
-export function ListGroup({ items, active, linked, bordered, horizontal, template, isDisabled, onSelect }) {
+export function ListGroup({
+  items,
+  active,
+  linked = false,
+  bordered = true,
+  horizontal = false,
+  template,
+  isDisabled = () => {},
+  onSelect = () => {},
+}) {
   const classes = formatClasses(['list-group', !bordered && 'list-group-flush', horizontal && 'list-group-horizontal']);
 
   const content = items.map((item, index) => (
@@ -28,14 +37,6 @@ export function ListGroup({ items, active, linked, bordered, horizontal, templat
 
   return <ul className={classes}>{content}</ul>;
 }
-
-ListGroup.defaultProps = {
-  bordered: true,
-  horizontal: false,
-  isDisabled: () => {},
-  linked: false,
-  onSelect: () => {},
-};
 
 ListGroup.propTypes = {
   active: PropTypes.number,

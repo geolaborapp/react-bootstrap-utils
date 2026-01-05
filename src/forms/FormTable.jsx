@@ -92,7 +92,7 @@ export function FormTable({
   required: _required,
   disabled: _disabled,
   afterChange,
-  tableProps,
+  tableProps = {},
   getCustomActions,
   getAddItemComponent,
   getRemoveComponent,
@@ -160,10 +160,6 @@ export function FormTable({
     </>
   );
 }
-
-FormTable.defaultProps = {
-  tableProps: {},
-};
 
 const formTableProps = {
   afterChange: PropTypes.func,

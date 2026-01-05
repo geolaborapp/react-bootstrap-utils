@@ -10,7 +10,7 @@ import { booleanOrFunction } from './helpers/form-helpers';
 import { FormGroup } from './FormGroup';
 
 export function FormInput({
-  type,
+  type = 'text',
   name,
   required: _required,
   disabled: _disabled,
@@ -51,10 +51,6 @@ export function FormInput({
     />
   );
 }
-
-FormInput.defaultProps = {
-  type: 'text',
-};
 
 FormInput.propTypes = {
   afterChange: PropTypes.func,

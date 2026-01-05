@@ -5,7 +5,7 @@ import { FormLabel } from './FormLabel';
 import { FormValidationFeedback } from './FormValidationFeedback';
 import { FormHelp } from './FormHelp';
 
-export function FormGroup({ children, name, feedback, mockInvalidSibling, help, ...props }) {
+export function FormGroup({ children, name, feedback = true, mockInvalidSibling = false, help, ...props }) {
   return (
     <div className="mb-3">
       <FormLabel {...props} />
@@ -15,11 +15,6 @@ export function FormGroup({ children, name, feedback, mockInvalidSibling, help, 
     </div>
   );
 }
-
-FormGroup.defaultProps = {
-  feedback: true,
-  mockInvalidSibling: false,
-};
 
 FormGroup.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),

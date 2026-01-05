@@ -5,7 +5,7 @@ import { UncontrolledFormLabel } from './UncontrolledFormLabel';
 import { UncontrolledFormHelp } from './UncontrolledFormHelp';
 import { UncontrolledFormValidationFeedback } from './UncontrolledFormValidationFeedback';
 
-export function UncontrolledFormGroup({ children, name, feedback, mockInvalidSibling, help, ...props }) {
+export function UncontrolledFormGroup({ children, name, feedback = true, mockInvalidSibling = false, help, ...props }) {
   return (
     <div className="mb-3">
       <UncontrolledFormLabel {...props} />
@@ -15,11 +15,6 @@ export function UncontrolledFormGroup({ children, name, feedback, mockInvalidSib
     </div>
   );
 }
-
-UncontrolledFormGroup.defaultProps = {
-  feedback: true,
-  mockInvalidSibling: false,
-};
 
 UncontrolledFormGroup.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),

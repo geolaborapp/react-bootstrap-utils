@@ -30,7 +30,7 @@ export function useDialog({ onlyRenderContentIfIsOpen = true, ...props }) {
   };
 }
 
-export function Dialog({ children, onlyRenderContentIfIsOpen, onClose, ...props }) {
+export function Dialog({ children, onlyRenderContentIfIsOpen = true, onClose = () => {}, ...props }) {
   const { isOpen, open, close } = useOpenState();
 
   const onCloseDialog = async () => {
@@ -52,11 +52,6 @@ export function Dialog({ children, onlyRenderContentIfIsOpen, onClose, ...props 
     </React.Fragment>
   );
 }
-
-Dialog.defaultProps = {
-  onClose: () => {},
-  onlyRenderContentIfIsOpen: true,
-};
 
 Dialog.propTypes = {
   afterOpen: PropTypes.func,
