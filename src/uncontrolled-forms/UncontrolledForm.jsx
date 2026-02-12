@@ -5,16 +5,16 @@ import { useUncontrolledFormHelper, UncontrolledFormContext } from './helpers/us
 import { UncontrolledFormActions } from './UncontrolledFormActions';
 
 export function UncontrolledForm({
-  cancelLabel,
+  cancelLabel = 'Cancel',
   children,
   customActions,
-  customValidation,
-  debounceWait,
+  customValidation = false,
+  debounceWait = 500,
   initialValues,
-  onCancel,
-  onChange,
-  onSubmit,
-  submitLabel,
+  onCancel = () => {},
+  onChange = () => {},
+  onSubmit = () => {},
+  submitLabel = 'Submit',
   validations,
   transform,
 }) {
@@ -82,14 +82,6 @@ export function UncontrolledForm({
     </form>
   );
 }
-
-UncontrolledForm.defaultProps = {
-  cancelLabel: 'Cancel',
-  customValidation: false,
-  debounceWait: 500,
-  onChange: () => {},
-  submitLabel: 'Submit',
-};
 
 UncontrolledForm.propTypes = {
   cancelLabel: PropTypes.string,

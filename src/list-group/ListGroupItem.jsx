@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { safeClick } from '../utils/event-handlers';
 import { formatClasses } from '../utils/attributes';
 
-export function ListGroupItem({ index, isActive, isDisabled, item, linked, onSelect, background, children }) {
+export function ListGroupItem({ index, isActive = false, isDisabled, item, linked, onSelect, background, children }) {
   const classes = formatClasses([
     'list-group-item',
     isActive && 'active',
@@ -29,10 +29,6 @@ export function ListGroupItem({ index, isActive, isDisabled, item, linked, onSel
     </li>
   );
 }
-
-ListGroupItem.defaultProps = {
-  isActive: false,
-};
 
 ListGroupItem.propTypes = {
   children: PropTypes.node.isRequired,

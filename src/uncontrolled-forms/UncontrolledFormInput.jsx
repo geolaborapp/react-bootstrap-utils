@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { isDateISOString } from 'js-var-type';
+
 import { formatClasses } from '../utils/attributes';
 
 import { booleanOrFunction } from './helpers/form-helpers';
@@ -9,7 +11,7 @@ import { useUncontrolledFormControl } from './helpers/useUncontrolledFormControl
 import { UncontrolledFormGroup } from './UncontrolledFormGroup';
 
 export function UncontrolledFormInput({
-  type,
+  type = 'text',
   name,
   required: _required,
   disabled: _disabled,
@@ -36,6 +38,11 @@ export function UncontrolledFormInput({
 
   if (type === 'datetime-local') {
     attrs.defaultValue = getValue() ?? '';
+  } else if (type === 'date') {
+    const value = getValue() ?? '';
+
+    //match em tudo antes do T da data ISO
+    attrs.value = isDateISOString(value) ? value.split('T')[0] : value;
   } else {
     attrs.value = getValue() ?? '';
   }
@@ -49,10 +56,6 @@ export function UncontrolledFormInput({
     />
   );
 }
-
-UncontrolledFormInput.defaultProps = {
-  type: 'text',
-};
 
 UncontrolledFormInput.propTypes = {
   afterChange: PropTypes.func,

@@ -19,7 +19,7 @@ TreeView.propTypes = {
   template: PropTypes.func.isRequired,
 };
 
-function TreeNodes({ childrenPath, depth, draggable, nodes, parentNode, template, nodePath }) {
+function TreeNodes({ childrenPath, depth, draggable, nodes, parentNode, template, nodePath = '' }) {
   return (
     <>
       {nodes.map((node, index) => (
@@ -38,10 +38,6 @@ function TreeNodes({ childrenPath, depth, draggable, nodes, parentNode, template
     </>
   );
 }
-
-TreeNodes.defaultProps = {
-  nodePath: '',
-};
 
 TreeNodes.propTypes = {
   childrenPath: PropTypes.string,

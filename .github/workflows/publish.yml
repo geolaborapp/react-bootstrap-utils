@@ -10,14 +10,21 @@ on:
           - Major 
           - Minor
           - Patch
+          - Beta
+      branch_name:
+        type: string
+        description: 'Branch name (required for Beta versions)'
+        required: false
 
-run-name: Publish Package ${{inputs.version_type}}
+run-name: Publish Package ${{inputs.version_type}}${{ inputs.version_type == 'Beta' && format(' from {0}', inputs.branch_name) || '' }}
 
 jobs: 
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.version_type == 'Beta' && inputs.branch_name || 'master' }}
 
       - uses: webfactory/ssh-agent@v0.9.0
         with: 
@@ -49,7 +56,18 @@ jobs:
         if: ${{ github.event.inputs.version_type == 'Patch'}}
         run: npm run release-patch
 
-      - name: publish package
+      - name: release-beta
+        if: ${{ github.event.inputs.version_type == 'Beta'}}
+        run: npm version prerelease --preid=beta
+
+      - name: publish package (standard)
+        if: ${{ github.event.inputs.version_type != 'Beta' }}
         run: git push --follow-tags origin master && npm publish
+        env: 
+          NODE_AUTH_TOKEN: ${{secrets.GEOLABOR_GITHUB_TOKEN}}
+
+      - name: publish package (beta)
+        if: ${{ github.event.inputs.version_type == 'Beta' }}
+        run: git push --follow-tags origin ${{ inputs.branch_name }} && npm publish --tag beta
         env: 
           NODE_AUTH_TOKEN: ${{secrets.GEOLABOR_GITHUB_TOKEN}}

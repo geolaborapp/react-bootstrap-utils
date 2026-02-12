@@ -14,6 +14,8 @@ import {
   UncontrolledFormGroupAutocomplete,
   UncontrolledFormGroupDropdown,
   UncontrolledFormGroupRadio,
+  UncontrolledFormGroupTable,
+  Dialog,
 } from '../dist/main';
 
 export function UncontrolledFormExamples() {
@@ -37,6 +39,7 @@ export function UncontrolledFormExamples() {
           textarea1:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque praesentium quisquam reiciendis expedita. Ad quod voluptas aliquid illum veniam odio? Nulla sed, illum eligendi amet fuga optio officia itaque nisi',
           dateMask: '0410202',
+          inputDate2: new Date().toISOString(),
         }}
         onSubmit={(data) => console.log('onSubmit', data)}
         onChange={(data) => console.log('onChange', data)}
@@ -84,6 +87,14 @@ export function UncontrolledFormExamples() {
               },
             },
           ],
+          formTable2: [
+            {
+              message: 'Must have more than 2 itens',
+              validate(value) {
+                return value?.length > 2;
+              },
+            },
+          ],
         }}
       >
         <h5>Form configuration:</h5>
@@ -117,7 +128,13 @@ export function UncontrolledFormExamples() {
           <FormArrayOfObjects />
         </div>
         <div className="mb-3">
-          <UncontrolledFormGroupInput label="Input date" name="inputDate" type="datetime-local" />
+          <UncontrolledFormGroupInput label="Input date time" name="inputDateTime" type="datetime-local" />
+        </div>
+        <div className="mb-3">
+          <UncontrolledFormGroupInput label="Input date" name="inputDate1" type="date" />
+        </div>
+        <div className="mb-3">
+          <UncontrolledFormGroupInput label="Input date with ISO date initialValue" name="inputDate2" type="date" />
         </div>
         <UncontrolledFormGroupAutocomplete
           name="autocomplete2Field1"
@@ -426,6 +443,12 @@ export function UncontrolledFormExamples() {
           <FormTextareaSetValueTeste1 />
           <FormTextareaSetValueTeste2 />
         </div>
+
+        <h5>FormTable</h5>
+        <div className="row mb-2">
+          <FormUncontrolledFormGroupTable1 />
+          <FormUncontrolledFormGroupTable2 />
+        </div>
       </UncontrolledForm>
     </div>
   );
@@ -466,7 +489,7 @@ function FormArray() {
 
   const newElement = useCallback(() => {
     setValue((prevValue) => [...prevValue, Math.max(...prevValue) + 1]);
-  });
+  }, [setValue]);
 
   if (refresh) {
     return <></>;
@@ -1093,5 +1116,84 @@ function FormTextareaSetValueTeste2({}) {
         rows="5"
       />
     </div>
+  );
+}
+
+function FormUncontrolledFormGroupTable1() {
+  return (
+    <UncontrolledFormGroupTable
+      name="formTable1"
+      required
+      label="Simple UncontrolledFormTable"
+      afterChange={(...args) => console.log('formTable', args)}
+      tableProps={{
+        actionLabel: 'Actions',
+        columns: [
+          {
+            attribute: 'name',
+            label: 'Name',
+          },
+          {
+            attribute: 'number',
+            label: 'Number',
+          },
+        ],
+      }}
+      getRemoveComponent={(removeItem) => <i className="bi bi-trash-fill" onClick={() => removeItem()}></i>}
+      getAddItemComponent={(addItem) => <AddFormGroupTableItem addItem={addItem} />}
+    />
+  );
+}
+function FormUncontrolledFormGroupTable2() {
+  return (
+    <UncontrolledFormGroupTable
+      name="formTable2"
+      required
+      label="UncontrolledFormTable with minimum itens validation"
+      tableProps={{
+        actionLabel: 'Actions',
+        columns: [
+          {
+            attribute: 'name',
+            label: 'Name',
+          },
+          {
+            attribute: 'number',
+            label: 'Number',
+          },
+        ],
+      }}
+      getRemoveComponent={(removeItem) => <i className="bi bi-trash-fill" onClick={() => removeItem()}></i>}
+      getAddItemComponent={(addItem) => <AddFormGroupTableItem addItem={addItem} />}
+    />
+  );
+}
+
+function AddFormGroupTableItem({ addItem }) {
+  return (
+    <Dialog
+      title="Add item"
+      body={({ close }) => (
+        <UncontrolledForm
+          initialValues={{}}
+          onSubmit={(data) => {
+            console.info('submit', data);
+            addItem(data);
+            close();
+          }}
+          onCancel={() => {
+            console.warn('cancel');
+            close();
+          }}
+        >
+          <UncontrolledFormGroupInput name="name" label="Name" required />
+          <UncontrolledFormGroupInput name="number" label="Number" type="number" required />
+        </UncontrolledForm>
+      )}
+    >
+      <button type="button" className="btn btn-primary">
+        Add item
+      </button>
+    </Dialog>
   );
 }

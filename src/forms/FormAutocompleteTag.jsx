@@ -9,6 +9,7 @@ import { formatClasses } from '../utils/attributes';
 import { useToasts } from '../toasts/useToasts';
 
 import { getValueByPath, setValueByPath } from '../utils/getters-setters';
+import { defaultFilter } from '../utils/filter';
 
 import { booleanOrFunction, handleInputChange, normalizeOptions } from './helpers/form-helpers';
 import { useFormControl } from './helpers/useFormControl';
@@ -16,20 +17,20 @@ import { useFormControl } from './helpers/useFormControl';
 import { FormGroup } from './FormGroup';
 
 export function FormAutocompleteTag({
-  addButtonIcon,
+  addButtonIcon = <i className="bi bi-plus-lg" />,
   afterChange,
-  repeatedTagErrorMessage,
-  allowUnlistedValue,
+  repeatedTagErrorMessage = 'Impossible to add repeated tag',
+  allowUnlistedValue = true,
   disabled: _disabled,
-  filter,
+  filter = defaultFilter,
   listContainerRef,
   name,
-  onSearch,
-  openOnFocus,
+  onSearch = () => {},
+  openOnFocus = false,
   options: _options,
   placeholder,
   required: _required,
-  template,
+  template = (x) => x,
   trackBy,
 }) {
   const { showToast } = useToasts();
@@ -306,21 +307,6 @@ export function FormAutocompleteTag({
   );
 }
 
-FormAutocompleteTag.defaultProps = {
-  allowUnlistedValue: true,
-  openOnFocus: false,
-  onSearch: () => {},
-  filter: (_searchValue) => (item) => {
-    const itemValue = JSON.stringify(item.label).toLowerCase();
-    const searchValue = _searchValue.toLowerCase();
-
-    return itemValue.includes(searchValue);
-  },
-  template: (x) => x,
-  repeatedTagErrorMessage: 'Impossible to add repeated tag',
-  addButtonIcon: <i className="bi bi-plus-lg" />,
-};
-
 FormAutocompleteTag.propTypes = {
   addButtonIcon: PropTypes.node,
   afterChange: PropTypes.func,
@@ -343,9 +329,9 @@ FormAutocompleteTag.propTypes = {
 };
 
 export function FormGroupAutocompleteTag({
-  addButtonIcon,
-  removeButtonIcon,
-  allowUnlistedValue,
+  addButtonIcon = <i className="bi bi-plus-lg" />,
+  removeButtonIcon = <i className="bi bi-x-lg" />,
+  allowUnlistedValue = true,
   afterChange,
   disabled,
   filter,
@@ -432,11 +418,6 @@ export function FormGroupAutocompleteTag({
     </FormGroup>
   );
 }
-FormGroupAutocompleteTag.defaultProps = {
-  allowUnlistedValue: true,
-  addButtonIcon: <i className="bi bi-plus-lg" />,
-  removeButtonIcon: <i className="bi bi-x-lg" />,
-};
 
 FormGroupAutocompleteTag.propTypes = {
   afterChange: PropTypes.func,

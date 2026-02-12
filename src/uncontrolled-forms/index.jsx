@@ -9,6 +9,7 @@ export * from './UncontrolledFormInputMask';
 export * from './UncontrolledFormRadio';
 export * from './UncontrolledFormSelect';
 export * from './UncontrolledFormSwitch';
+export * from './UncontrolledFormTable';
 export * from './UncontrolledFormTextarea';
 export * from './helpers/useUncontrolledFormControl';
 export * from './helpers/useUncontrolledFormEffect';

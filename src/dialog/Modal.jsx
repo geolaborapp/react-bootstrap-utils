@@ -8,20 +8,20 @@ import { formatClasses } from '../utils/attributes';
 const ESCAPE_KEYCODE = 27;
 
 export function Modal({
-  afterOpen,
+  afterOpen = () => {},
   body,
-  centered,
+  centered = true,
   contentClassName,
   footer,
   isOpen,
-  keyboard,
+  keyboard = true,
   onClose,
-  scrollable,
-  size,
-  staticBackdrop,
+  scrollable = false,
+  size = '',
+  staticBackdrop = false,
   title,
-  useTimesClose,
-  dialogBodyProps,
+  useTimesClose = true,
+  dialogBodyProps = {},
 }) {
   const modalRef = useRef(null);
   const closeAndHide = useCallback(() => {
@@ -103,17 +103,6 @@ export function Modal({
     </div>
   );
 }
-
-Modal.defaultProps = {
-  afterOpen: () => {},
-  centered: true,
-  dialogBodyProps: {},
-  keyboard: true,
-  scrollable: false,
-  size: '',
-  staticBackdrop: false,
-  useTimesClose: true,
-};
 
 Modal.propTypes = {
   afterOpen: PropTypes.func,

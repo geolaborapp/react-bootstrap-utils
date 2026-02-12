@@ -22,6 +22,7 @@ export function UncontrolledFormTextarea({ name, required: _required, disabled: 
   const required = booleanOrFunction(_required, getFormData());
 
   const attrs = {
+    type: 'text',
     ..._attrs,
     disabled,
     name,
@@ -38,10 +39,6 @@ export function UncontrolledFormTextarea({ name, required: _required, disabled: 
     />
   );
 }
-
-UncontrolledFormTextarea.defaultProps = {
-  type: 'text',
-};
 
 UncontrolledFormTextarea.propTypes = {
   afterChange: PropTypes.func,

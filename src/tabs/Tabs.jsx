@@ -7,7 +7,16 @@ import { formatClasses } from '../utils/attributes';
 import { TabHeader } from './TabHeader';
 import { TabContent } from './TabContent';
 
-export function Tabs({ vertical, tabs: _tabs, activeTab, onlyRenderActiveTab, bordered, onSelect, justified, fill }) {
+export function Tabs({
+  vertical = false,
+  tabs: _tabs,
+  activeTab = 0,
+  onlyRenderActiveTab = false,
+  bordered = false,
+  onSelect = () => {},
+  justified = false,
+  fill = false,
+}) {
   const tabs = useMemo(() => _tabs.filter((tab) => (isFunction(tab?.hideIf) ? !tab.hideIf() : true)), [_tabs]);
 
   if (activeTab >= tabs.length) {
@@ -57,16 +66,6 @@ export function Tabs({ vertical, tabs: _tabs, activeTab, onlyRenderActiveTab, bo
     </div>
   );
 }
-
-Tabs.defaultProps = {
-  activeTab: 0,
-  bordered: false,
-  fill: false,
-  justified: false,
-  onlyRenderActiveTab: false,
-  onSelect: () => {},
-  vertical: false,
-};
 
 Tabs.propTypes = {
   activeTab: PropTypes.number,

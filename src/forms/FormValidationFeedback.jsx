@@ -4,7 +4,7 @@ import { isEmptyLike } from 'js-var-type';
 
 import { FormContext } from './helpers/form-helpers';
 
-export function FormValidationFeedback({ name, mockInvalidSibling }) {
+export function FormValidationFeedback({ name, mockInvalidSibling = false }) {
   const formState = useContext(FormContext);
   let validationMessage = formState.getValidationMessage(name);
 
@@ -23,10 +23,6 @@ export function FormValidationFeedback({ name, mockInvalidSibling }) {
     </>
   );
 }
-
-FormValidationFeedback.defaultProps = {
-  mockInvalidSibling: false,
-};
 
 FormValidationFeedback.propTypes = {
   name: PropTypes.string.isRequired,

@@ -6,6 +6,7 @@ import { Dropdown } from '../mixed/Dropdown';
 import { useOpenState } from '../utils/useOpenState';
 import { formatClasses } from '../utils/attributes';
 import { getValueByPath } from '../utils/getters-setters';
+import { defaultFilter } from '../utils/filter';
 
 import {
   booleanOrFunction,
@@ -16,6 +17,7 @@ import {
   serializeValue,
 } from './helpers/form-helpers';
 import { useFormControl } from './helpers/useFormControl';
+// eslint-disable-next-line import/max-dependencies
 import { FormGroup } from './FormGroup';
 
 function getSelectedItem(value, items, allowUnlistedValue, trackBy) {
@@ -34,17 +36,17 @@ export function FormAutocomplete({
   afterChange,
   allowUnlistedValue,
   disabled: _disabled,
-  filter,
+  filter = defaultFilter,
   id,
   listContainerRef,
   name,
-  onSearch,
-  onClearSearch,
-  openOnFocus,
+  onSearch = () => {},
+  onClearSearch = () => {},
+  openOnFocus = false,
   options,
   placeholder,
   required: _required,
-  template,
+  template = (x) => x,
   trackBy,
 }) {
   const {
@@ -261,19 +263,6 @@ export function FormAutocomplete({
     </>
   );
 }
-
-FormAutocomplete.defaultProps = {
-  openOnFocus: false,
-  onSearch: () => {},
-  onClearSearch: () => {},
-  filter: (_searchValue) => (item) => {
-    const itemValue = JSON.stringify(item.label).toLowerCase();
-    const searchValue = _searchValue.toLowerCase();
-
-    return itemValue.includes(searchValue);
-  },
-  template: (x) => x,
-};
 
 FormAutocomplete.propTypes = {
   afterChange: PropTypes.func,

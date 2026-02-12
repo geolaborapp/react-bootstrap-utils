@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
+import { isDateISOString } from 'js-var-type';
+
 import { formatClasses } from '../utils/attributes';
 
 import { useFormControl } from './helpers/useFormControl';
@@ -8,7 +10,7 @@ import { booleanOrFunction } from './helpers/form-helpers';
 import { FormGroup } from './FormGroup';
 
 export function FormInput({
-  type,
+  type = 'text',
   name,
   required: _required,
   disabled: _disabled,
@@ -31,6 +33,11 @@ export function FormInput({
 
   if (type === 'datetime-local') {
     attrs.defaultValue = getValue();
+  } else if (type === 'date') {
+    const value = getValue();
+
+    //match em tudo antes do T da data ISO
+    attrs.value = isDateISOString(value) ? value.split('T')[0] : value;
   } else {
     attrs.value = getValue();
   }
@@ -44,10 +51,6 @@ export function FormInput({
     />
   );
 }
-
-FormInput.defaultProps = {
-  type: 'text',
-};
 
 FormInput.propTypes = {
   afterChange: PropTypes.func,

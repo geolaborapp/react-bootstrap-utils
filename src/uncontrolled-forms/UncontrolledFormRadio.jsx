@@ -13,7 +13,7 @@ export function UncontrolledFormRadio({
   required: _required,
   checkedValue,
   valueLabel,
-  inline,
+  inline = false,
   disabled: _disabled,
   afterChange,
   state,
@@ -47,10 +47,6 @@ export function UncontrolledFormRadio({
   );
 }
 
-UncontrolledFormRadio.defaultProps = {
-  inline: false,
-};
-
 UncontrolledFormRadio.propTypes = {
   afterChange: PropTypes.func,
   checkedValue: PropTypes.any,
@@ -63,8 +59,12 @@ UncontrolledFormRadio.propTypes = {
   state: PropTypes.array.isRequired,
 };
 
-export function UncontrolledFormGroupRadio({ options, id, ...props }) {
+export function UncontrolledFormGroupRadio({ options, id, ..._props }) {
   const state = useState('');
+  const props = {
+    inline: true,
+    ..._props,
+  };
 
   return (
     <UncontrolledFormGroup mockInvalidSibling={true} {...props}>
@@ -83,10 +83,6 @@ export function UncontrolledFormGroupRadio({ options, id, ...props }) {
     </UncontrolledFormGroup>
   );
 }
-
-UncontrolledFormGroupRadio.defaultProps = {
-  inline: true,
-};
 
 UncontrolledFormGroupRadio.propTypes = {
   afterChange: PropTypes.func,

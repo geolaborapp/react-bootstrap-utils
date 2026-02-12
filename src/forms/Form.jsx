@@ -6,17 +6,17 @@ import { useForm } from './helpers/useForm';
 import { FormActions } from './FormActions';
 
 export function Form({
-  cancelLabel,
+  cancelLabel = 'Cancel',
   children,
-  customValidation,
+  customValidation = false,
   customActions,
   initialValues,
-  onCancel,
-  onSubmit,
-  onChange,
-  submitLabel,
+  onCancel = () => {},
+  onSubmit = () => {},
+  onChange = () => {},
+  submitLabel = 'Submit',
   validations,
-  transform,
+  transform = (data) => data,
 }) {
   const formState = useForm(initialValues, { validations, onChange, transform });
   const formRef = useRef(null);
@@ -99,14 +99,6 @@ export function Form({
     </form>
   );
 }
-
-Form.defaultProps = {
-  cancelLabel: 'Cancel',
-  customValidation: false,
-  submitLabel: 'Submit',
-  onChange: () => {},
-  transform: (data) => data,
-};
 
 Form.propTypes = {
   cancelLabel: PropTypes.string,

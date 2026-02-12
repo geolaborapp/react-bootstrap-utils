@@ -11,17 +11,17 @@ import { normalizeColumns } from './table-helpers';
 export function Table({
   docs,
   columns,
-  striped,
-  bordered,
-  hover,
-  small,
-  dark,
-  rowClass,
+  striped = true,
+  bordered = false,
+  hover = true,
+  small = true,
+  dark = false,
+  rowClass = () => '',
   caption,
   onRowClick,
   actions,
-  actionLabel,
-  columnHeaderFormat,
+  actionLabel = 'Actions',
+  columnHeaderFormat = (label) => label,
 }) {
   const normalizedColumns = normalizeColumns(columns);
 
@@ -46,17 +46,6 @@ export function Table({
     </div>
   );
 }
-
-Table.defaultProps = {
-  striped: true,
-  bordered: false,
-  hover: true,
-  small: true,
-  dark: false,
-  actionLabel: 'Actions',
-  rowClass: () => '',
-  columnHeaderFormat: (label) => label,
-};
 
 Table.propTypes = {
   actionLabel: PropTypes.string,

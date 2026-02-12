@@ -1,17 +1,21 @@
 /* eslint-disable import/no-anonymous-default-export */
 /* eslint-disable import/no-default-export */
-import resolve from '@rollup/plugin-node-resolve';
-import babel from '@rollup/plugin-babel';
+const resolve = require('@rollup/plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
+const babel = require('@rollup/plugin-babel');
 
-export default {
+module.exports = {
   input: 'src/index.js',
   plugins: [
     resolve({
       extensions: ['.mjs', '.js', '.json', '.jsx'],
     }),
+    commonjs(),
     babel({
       babelHelpers: 'runtime',
-      exclude: /node_modules/, // only transpile our source code
+      exclude: /node_modules/,
+      extensions: ['.js', '.jsx'],
+      presets: ['@babel/preset-env', ['@babel/preset-react', { runtime: 'automatic' }]],
     }),
   ],
   output: {
