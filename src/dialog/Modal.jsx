@@ -56,9 +56,7 @@ export function Modal({
     }
   }, [afterOpen, isOpen]);
 
-  useEffect(() => {
-    return () => hideModal(modalRef);
-  }, []);
+  useEffect(() => () => hideModal(modalRef), []);
 
   return (
     <div
