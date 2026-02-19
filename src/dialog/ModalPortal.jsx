@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 export function ModalPortal({ children, title, isOpen }) {
   const [container, setContainer] = useState();
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const modalPortalsElem = getModalPortalsElem();
@@ -13,18 +14,21 @@ export function ModalPortal({ children, title, isOpen }) {
     containerElem.dataset.title = title;
 
     modalPortalsElem.appendChild(containerElem);
+    containerRef.current = containerElem;
     setContainer(containerElem);
 
     return () => {
-      if (!container) {
+      if (!containerRef.current) {
         return;
       }
 
-      const isDescendant = modalPortalsElem.contains(container);
+      const isDescendant = modalPortalsElem.contains(containerRef.current);
 
       if (isDescendant) {
-        modalPortalsElem.removeChild(container);
+        modalPortalsElem.removeChild(containerRef.current);
       }
+
+      containerRef.current = null;
     };
     //"container" causaria um loop infinito
     // eslint-disable-next-line react-hooks/exhaustive-deps
