@@ -26,6 +26,7 @@ export function ListGroup({
       item={item}
       linked={linked}
       onSelect={onSelect}
+      background={item?.background}
     >
       {template(item, index)}
     </ListGroupItem>
