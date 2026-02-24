@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 2.1.0 (2026-02-24)
+
+
+### Features
+
+* add background color support to list group items ([#84](https://github.com/geolaborapp/react-bootstrap-utils/issues/84)) ([711379d](https://github.com/geolaborapp/react-bootstrap-utils/commit/711379d461d430c014289a05f140f051e8071889))
+
 ### 2.0.2 (2026-01-05)
 
 ### 2.0.1 (2025-12-04)
