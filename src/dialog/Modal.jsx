@@ -54,9 +54,9 @@ export function Modal({
     } else {
       hideModal(modalRef);
     }
-
-    return () => hideModal(modalRef);
   }, [afterOpen, isOpen]);
+
+  useEffect(() => () => hideModal(modalRef), []);
 
   return (
     <div
@@ -122,20 +122,26 @@ Modal.propTypes = {
 };
 
 function hideModal(modalRef) {
-  if (modalRef.current) {
-    modalRef.current.style.display = 'none';
-    modalRef.current.classList.remove('show');
+  if (!modalRef.current || !modalRef.current.classList.contains('show')) {
+    return;
   }
+
+  modalRef.current.style.display = 'none';
+  modalRef.current.classList.remove('show');
 
   hideModalBackdrop();
   enableBodyScroll();
 
-  if (modalRef.current && modalRef.current.style.zIndex) {
+  if (modalRef.current.style.zIndex) {
     modalRef.current.style.zIndex = null;
   }
 }
 
 function enableBodyScroll() {
+  if (countModals() !== 0) {
+    return;
+  }
+
   const body = document.querySelector('body');
 
   body.classList.remove('modal-open');
