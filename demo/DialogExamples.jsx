@@ -279,7 +279,14 @@ function SecondDialog({ close }) {
                 Open third dialog
               </button>
             </AlertDialog>
-            <button type="button" className="btn btn-secondary" onClick={close}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => {
+                setForceRender((prev) => prev + 1);
+                close();
+              }}
+            >
               Close second dialog
             </button>
           </div>

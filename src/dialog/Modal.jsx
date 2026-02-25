@@ -4,6 +4,7 @@ import { isFunction } from 'js-var-type';
 
 import { stopPropagation } from '../utils/event-handlers';
 import { formatClasses } from '../utils/attributes';
+import { usePreviousValue } from '../utils/usePreviousValue';
 
 const ESCAPE_KEYCODE = 27;
 
@@ -24,7 +25,15 @@ export function Modal({
   dialogBodyProps = {},
 }) {
   const modalRef = useRef(null);
+  // isClosingRef evita race condition: durante re-renders causados por ações do body
+  // (ex.: seleção de linha), bloqueia showModal enquanto o close está em andamento.
+  // prevIsOpen detecta transição de abertura para resetar essa flag só quando o dialog
+  // realmente muda de fechado -> aberto, sem reativar showModal indevidamente.
+  const isClosingRef = useRef(false);
+  const prevIsOpen = usePreviousValue(isOpen);
+
   const closeAndHide = useCallback(() => {
+    isClosingRef.current = true;
     hideModal(modalRef);
     onClose();
   }, [onClose]);
@@ -48,13 +57,17 @@ export function Modal({
   }, [keyboard, closeIfEscape, modalRef]);
 
   useEffect(() => {
-    if (isOpen) {
-      showModal(modalRef);
+    const isOpeningModal = isOpen && prevIsOpen !== isOpen;
+
+    if (isOpeningModal) {
+      isClosingRef.current = false;
+      showModal(modalRef, isClosingRef);
       afterOpen();
-    } else {
+    } else if (!isOpen) {
       hideModal(modalRef);
     }
-  }, [afterOpen, isOpen]);
+    // else: isOpen=true mas não é transição -> re-render, não faz nada
+  }, [afterOpen, isOpen, prevIsOpen]);
 
   useEffect(() => () => hideModal(modalRef), []);
 
@@ -147,8 +160,12 @@ function enableBodyScroll() {
   body.classList.remove('modal-open');
 }
 
-function showModal(modalRef) {
+function showModal(modalRef, isClosingRef) {
   if (!modalRef.current) {
+    return;
+  }
+
+  if (isClosingRef.current) {
     return;
   }
 
