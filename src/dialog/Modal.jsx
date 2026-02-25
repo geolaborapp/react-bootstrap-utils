@@ -152,6 +152,12 @@ function showModal(modalRef) {
     return;
   }
 
+  const isAlreadyVisible = modalRef.current.classList.contains('show');
+
+  if (isAlreadyVisible) {
+    return;
+  }
+
   disableBodyScroll();
   showModalBackdrop();
 
