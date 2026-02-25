@@ -267,8 +267,9 @@ function SecondDialog({ close }) {
       size="lg"
       body={({ close }) => (
         <>
-          The dialog is working correctly if, even if the component re-renders, the dialog doesn't increment the z-index and the overlay works correctly.
-          After n clicks, and closing the dialog, the overlay of overlapping dialog must be correct.
+          The dialog is working correctly if, even if the component re-renders, the dialog doesn't increment the z-index
+          and the overlay works correctly. After n clicks, and closing the dialog, the overlay of overlapping dialog
+          must be correct.
           <div>
             <button type="button" className="btn btn-primary" onClick={() => setForceRender((prev) => prev + 1)}>
               Force re-render
