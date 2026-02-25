@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 2.1.1 (2026-02-25)
+
+
+### Bug Fixes
+
+* corrige caso de "re renderização" em overlapping dialogs ([#89](https://github.com/geolaborapp/react-bootstrap-utils/issues/89)) ([c4f21bd](https://github.com/geolaborapp/react-bootstrap-utils/commit/c4f21bdcf1b5fc09d9ec35870eccac522063d319))
+
 ## 2.1.0 (2026-02-24)
 
 
