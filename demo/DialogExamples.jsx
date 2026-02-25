@@ -229,28 +229,7 @@ export function DialogExamples() {
               magni possimus pariatur iste incidunt. Dolore adipisci quaerat nemo dicta voluptas beatae voluptates rem
               neque veritatis, necessitatibus ipsam corporis?
               <br />
-              <Dialog
-                title="Second dialog"
-                size="lg"
-                body={
-                  <>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque voluptatem reprehenderit laudantium
-                    facilis necessitatibus sed optio nihil fugiat numquam minus earum ipsum quam ab harum natus, velit
-                    libero excepturi quae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium corrupti
-                    maxime, magni possimus pariatur iste incidunt. Dolore adipisci quaerat nemo dicta voluptas beatae
-                    voluptates rem neque veritatis, necessitatibus ipsam corporis?
-                    <AlertDialog message="Third dialog">
-                      <button type="button" className="btn btn-warning">
-                        Open third dialog
-                      </button>
-                    </AlertDialog>
-                  </>
-                }
-              >
-                <button type="button" className="btn btn-info">
-                  Open second dialog
-                </button>
-              </Dialog>
+              <SecondDialog />
             </>
           }
         >
@@ -276,5 +255,47 @@ export function DialogExamples() {
         </button>
       </div>
     </div>
+  );
+}
+
+function SecondDialog({ close }) {
+  const [forceRender, setForceRender] = useState(0);
+
+  return (
+    <Dialog
+      title="Second dialog (body function)"
+      size="lg"
+      body={({ close }) => (
+        <>
+          The dialog is working correctly if, even if the component re-renders, the dialog doesn't increment the z-index
+          and the overlay works correctly. After n clicks, and closing the dialog, the overlay of overlapping dialog
+          must be correct.
+          <div>
+            <button type="button" className="btn btn-primary" onClick={() => setForceRender((prev) => prev + 1)}>
+              Force re-render
+            </button>
+            <AlertDialog message="Third dialog">
+              <button type="button" className="btn btn-warning">
+                Open third dialog
+              </button>
+            </AlertDialog>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => {
+                setForceRender((prev) => prev + 1);
+                close();
+              }}
+            >
+              Close second dialog
+            </button>
+          </div>
+        </>
+      )}
+    >
+      <button type="button" className="btn btn-info">
+        Open second dialog
+      </button>
+    </Dialog>
   );
 }
