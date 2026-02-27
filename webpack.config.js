@@ -32,6 +32,7 @@ module.exports = [
       path: `${__dirname}/demo`,
       publicPath: '/demo/',
     },
+    devtool: 'eval-source-map',
     devServer: {
       static: {
         directory: `${__dirname}/demo`,

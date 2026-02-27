@@ -29,12 +29,15 @@ export function Modal({
   // (ex.: seleção de linha), bloqueia showModal enquanto o close está em andamento.
   // prevIsOpen detecta transição de abertura para resetar essa flag só quando o dialog
   // realmente muda de fechado -> aberto, sem reativar showModal indevidamente.
+  // needsCleanupRef garante que hideModalBackdrop/enableBodyScroll sejam chamados
+  // mesmo se modalRef.current for null durante unmount (ex: parent unmount durante onProceed).
   const isClosingRef = useRef(false);
+  const needsCleanupRef = useRef(false);
   const prevIsOpen = usePreviousValue(isOpen);
 
   const closeAndHide = useCallback(() => {
     isClosingRef.current = true;
-    hideModal(modalRef);
+    hideModal(modalRef, needsCleanupRef);
     onClose();
   }, [onClose]);
   const closeIfEscape = useCallback(
@@ -61,15 +64,16 @@ export function Modal({
 
     if (isOpeningModal) {
       isClosingRef.current = false;
+      needsCleanupRef.current = true;
       showModal(modalRef, isClosingRef);
       afterOpen();
     } else if (!isOpen) {
-      hideModal(modalRef);
+      hideModal(modalRef, needsCleanupRef);
     }
     // else: isOpen=true mas não é transição -> re-render, não faz nada
   }, [afterOpen, isOpen, prevIsOpen]);
 
-  useEffect(() => () => hideModal(modalRef), []);
+  useEffect(() => () => hideModal(modalRef, needsCleanupRef), []);
 
   return (
     <div
@@ -134,19 +138,22 @@ Modal.propTypes = {
   useTimesClose: PropTypes.bool,
 };
 
-function hideModal(modalRef) {
-  if (!modalRef.current || !modalRef.current.classList.contains('show')) {
-    return;
+function hideModal(modalRef, needsCleanupRef) {
+  // First, remove 'show' class so countModals() returns correct value
+  if (modalRef.current && modalRef.current.classList.contains('show')) {
+    modalRef.current.style.display = 'none';
+    modalRef.current.classList.remove('show');
+
+    if (modalRef.current.style.zIndex) {
+      modalRef.current.style.zIndex = null;
+    }
   }
 
-  modalRef.current.style.display = 'none';
-  modalRef.current.classList.remove('show');
-
-  hideModalBackdrop();
-  enableBodyScroll();
-
-  if (modalRef.current.style.zIndex) {
-    modalRef.current.style.zIndex = null;
+  // Then cleanup backdrop/body scroll if this modal was shown
+  if (needsCleanupRef.current) {
+    needsCleanupRef.current = false;
+    hideModalBackdrop();
+    enableBodyScroll();
   }
 }
 
