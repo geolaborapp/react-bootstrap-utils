@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rollup --config",
     "start": "webpack serve --mode development",
+    "start:debug-source": "DEBUG_SOURCE=true webpack serve --mode development",
     "docs": "webpack --mode development",
     "release": "standard-version",
     "release-patch": "npm run release -- --release-as patch",

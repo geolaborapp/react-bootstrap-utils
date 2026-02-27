@@ -1,6 +1,9 @@
 'use strict';
 
+const webpack = require('webpack');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
+const isDebugSourceMode = process.env.DEBUG_SOURCE === 'true';
 
 module.exports = [
   {
@@ -82,4 +85,10 @@ module.exports = [
     extensions: ['*', '.js', '.jsx'],
   },
   ...setup,
+  plugins: [
+    ...(setup.plugins || []),
+    ...(isDebugSourceMode
+      ? [new webpack.NormalModuleReplacementPlugin(/\.\.\/dist\/main$/, '../src/index')]
+      : []),
+  ],
 }));
