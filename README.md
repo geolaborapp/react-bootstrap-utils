@@ -47,6 +47,15 @@ Starting demo app
 npm run start
 ```
 
+Starting demo app in source debug mode (recommended for local debugging)
+
+```bash
+npm run start:debug-source
+```
+
+This mode maps demo imports to `src/` (instead of `dist/`) so you can inspect files like
+`src/dialog/Modal.jsx` directly in browser DevTools while running `http://localhost:8080`.
+
 ## How to Publish a New Version
 
 Make sure the master branch is updated (git pull) and make sure all new commits (or expected commits) are included. 

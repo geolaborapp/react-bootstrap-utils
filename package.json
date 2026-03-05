@@ -1,11 +1,12 @@
 {
   "name": "@geolaborapp/react-bootstrap-utils",
-  "version": "2.1.1",
+  "version": "2.1.2-beta.0",
   "description": "React bootstrap library",
   "main": "dist/main.js",
   "scripts": {
     "build": "rollup --config",
     "start": "webpack serve --mode development",
+    "start:debug-source": "DEBUG_SOURCE=true webpack serve --mode development",
     "docs": "webpack --mode development",
     "release": "standard-version",
     "release-patch": "npm run release -- --release-as patch",

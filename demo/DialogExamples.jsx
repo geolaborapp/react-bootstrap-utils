@@ -162,7 +162,11 @@ export function DialogExamples() {
         <ConfirmationDialog
           title="Atention!"
           message="Are you sure you want to proceed?"
-          onProceed={() => console.info('onProceed')}
+          onProceed={async () => {
+            console.info('onProceed - start');
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            console.info('onProceed - end');
+          }}
           onCancel={() => console.warn('onCancel')}
         >
           <button type="button" className="btn btn-warning">
@@ -239,6 +243,14 @@ export function DialogExamples() {
         </Dialog>
       </div>
       <div className="col-6">
+        <h1 className="h4 mt-3">Parent unmount during onProceed</h1>
+        <ParentUnmountTest />
+      </div>
+      <div className="col-6">
+        <h1 className="h4 mt-3">Overlapping dialogs + unmount</h1>
+        <OverlappingUnmountTest />
+      </div>
+      <div className="col-6">
         <h1 className="h4 mt-3">Open a dialog programmatically</h1>
 
         <DialogPortal />
@@ -254,6 +266,115 @@ export function DialogExamples() {
           useAlertDialog
         </button>
       </div>
+    </div>
+  );
+}
+
+function ParentUnmountTest() {
+  const [showParent, setShowParent] = useState(true);
+
+  return (
+    <div>
+      <p className="text-muted small mb-2">
+        Click &quot;Proceed&quot; in the ConfirmationDialog. The parent will unmount during onProceed.
+        <br />
+        <strong>Expected:</strong> Backdrop should be cleaned up (no stuck overlay).
+        <br />
+        <strong>Bug (before fix):</strong> Backdrop stays stuck because modalRef.current is null during cleanup.
+      </p>
+      {showParent ? (
+        <ConfirmationDialogChild onProceedAction={() => setShowParent(false)} />
+      ) : (
+        <div>
+          <p className="text-success">Parent unmounted. Backdrop should be gone.</p>
+          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => setShowParent(true)}>
+            Reset test
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ConfirmationDialogChild({ onProceedAction }) {
+  return (
+    <ConfirmationDialog
+      title="Unmount during onProceed test"
+      message="Click Proceed. The parent will unmount during onProceed callback, before the dialog closes normally."
+      onProceed={() => {
+        console.log('onProceed: triggering parent unmount...');
+        onProceedAction();
+        console.log('onProceed: parent unmounted');
+      }}
+      onCancel={() => console.log('onCancel')}
+    >
+      <button type="button" className="btn btn-danger">
+        Open ConfirmationDialog
+      </button>
+    </ConfirmationDialog>
+  );
+}
+
+function OverlappingUnmountTest() {
+  const [showParent, setShowParent] = useState(true);
+
+  return (
+    <div>
+      <p className="text-muted small mb-2">
+        Open Dialog A → Open Dialog B → Click Proceed in ConfirmationDialog.
+        <br />
+        <strong>Expected:</strong> All backdrops cleaned up, body scroll restored.
+        <br />
+        <strong>Bug:</strong> z-index decremented incorrectly or backdrop stuck.
+      </p>
+      {showParent ? (
+        <Dialog
+          title="Dialog A (outer)"
+          size="lg"
+          body={
+            <>
+              <p>This is Dialog A. Open Dialog B below, then click Proceed to trigger parent unmount.</p>
+              <Dialog
+                title="Dialog B (inner)"
+                body={
+                  <>
+                    <p>This is Dialog B. Click the ConfirmationDialog below.</p>
+                    <ConfirmationDialog
+                      title="Unmount with overlapping dialogs"
+                      message="Clicking Proceed will unmount the entire parent, closing Dialog A, B, and this ConfirmationDialog simultaneously."
+                      onProceed={() => {
+                        console.log('onProceed: unmounting parent with overlapping dialogs...');
+                        setShowParent(false);
+                        console.log('onProceed: parent unmounted');
+                      }}
+                      onCancel={() => console.log('onCancel')}
+                    >
+                      <button type="button" className="btn btn-danger">
+                        Open ConfirmationDialog
+                      </button>
+                    </ConfirmationDialog>
+                  </>
+                }
+              >
+                <button type="button" className="btn btn-warning">
+                  Open Dialog B
+                </button>
+              </Dialog>
+            </>
+          }
+        >
+          <button type="button" className="btn btn-primary">
+            Open Dialog A
+          </button>
+        </Dialog>
+      ) : (
+        <div>
+          <p className="text-success">All dialogs unmounted. Backdrop should be gone, body scroll restored.</p>
+          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => setShowParent(true)}>
+            Reset test
+          </button>
+        </div>
+      )}
     </div>
   );
 }
