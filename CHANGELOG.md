@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 2.1.2 (2026-03-05)
+
+
+### Bug Fixes
+
+* tenta corrigir race condtion de alguns confirmation dialogs (modal era fechado, mas overlay mantido) ([#90](https://github.com/geolaborapp/react-bootstrap-utils/issues/90)) ([9fa392e](https://github.com/geolaborapp/react-bootstrap-utils/commit/9fa392e2a97c017b54fe8b456a2d78a0391601a7))
+
 ### 2.1.1 (2026-02-25)
 
 
