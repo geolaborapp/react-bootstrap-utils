@@ -382,6 +382,18 @@ export function TableExamples() {
             ]}
           />
         </div>
+        <div className="col-6 mb-3">
+          <h1 className="h4">Table in loading state</h1>
+          <Table
+            columns={['a', 'b', 'c.d']}
+            docs={[
+              { a: 1, b: 2, c: { d: 3 } },
+              { a: 4, b: 5, c: { d: 6 } },
+              { a: 7, b: 8, c: { d: 9 } },
+            ]}
+            isLoading
+          />
+        </div>
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ export function Table({
   actions,
   actionLabel = 'Actions',
   columnHeaderFormat = (label) => label,
+  isLoading,
 }) {
   const normalizedColumns = normalizeColumns(columns);
 
@@ -41,7 +42,7 @@ export function Table({
       <table className={tableClasses}>
         {caption && <caption>{caption}</caption>}
         <TableHead {...{ actionLabel, columnHeaderFormat, hasActions }} columns={normalizedColumns} />
-        <TableBody {...{ docs, rowClass, actions, onRowClick }} columns={normalizedColumns} />
+        <TableBody {...{ docs, rowClass, actions, onRowClick, isLoading }} columns={normalizedColumns} />
       </table>
     </div>
   );
@@ -60,6 +61,7 @@ Table.propTypes = {
   dark: PropTypes.bool,
   docs: PropTypes.arrayOf(PropTypes.object),
   hover: PropTypes.bool,
+  isLoading: PropTypes.bool,
   onRowClick: PropTypes.func,
   rowClass: PropTypes.func,
   small: PropTypes.bool,

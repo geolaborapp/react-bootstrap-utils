@@ -8,10 +8,22 @@ import { getValueByPath } from '../utils/getters-setters';
 import { getColumnClass } from './table-helpers';
 import { TableActions } from './TableActions';
 
-export function TableBody({ columns, docs, rowRole, rowClass, actions, onRowClick }) {
+export function TableBody({ columns, docs, rowRole, rowClass, actions, onRowClick, isLoading }) {
   const trRole = rowRole ?? isFunction(onRowClick) ? 'button' : 'row';
   const trOnClick = isFunction(onRowClick) ? onRowClick : () => {};
   const filteredColumns = columns.filter((column) => !column.hideIf?.());
+
+  if (isLoading) {
+    return (
+      <tbody>
+        <tr>
+          <td colSpan={`${filteredColumns?.length ?? 1}`} className="text-center">
+            <div className="spinner-border"></div>
+          </td>
+        </tr>
+      </tbody>
+    );
+  }
 
   return (
     <tbody>
@@ -48,6 +60,7 @@ TableBody.propTypes = {
   ]),
   columns: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
   docs: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool,
   rowRole: PropTypes.string,
   rowClass: PropTypes.func,
   onRowClick: PropTypes.func,
