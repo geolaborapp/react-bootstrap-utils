@@ -34,18 +34,26 @@ export function useToastState({ unique, messageFormatter, customToasts, onClose 
       const toastId = nextId;
       const _message = isFunction(messageFormatter) ? messageFormatter(message) : message;
 
+      // Automatically increase autoClose to 7000ms if message is longer than 150 characters
+      const CHAR_THRESHOLD = 150;
+      const EXTENDED_CLOSE_TIME = 7000;
+      let finalAutoClose = autoClose;
+      if (isNumber(autoClose) && autoClose === 5000 && _message.length > CHAR_THRESHOLD) {
+        finalAutoClose = EXTENDED_CLOSE_TIME;
+      }
+
       push(position, {
         id: toastId,
         message: _message,
         type,
         position,
-        closeControl: !autoClose,
+        closeControl: !finalAutoClose,
       });
 
-      if (isNumber(autoClose) && !isNaN(autoClose)) {
+      if (isNumber(finalAutoClose) && !isNaN(finalAutoClose)) {
         const timeoutId = setTimeout(() => {
           close(position, toastId);
-        }, autoClose);
+        }, finalAutoClose);
 
         timeoutRefs.current[toastId] = { timeoutId, position };
       }
