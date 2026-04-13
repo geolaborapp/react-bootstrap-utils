@@ -34,12 +34,14 @@ export function useToastState({ unique, messageFormatter, customToasts, onClose 
       const toastId = nextId;
       const _message = isFunction(messageFormatter) ? messageFormatter(message) : message;
 
-      // Automatically increase autoClose to 7000ms if message is longer than 150 characters
       const CHAR_THRESHOLD = 150;
-      const EXTENDED_CLOSE_TIME = 7000;
+      const EXTENDED_CLOSE_TIME = 10000;
       let finalAutoClose = autoClose;
+      let closeControl = !finalAutoClose;
+
       if (isNumber(autoClose) && autoClose === 5000 && _message.length > CHAR_THRESHOLD) {
         finalAutoClose = EXTENDED_CLOSE_TIME;
+        closeControl = true;
       }
 
       push(position, {
@@ -47,7 +49,7 @@ export function useToastState({ unique, messageFormatter, customToasts, onClose 
         message: _message,
         type,
         position,
-        closeControl: !finalAutoClose,
+        closeControl,
       });
 
       if (isNumber(finalAutoClose) && !isNaN(finalAutoClose)) {

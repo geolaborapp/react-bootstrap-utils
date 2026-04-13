@@ -11,7 +11,7 @@ export function useToasts() {
      * @param {string} message
      * @param {object} options Configurations object
      * @param {string} options.type toast color based on bootstrap theme ('info' - default, 'success', 'danger', 'warning')
-     * @param {number} options.autoClose miliseconds to automatically close toast (default 5000, automatically increased to 7000 if message > 150 characters)
+     * @param {number} options.autoClose miliseconds to automatically close toast (default 5000, automatically increased to 10000 if message > 150 characters)
      * @param {string} options.position toast position ('TOP_LEFT', 'TOP_RIGHT' - default, 'BOTTOM_LEFT', 'BOTTOM_RIGHT')
      *
      * @returns {func} a closeToast function to close the opened toast
