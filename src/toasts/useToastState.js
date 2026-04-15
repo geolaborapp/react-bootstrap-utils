@@ -39,7 +39,7 @@ export function useToastState({ unique, messageFormatter, customToasts, onClose 
       let finalAutoClose = autoClose;
       let closeControl = !finalAutoClose;
 
-      if (isNumber(autoClose) && autoClose === 5000 && _message.length > CHAR_THRESHOLD) {
+      if (isNumber(autoClose) && autoClose === 5000 && _message?.length > CHAR_THRESHOLD) {
         finalAutoClose = EXTENDED_CLOSE_TIME;
         closeControl = true;
       }
