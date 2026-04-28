@@ -144,6 +144,7 @@ export function FormTable({
         {...attrs}
         ref={registerRef}
         id={name}
+        onChange={() => {}}
         value={value?.length > 0 ? '1' : ''} //for required validation
       />
       {addItemComponent}

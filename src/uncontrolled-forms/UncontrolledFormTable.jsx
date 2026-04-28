@@ -150,6 +150,7 @@ export function UncontrolledFormTable({
         {...attrs}
         ref={registerInputRef}
         id={name}
+        onChange={() => {}}
         value={value?.length > 0 ? '1' : ''} //for required validation
       />
       {addItemComponent}
