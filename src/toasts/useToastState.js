@@ -34,18 +34,28 @@ export function useToastState({ unique, messageFormatter, customToasts, onClose 
       const toastId = nextId;
       const _message = isFunction(messageFormatter) ? messageFormatter(message) : message;
 
+      const CHAR_THRESHOLD = 150;
+      const EXTENDED_CLOSE_TIME = 10000;
+      let finalAutoClose = autoClose;
+      let closeControl = !finalAutoClose;
+
+      if (isNumber(autoClose) && autoClose === 5000 && _message?.length > CHAR_THRESHOLD) {
+        finalAutoClose = EXTENDED_CLOSE_TIME;
+        closeControl = true;
+      }
+
       push(position, {
         id: toastId,
         message: _message,
         type,
         position,
-        closeControl: !autoClose,
+        closeControl,
       });
 
-      if (isNumber(autoClose) && !isNaN(autoClose)) {
+      if (isNumber(finalAutoClose) && !isNaN(finalAutoClose)) {
         const timeoutId = setTimeout(() => {
           close(position, toastId);
-        }, autoClose);
+        }, finalAutoClose);
 
         timeoutRefs.current[toastId] = { timeoutId, position };
       }
