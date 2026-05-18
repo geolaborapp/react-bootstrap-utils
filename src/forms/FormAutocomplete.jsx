@@ -81,6 +81,7 @@ export function FormAutocomplete({
   const [ignoreBlur, setIgnoreBlur] = useState(false);
   const [isFocused, setFocus] = useState(false);
   const searchInputRef = useRef(null);
+  const openTimerRef = useRef(null);
 
   const registerRef = useCallback(register, [register]);
   const disabled = booleanOrFunction(_disabled, getFormData());
@@ -123,7 +124,7 @@ export function FormAutocomplete({
 
   const onSearchInputFocus = useCallback(() => {
     if (openOnFocus) {
-      setTimeout(() => {
+      openTimerRef.current = setTimeout(() => {
         open();
       }, 100);
     }
@@ -169,6 +170,7 @@ export function FormAutocomplete({
 
   const onSelectItem = useCallback(
     ({ value, label }) => {
+      clearTimeout(openTimerRef.current);
       setValue(value);
       setSearchValue(label);
       setSelectedItem({ value, label });
