@@ -51,6 +51,7 @@ export function FormAutocompleteTag({
   const [isFocused, setFocus] = useState(false);
 
   const searchInputRef = useRef(null);
+  const openTimerRef = useRef(null);
 
   const value = useMemo(() => getValue() || [], [getValue]);
   const options = useMemo(() => {
@@ -168,7 +169,7 @@ export function FormAutocompleteTag({
 
   const onSearchInputFocus = useCallback(() => {
     if (openOnFocus) {
-      setTimeout(() => {
+      openTimerRef.current = setTimeout(() => {
         open();
       }, 100);
     }
@@ -200,6 +201,7 @@ export function FormAutocompleteTag({
 
   const onSelectItem = useCallback(
     ({ value }) => {
+      clearTimeout(openTimerRef.current);
       addTag(value);
       setSearchValue('');
       setIgnoreBlur(false);
