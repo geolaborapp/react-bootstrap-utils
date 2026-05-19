@@ -80,6 +80,7 @@ export function UncontrolledFormAutocomplete({
   const [ignoreBlur, setIgnoreBlur] = useState(false);
   const [isFocused, setFocus] = useState(false);
   const searchInputRef = useRef(null);
+  const openTimerRef = useRef(null);
 
   const disabled = booleanOrFunction(_disabled, getFormData());
   const required = booleanOrFunction(_required, getFormData());
@@ -122,7 +123,7 @@ export function UncontrolledFormAutocomplete({
 
   const onSearchInputFocus = useCallback(() => {
     if (openOnFocus) {
-      setTimeout(() => {
+      openTimerRef.current = setTimeout(() => {
         open();
       }, 100);
     }
@@ -168,6 +169,7 @@ export function UncontrolledFormAutocomplete({
 
   const onSelectItem = useCallback(
     ({ value, label }) => {
+      clearTimeout(openTimerRef.current);
       setValue(value);
       setSearchValue(label);
       setSelectedItem({ value, label });
