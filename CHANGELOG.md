@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 2.1.3 (2026-05-19)
+
+
+### Bug Fixes
+
+* corrige autocomplete com openOnFocus em mobile ([#94](https://github.com/geolaborapp/react-bootstrap-utils/issues/94)) ([125d637](https://github.com/geolaborapp/react-bootstrap-utils/commit/125d6370485e84c668769cb4bb8a9344611a7344))
+
 ### 2.1.2 (2026-03-05)
 
 
